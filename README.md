@@ -25,6 +25,10 @@
 
 ![nf-core/epigenomesegmentation metro map](docs/images/nf-core-epigenomesegmentation_dark.png)
 
+<a href='https://www.denbi.de/about'> <img src="docs/images/denbi-logo.png" align="right" width="150"> </a>
+
+This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
+
 ## Default Workflow: Topology Modelling
 By default, the EPIGENOMESEGMENTATION pipeline executes the **Topology Modeling**.
 
