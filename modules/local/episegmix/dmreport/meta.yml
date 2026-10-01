@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "episegmix_dmreport"
-description: Generates visual reports and plots based on the EpiSegMix standard model (DM) segmentation results and the trained hidden Markov model.
+description: Generates plots and a Markdown report based on the EpiSegMix standard model (DM) segmentation results and the trained hidden Markov model.
 keywords:
   - epigenomics
   - segmentation
@@ -102,7 +102,7 @@ output:
           description: The directory containing the decoded genomic segmentation results.
       - "Plots/*":
           type: file
-          description: Generated visual reports and plots evaluating the segmentation.
+          description: Generated plots and Markdown report evaluating the segmentation.
           pattern: "Plots/*"
 
   versions_episegmix:

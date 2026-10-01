@@ -27,16 +27,16 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0.tab", checkIfExists: true),
                     [ id: 'no_bed_counts' ],
                     [],
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0_2.yaml', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-counts.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-regions.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-counts-meth.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dm/final-model-kidney_P0_2.json', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/Segmentation', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/kidney_P0_2.yaml", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-counts.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-regions.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-counts-meth.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/dm/final-model-kidney_P0_2.json", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/ldm/Segmentation", checkIfExists: true)
                 ]
                 """
             }
@@ -73,16 +73,16 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0.tab", checkIfExists: true),
                     [ id: 'no_bed_counts' ],
                     [],
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0_2.yaml', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-counts.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-regions.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/kidney_P0_2-train-counts-meth.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dm/final-model-kidney_P0_2.json', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/ldm/Segmentation', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/kidney_P0_2.yaml", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-counts.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-regions.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/kidney_P0_2-train-counts-meth.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/dm/final-model-kidney_P0_2.json", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/ldm/Segmentation", checkIfExists: true)
                 ]
                 """
             }

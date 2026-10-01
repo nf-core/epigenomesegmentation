@@ -30,7 +30,7 @@
 This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
 
 ## Default Workflow: Topology Modelling
-By default, the EPIGENOMESEGMENTATION pipeline executes the **Topology Modeling**.
+By default, the pipeline runs the topology-modeling (LDM) segmentation workflow. Use `--duration` to select the duration-modeling (DM) workflow, `--dna` for methylation/coverage-only segmentation, or `--fitting` to evaluate candidate count distributions instead of running the usual segmentation workflow. `--jointrain` is an optional shared-training mode and is disabled by default.
 
 ### Execution Steps
 
@@ -67,9 +67,9 @@ The pipeline logic is organized into the following modular components:
 
 ---
 
-> **Note:** You can set the execution mode using flags: `--duration`, `--dna` & `--fitting` to adjust for what type of segmentation modeling you would like to use. 
+> **Note:** Use `--counts` to generate and publish count files without training a model or creating segmentations. See the [usage documentation](docs/usage.md#count-generation-only) for details.
 
-**Note:** You can also directly use a your own count matrices if you have using the flags `--methcounts` & `--histonecounts`.
+**Note:** Precomputed count matrices can be supplied with `--methcounts` and/or `--histonecounts`; see the [usage documentation](docs/usage.md#using-precomputed-counts) for their requirements.
 
 ## Usage
 

@@ -50,9 +50,8 @@ for BED in "${SEG_DIR}"/viterbi_*.bed.gz; do
     # Define the corresponding TAB file path
     TAB="${SEG_DIR}/${sample_id}.tab"
     
-    # Define the unique prefix for this sample's HTML and images
-    PREFIX="${OUT_DIR}/${OUTPUT}_${sample_id}"
-    BASE_PREFIX="${OUTPUT}_${sample_id}" # Used specifically for the HTML name
+    # Keep per-sample outputs named by the segmentation sample ID.
+    PREFIX="${OUT_DIR}/${sample_id}"
 
     # Run the sample-specific plotting scripts
     results.py \
@@ -77,14 +76,12 @@ for BED in "${SEG_DIR}"/viterbi_*.bed.gz; do
         -d "${BED}" \
         -o "${PREFIX}-state-colors.png"
 
-    cp "${OUT_DIR}/${OUTPUT}-histogram.png" "${PREFIX}-histogram.png"
-    cp "${OUT_DIR}/${OUTPUT}-correlation.png" "${PREFIX}-correlation.png"
     cp "${OUT_DIR}/${OUTPUT}-methylation-density.png" "${PREFIX}-methylation-density.png" 2>/dev/null || true
 
     segmentation_report_md.sh \
-        -n "${BASE_PREFIX}" \
-        -o "${OUT_DIR}/"
-
+        -n "${sample_id}" \
+        -o "${OUT_DIR}" \
+        -p "${OUTPUT}"
 done
 
-echo "Plots and HTML reports generated successfully in ${OUT_DIR}/"
+echo "Plots and Markdown reports generated successfully in ${OUT_DIR}/"

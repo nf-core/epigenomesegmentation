@@ -63,7 +63,7 @@ TREATMENT,1,WGBS,./data/treatment_methyl.bed.gz,WGBS,true,BI
 | `file_name`       | Full path to file. `.bam` / `.bam.gz` (histone), `.bed` / `.bed.gz` (methylation).     |
 | `modality`        | Supported: `ChIP-seq`, `WGBS`, `ATAC-seq`, `NOMe-seq`, `chip`, `wgbs`, `atac`, `nome`. |
 | `paired_end`      | Boolean (`true` or `false`).                                                           |
-| `distribution`    | Statistical distribution used for modeling.                                            |
+| `distribution`    | Optional statistical distribution used for modeling. Leave empty to use the default. |
 
 ### Supported Distributions
 
@@ -107,13 +107,27 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-## Segmentaion 
+## Segmentation
 
-Based on your sample sheet, if it contains only histone data or methylation data or both together, the pipeline behavior changes by default. If both are present, the pipeline runs combined segmentation, and if there is only histone (BAM files) data present, it only runs histone segmentation. But **if only methylation or Coveragemarker (BED files) data is present**, then please **use the flag --dna** to do methylation or Coveragemarker marker specific segmentation.
+The pipeline routes inputs by file extension: BAM files are used for histone counts, while BED/BED.GZ files are used for methylation or coverage-marker counts. When both modalities are supplied, the default workflow combines them for segmentation; histone-only samples are segmented using histone data. For methylation/coverage-only segmentation, use `--dna`.
 
+### Pipeline modes
+By default, the pipeline runs topology modeling (LDM). `--dna`, `--fitting`, `--jointrain`, and `--counts` change the workflow path; use only compatible options together. `--duration` selects the model type and can be combined with compatible workflow options such as `--jointrain`. `--methcounts` and `--histonecounts` are inputs for precomputed counts, not modes.
 
-### Epigenomesegmentaion modes
-The pipeline's behavior can be significantly altered using boolean flags `--duration`, `--dna`, `--fitting`, `--jointrain`, `--methcounts` & `--histonecounts` flag. By default, the pipeline runs in topology modeling mode.
+#### Count generation only
+
+Use `--counts` to run the BAM/BED count-generation steps and stop before model training and segmentation:
+
+```bash
+nextflow run nf-core/epigenomesegmentation \
+  --input samplesheet.csv \
+  --outdir results \
+  --genome hg38 \
+  --counts \
+  -profile docker
+```
+
+For BAM inputs, the pipeline generates histone count matrices. For BED/BED.GZ inputs, it generates binned methylation/coverage count files. Outputs are published under `Counts/<sample>_Histone/` and `Counts/<sample>_Methylation/`, respectively. This mode uses raw BAM/BED inputs; use `--histonecounts` and/or `--methcounts` to supply precomputed counts for a segmentation run instead. `--counts` does not generate segmentations or model reports.
 
 #### Methylation or CoverageMarker Mode
 
@@ -121,7 +135,7 @@ The pipeline's behavior can be significantly altered using boolean flags `--dura
 --dna
 ```
 
-By giving this flag, histone processing is entirely ignored. The pipeline will process only methylation data or coverage markers (BED files), generate methylation specific bins, train and decode a methylation or CoverageMarker only segmentation model.
+With this flag, BAM processing is skipped and the pipeline performs methylation/coverage-only segmentation from BED inputs. The workflow generates and bins the BED-based counts before training and decoding the model.
 
 #### Duration Mode
 
@@ -129,7 +143,7 @@ By giving this flag, histone processing is entirely ignored. The pipeline will p
 --duration
 ```
 
-Executes the Standard Hidden Markov Model (HMM) for epigenomesegmenation.
+Selects the duration-modeling (DM) HMM, which models segment duration. Without this flag, the default segmentation workflow uses topology modeling (LDM).
 
 #### Fitting Mode
 
@@ -137,7 +151,7 @@ Executes the Standard Hidden Markov Model (HMM) for epigenomesegmenation.
 --fitting
 ```
 
-This mode does not perform full segmentation. Instead, it extracts counts and runs distribution fitting algorithms to help you determine the optimal statistical distributions (e.g., NBI, BI, SI, BNB) for your specific epigenetic marks. You can specify a comma-separated list of distributions to test using the `--distributions` parameter.
+This mode fits candidate distributions to the count data rather than running the usual segmentation workflow. Specify the comma-separated candidates with `--distributions`, for example `--distributions 'NBI,SI,BNB'`. The workflow uses the fitting results to produce an updated samplesheet with the best-fitting distribution.
 
 
 #### Jointrain Mode
@@ -146,19 +160,19 @@ This mode does not perform full segmentation. Instead, it extracts counts and ru
 --jointrain
 ```
 
-When this flag is set to true, the segmentation traing is run on the concatenated count matrix to give us the same states labeling order for multiple samples. 
+This opt-in mode trains a shared model from the combined counts of the input samples for each requested state, then decodes each sample separately. It can make state labels comparable across samples; each sample still receives its own segmentation. It is disabled by default.
 
-**Note:** Only the order of labeling is the same; the segmentation results for different samples are different.
+**Note:** `--jointrain` can be combined with `--duration`. Do not combine it with `--dna`, `--fitting`, or `--counts`; those select different workflow paths.
 
-#### Your own Counts Mode
+#### Using precomputed counts
 
 ```bash
 --methcounts <path to count matrix>  --histonecounts <path to count matrix>
 ```
 
-Users can themselves provide their own count matrix path via the flags `--methcounts` & `--histonecounts` if both flags are given a combined segmentation is done, or otherwise if one flag is given a corresponding segmentation is done. In this case the sample sheet must contain the same order and dummy paths to BAM or BED files as count matrices to make the config file on the fly, and the naming of meth counts and histone counts should be {sample_id}_meth.tab and {sample_id}.tab, respectively.
+Use these options when count matrices have already been generated. Supply `--histonecounts` for histone counts and `--methcounts` for methylation/coverage counts; supplying both enables a combined run. The pipeline still uses `--input` to obtain sample and assay metadata and to determine how inputs are grouped. For methylation-only segmentation, also set `--dna`.
 
-**Note:** With the flag `--methcounts`, the user has to mention `--dna` flag true as well to run methylation segmentaion.
+**Important limitation:** Each option is currently resolved as one file path (or a glob whose first match is used) and paired with metadata from the samplesheet. The workflow does not currently document or guarantee automatic per-sample matching of multiple count files. Confirm the expected count-file layout and sample association before relying on custom count inputs for multiple samples.
 
 #### Exploring Multiple States
 
@@ -166,7 +180,7 @@ Users can themselves provide their own count matrix path via the flags `--methco
 --states 8,10,12
 ```
 
-The `--states` parameter defines the number of chromatin states for the segmentation model. You can provide a single integer or a comma separated list of values (e.g., `8,10,12`) to train models for multiple state configurations simultaneously in parallel. The pipeline itself automatically handles the creation and management of all necessary configuration files for each state!
+The `--states` parameter defines the number of chromatin states for the segmentation model. You can provide a single integer or a comma-separated list (e.g., `8,10,12`) to run multiple state configurations. The pipeline creates a model configuration for each requested state.
 
 #### Parameter Estimation Chromosome
 

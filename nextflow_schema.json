@@ -64,13 +64,13 @@
                 },
                 "counts": {
                     "type": "boolean",
-                    "description": "Run only count generation (skip all downstream analysis).",
+                    "description": "Generate histone and/or methylation/coverage count files from the supplied BAM and BED inputs, then skip model training and segmentation.",
                     "fa_icon": "fas fa-hashtag",
                     "default": false
                 },
                 "jointrain": {
                     "type": "boolean",
-                    "description": "Run one training session on a random sample and uses that for decoding others.",
+                    "description": "Train a shared model from the combined counts of the input samples for each requested state, then decode each sample separately. Disabled by default.",
                     "fa_icon": "fas fa-play",
                     "default": false
                 },

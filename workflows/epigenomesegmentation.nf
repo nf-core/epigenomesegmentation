@@ -234,8 +234,11 @@ workflow EPIGENOMESEGMENTATION {
                         .groupTuple()
                         .map { state, sample_ids, meta1, histone, meta2, meth ->
                             def combined_key = "${sample_ids.join('_')}_${state}"
-                            
-                            [combined_key, meta1[0], histone, meta2[0], meth, state]
+
+                            def histone_files = histone.flatten().findAll { it != null }
+                            def meth_files = meth.flatten().findAll { it != null }
+
+                            [combined_key, meta1[0], histone_files, meta2[0], meth_files, state]
                         }
     }
     else {

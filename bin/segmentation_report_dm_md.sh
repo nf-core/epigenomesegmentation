@@ -12,13 +12,13 @@ STATISTICS_PREFIX=""
 # ==========================================
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        -n|--name) 
+        -n|--name)
             NAME="$2"
-            shift 2 
+            shift 2
             ;;
-        -o|--output-dir) 
+        -o|--output-dir)
             OUTPUT_DIR="$2"
-            shift 2 
+            shift 2
             ;;
         -p|--statistics-prefix)
             STATISTICS_PREFIX="$2"
@@ -32,8 +32,10 @@ while [[ $# -gt 0 ]]; do
             echo "  -p, --statistics-prefix  Prefix for shared model-level plots"
             exit 0
             ;;
-        *) 
-            echo "Error: Unknown argument '$1'" >&2; exit 1 ;;
+        *)
+            echo "Error: Unknown argument '$1'" >&2
+            exit 1
+            ;;
     esac
 done
 
@@ -45,26 +47,27 @@ fi
 # ==========================================
 # Generate Markdown
 # ==========================================
+mkdir -p "${OUTPUT_DIR}"
 MD_FILE="${OUTPUT_DIR}/${NAME}_report.md"
 
-cat << EOF > "${MD_FILE}"
-# EpiSegMix Segmentation Report
-**Sample / Prefix ID:** ${NAME}  
+cat <<EOF > "${MD_FILE}"
+# EpiSegMix DM Segmentation Report
+**Sample / Prefix ID:** ${NAME}
 
 ---
 
 ## 1. Emission & Transition Parameters
 
 ### Normalized Emission Probabilities
-*Displays the scaled emission probabilities, highlighting the specific combination of epigenetic marks that define the signature of each hidden state.*
-![Normalized Emission](./${NAME}-normEmission.png)
+*Displays the scaled emission probabilities that define each hidden state.*
+![Normalized Emission](./${NAME}-normEmission-viterbi.png)
 
 ### Mean Emission
-*Shows the raw average signal intensity for each epigenetic mark within the discovered states.*
-![Mean Emission](./${NAME}-meanEmission.png)
+*Shows the raw average signal intensity for each epigenetic mark within each state.*
+![Mean Emission](./${NAME}-meanEmission-viterbi.png)
 
 ### Transition Matrix
-*A heatmap illustrating the probability of transitioning from one hidden state to another along the chromosome, revealing structural genomic domains.*
+*Shows the probability of transitioning from one hidden state to another along the chromosome.*
 ![Transition Matrix](./${NAME}-transitionMatrix.png)
 
 ---
@@ -77,7 +80,7 @@ cat << EOF > "${MD_FILE}"
 
 ### State Membership & Coverage
 *Illustrates the proportion of the genome assigned to each respective state.*
-![State Membership](./${NAME}-stateMembership.png)
+![State Membership](./${NAME}-stateMembership-viterbi.png)
 
 ---
 
@@ -85,11 +88,7 @@ cat << EOF > "${MD_FILE}"
 
 ### Average State Length
 *Displays the average genomic span (in base pairs) for contiguous segments of each state.*
-![State Length](./${NAME}-stateLength.png)
-
-### State Length Distribution
-*Provides the full distribution of lengths for the segmented regions across all states.*
-![State Length Distribution](./${NAME}-statelengthDistribution.png)
+![State Length](./${NAME}-stateLength-viterbi.png)
 
 ### State Distribution
 *Shows the overall frequency and emission distribution for each chromatin state.*

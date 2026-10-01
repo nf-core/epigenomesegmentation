@@ -8,24 +8,18 @@ set -euo pipefail
 # ==========================================
 YAML=""
 JSON=""
-TAB=""
-BED=""
+SEG_DIR=""
 OUTPUT=""
 THREADS=""
 
-
-# ==========================================
-# Functions
-# ==========================================
 show_help(){
     cat <<'HELP'
 Usage: $(basename "$0") [OPTIONS]
 
-Options for making plots and HTML report:
+Options for making plots and Markdown reports:
     -y, --yaml      YAML configuration file
     -j, --json      JSON file for model
-    -t, --tab       Tab-separated segmentation file
-    -b, --bed       BED file of segmentation
+    -s, --seg-dir   Directory containing tab and BED segmentation files
     -o, --output    Base name for output files and directory
     -@, --threads   Number of threads to use
     -h, --help      Show this help message and exit
@@ -45,12 +39,8 @@ while [[ $# -gt 0 ]]; do
             JSON="$2"
             shift 2
             ;;
-        -t|--tab)
-            TAB="$2"
-            shift 2
-            ;;
-        -b|--bed)
-            BED="$2"
+        -s|--seg-dir)
+            SEG_DIR="$2"
             shift 2
             ;;
         -o|--output)
@@ -73,10 +63,13 @@ while [[ $# -gt 0 ]]; do
     esac
 done
 
-# Check if required arguments are provided
-if [[ -z "${YAML}" || -z "${OUTPUT}" || -z "${JSON}" ]]; then
-    echo "Error: Missing required arguments (--yaml and --output and --json are required)." >&2
+if [[ -z "${YAML}" || -z "${JSON}" || -z "${SEG_DIR}" || -z "${OUTPUT}" ]]; then
+    echo "Error: --yaml, --json, --seg-dir, and --output are required." >&2
     show_help
+    exit 1
+fi
+if [[ ! -d "${SEG_DIR}" ]]; then
+    echo "Error: Segmentation directory '${SEG_DIR}' does not exist." >&2
     exit 1
 fi
 
@@ -84,6 +77,13 @@ fi
 # Main Execution
 # ==========================================
 OUT_DIR="Plots"
+shopt -s nullglob
+BED_FILES=("${SEG_DIR}"/viterbi_*.bed.gz)
+if [[ ${#BED_FILES[@]} -eq 0 ]]; then
+    echo "Error: No viterbi_*.bed.gz files found in '${SEG_DIR}'." >&2
+    exit 1
+fi
+
 mkdir -p "${OUT_DIR}"
 
 plot_statistics.py \
@@ -92,31 +92,43 @@ plot_statistics.py \
     -c "${OUT_DIR}/${OUTPUT}-correlation.png" \
     -m "${OUT_DIR}/${OUTPUT}-methylation-density.png"
 
-results.py \
-    -c "${TAB}" \
-    -j "${JSON}" \
-    -e "${OUT_DIR}/${OUTPUT}-meanEmission-viterbi.png" \
-    -t "${OUT_DIR}/${OUTPUT}-transitionMatrix.png" \
-    -m "${OUT_DIR}/${OUTPUT}-stateMembership-viterbi.png" \
-    -l "${OUT_DIR}/${OUTPUT}-stateLength-viterbi.png" \
-    -s viterbi \
-    -n "${OUT_DIR}/${OUTPUT}-normEmission-viterbi.png" \
-    -d "${BED}"
+for BED in "${BED_FILES[@]}"; do
+    filename=$(basename "${BED}")
+    sample_id=${filename#viterbi_}
+    sample_id=${sample_id%.bed.gz}
+    TAB="${SEG_DIR}/${sample_id}.tab"
+    if [[ ! -f "${TAB}" ]]; then
+        echo "Error: Expected tab file '${TAB}' for BED file '${BED}'." >&2
+        exit 1
+    fi
 
-plot_state_histograms.py \
-    -c "${TAB}" \
-    -j "${JSON}" \
-    -a "${OUT_DIR}/${OUTPUT}-stateDistribution.png" \
-    -s viterbi
+    PREFIX="${sample_id}"
 
-plot_state_colors.py \
+    results.py \
+        -c "${TAB}" \
+        -j "${JSON}" \
+        -e "${OUT_DIR}/${PREFIX}-meanEmission-viterbi.png" \
+        -t "${OUT_DIR}/${PREFIX}-transitionMatrix.png" \
+        -m "${OUT_DIR}/${PREFIX}-stateMembership-viterbi.png" \
+        -l "${OUT_DIR}/${PREFIX}-stateLength-viterbi.png" \
+        -s viterbi \
+        -n "${OUT_DIR}/${PREFIX}-normEmission-viterbi.png" \
+        -d "${BED}"
+
+    plot_state_histograms.py \
+        -c "${TAB}" \
+        -j "${JSON}" \
+        -a "${OUT_DIR}/${PREFIX}-stateDistribution.png" \
+        -s viterbi
+
+    plot_state_colors.py \
         -d "${BED}" \
-        -o "${OUT_DIR}/${OUTPUT}-state-colors.png"
+        -o "${OUT_DIR}/${PREFIX}-state-colors.png"
 
-segmentation_report_dm.sh  \
-        -n "${OUTPUT}" \
-        -o "${OUT_DIR}/" \
-        -i true \
-        -c viterbi
+    segmentation_report_dm_md.sh \
+        -n "${PREFIX}" \
+        -o "${OUT_DIR}" \
+        -p "${OUTPUT}"
+done
 
-echo "Plots generated successfully in ${OUT_DIR}/"
+echo "Plots and Markdown reports generated successfully in ${OUT_DIR}/"

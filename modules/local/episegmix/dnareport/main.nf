@@ -18,7 +18,7 @@ process EPISEGMIX_DNAREPORT {
     task.ext.when == null || task.ext.when
 
     script:
-    def args = task.ext.args ?: "-y ${yaml} -j ${json} -t ${segmentation}/*.bed -b ${segmentation}/viterbi*.bed.gz"
+    def args = task.ext.args ?: "-y ${yaml} -j ${json} -t ${segmentation}/*.tab -b ${segmentation}/viterbi*.bed.gz"
     def prefix = task.ext.prefix ?: "${sample_id}"
 
     """
