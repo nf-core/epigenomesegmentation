@@ -189,5 +189,196 @@
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
         }
+    },
+    "GM12878 - EPISEGMIX_TRAINCOUNTS - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "GM12878_2-train-regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "GM12878_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "GM12878_2",
+                        "GM12878_2.regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "EPISEGMIX_TRAINCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "dna_regions": [
+                    [
+                        "GM12878_2",
+                        "GM12878_2.regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "train_counts": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "GM12878_2-train-regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "GM12878_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_TRAINCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:56:13.383470964",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "GM12878 - EPISEGMIX_TRAINCOUNTS": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4"
+                    ]
+                ],
+                "1": [
+                    [
+                        "GM12878_2",
+                        "dummy.regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "2": [
+                    [
+                        "EPISEGMIX_TRAINCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "dna_regions": [
+                    [
+                        "GM12878_2",
+                        "dummy.regions.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "train_counts": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_TRAINCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_TRAINCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:55:59.148272419",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
     }
 }

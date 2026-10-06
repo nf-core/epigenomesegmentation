@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	14/ea77db	75308	EPISEGMIX_DNAREPORT (GM12878_2)	COMPLETED	0	2026-10-02 15:44:14.459	4.8s	31ms	114.5%	3.3 MB	4.4 MB	208.4 KB	331 B

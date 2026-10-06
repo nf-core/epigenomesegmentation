@@ -16,8 +16,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    [ id: 'kidney_P0' ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true)
+                    [ id: 'GM12878' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true)
                 ]
                 """
             }
@@ -43,8 +43,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    [ id: 'kidney_P0' ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true)
+                    [ id: 'GM12878' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true)
                 ]
                 """
             }

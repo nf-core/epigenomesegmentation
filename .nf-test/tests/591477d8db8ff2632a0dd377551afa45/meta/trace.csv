@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	05/ba1848	75325	EPISEGMIX_LDMDECODE (GM12878_2)	COMPLETED	0	2026-10-02 15:59:23.544	34.8s	10.4s	120.4%	432.2 MB	1021.2 MB	162.8 MB	51.1 MB

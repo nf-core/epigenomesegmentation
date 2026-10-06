@@ -10,16 +10,16 @@ nextflow_process {
     tag "episegmix"
     tag "episegmix/traincounts"
 
-    test("Kidney - EPISEGMIX_TRAINCOUNTS") {
+    test("GM12878 - EPISEGMIX_TRAINCOUNTS") {
 
         when {
             process {
                 """
                 input[0] = [
-                    'kidney_P0_2',
+                    'GM12878_2',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -27,11 +27,11 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
-                    [ id: 'no_bed_counts' ],
-                    [],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
+                    [ id: 'GM12878', epigenetic_mark: 'WGBS', distribution: 'BB' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Methylation/GM12878_meth.tab", checkIfExists: true),
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0_2.yaml', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_ldm/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true)
                 ]
                 """
             }
@@ -49,7 +49,7 @@ nextflow_process {
 
     }
 
-    test("Kidney - EPISEGMIX_TRAINCOUNTS - stub") {
+    test("GM12878 - EPISEGMIX_TRAINCOUNTS - stub") {
 
         options "-stub"
 
@@ -57,10 +57,10 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'kidney_P0_2',
+                    'GM12878_2',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -68,11 +68,11 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
-                    [ id: 'no_bed_counts' ],
-                    [],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
+                    [ id: 'GM12878', epigenetic_mark: 'WGBS', distribution: 'BB' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Methylation/GM12878_meth.tab", checkIfExists: true),
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0_2.yaml', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_ldm/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true)
                 ]
                 """
             }

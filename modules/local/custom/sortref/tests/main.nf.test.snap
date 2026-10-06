@@ -4,8 +4,8 @@
             {
                 "0": [
                     [
-                        "mm10",
-                        "filtered_mm10.chrom.sizes.v2.v2:md5,fddb62269e2ac8b9bee182398518f75e"
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes.v2.v2:md5,1bf8ffedfe7f9bb9d1a481c2a97ee03f"
                     ]
                 ],
                 "1": [
@@ -24,8 +24,8 @@
                 ],
                 "filtered_chromsizes": [
                     [
-                        "mm10",
-                        "filtered_mm10.chrom.sizes.v2.v2:md5,fddb62269e2ac8b9bee182398518f75e"
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes.v2.v2:md5,1bf8ffedfe7f9bb9d1a481c2a97ee03f"
                     ]
                 ],
                 "versions_awk": [
@@ -60,10 +60,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T13:30:05.561236",
+        "timestamp": "2026-10-02T13:41:16.567001669",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     },
     "mm10 - SORTREF - stub": {
@@ -71,8 +71,8 @@
             {
                 "0": [
                     [
-                        "mm10",
-                        "filtered_mm10.chrom.sizes.v2.v2:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes.v2.v2:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -91,8 +91,8 @@
                 ],
                 "filtered_chromsizes": [
                     [
-                        "mm10",
-                        "filtered_mm10.chrom.sizes.v2.v2:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes.v2.v2:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions_awk": [
@@ -111,10 +111,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T13:30:08.800026",
+        "timestamp": "2026-10-02T13:41:30.36980535",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     }
 }

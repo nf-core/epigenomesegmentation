@@ -12,10 +12,12 @@ nextflow_process {
 
     test("mm10 - FILTERCHROMSIZES") {
 
+        options "--genome hg38"
+
         when {
             process {
                 """
-                input[0] = file(params.pipelines_testdata_base_path + '/modules/mm10.chrom.sizes', checkIfExists: true)
+                input[0] = file("${projectDir}/assets/testdata/ref/hg38_chr12_chr13.chrom.sizes", checkIfExists: true)
                 """
             }
         }
@@ -34,12 +36,12 @@ nextflow_process {
 
     test("mm10 - FILTERCHROMSIZES - stub") {
 
-        options "-stub"
+        options "-stub --genome hg38"
 
         when {
             process {
                 """
-                input[0] = file(params.pipelines_testdata_base_path + '/modules/mm10.chrom.sizes', checkIfExists: true)
+                input[0] = file("${projectDir}/assets/testdata/ref/hg38_chr12_chr13.chrom.sizes", checkIfExists: true)
                 """
             }
         }

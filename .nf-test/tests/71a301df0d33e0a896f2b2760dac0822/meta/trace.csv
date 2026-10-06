@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	5e/5b8bf4	75318	EPISEGMIX_TRAINCOUNTS (GM12878_2)	COMPLETED	0	2026-10-02 15:51:36.998	4.8s	35ms	62.4%	3.3 MB	4.4 MB	197.9 KB	330 B

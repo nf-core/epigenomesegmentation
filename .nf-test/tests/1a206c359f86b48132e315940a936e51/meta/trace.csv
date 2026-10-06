@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	35/4672cb	75281	CUSTOM_FILTERBED (GM12878)	COMPLETED	0	2026-10-02 15:34:37.143	4.8s	38ms	55.9%	3.1 MB	4.3 MB	137.2 KB	372 B

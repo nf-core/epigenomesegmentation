@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	e5/70fd8f	75334	CUSTOM_SHEETBAM (GM12878)	COMPLETED	0	2026-10-02 16:27:57.737	4.8s	0ms	101.6%	2.7 MB	11 MB	105.6 KB	1.1 KB

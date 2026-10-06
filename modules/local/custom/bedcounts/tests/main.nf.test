@@ -21,14 +21,14 @@ nextflow_process {
                 """
                 input[0] = [
                     [
-                        id: 'kidney_P0',
+                        id: 'GM12878',
                         replicate: 1,
                         epigenetic_mark: 'WGBS',
                         modality: 'WGBS',
                         paired_end: true,
                         distribution: 'BI'
                     ],
-                    file(params.pipelines_testdata_base_path + '/testdata/WGBS_mm10_kidney_chr12_reduced.bed.gz', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/bed/ENCFF279HCL_chr12_chr13.bed.gz", checkIfExists: true)
                 ]
                 """
             }
@@ -56,14 +56,14 @@ nextflow_process {
                 """
                 input[0] = [
                     [
-                        id: 'kidney_P0',
+                        id: 'GM12878',
                         replicate: 1,
                         epigenetic_mark: 'WGBS',
                         modality: 'WGBS',
                         paired_end: true,
                         distribution: 'BI'
                     ],
-                    file(params.pipelines_testdata_base_path + '/testdata/WGBS_mm10_kidney_chr12_reduced.bed.gz', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/bed/ENCFF279HCL_chr12_chr13.bed.gz", checkIfExists: true)
                 ]
                 """
             }

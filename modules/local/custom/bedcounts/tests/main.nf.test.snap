@@ -5,14 +5,14 @@
                 "0": [
                     [
                         {
-                            "id": "kidney_P0",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "kidney_P0_WGBS.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "GM12878_WGBS.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -32,14 +32,14 @@
                 "countsbed": [
                     [
                         {
-                            "id": "kidney_P0",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "kidney_P0_WGBS.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "GM12878_WGBS.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions_awk": [
@@ -58,10 +58,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T12:46:52.760508",
+        "timestamp": "2026-10-02T13:38:25.994573104",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     },
     "Kidney - BEDCOUNTS": {
@@ -70,14 +70,14 @@
                 "0": [
                     [
                         {
-                            "id": "kidney_P0",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "kidney_P0_WGBS.tab:md5,2a091b25aa544a10014701e71446802d"
+                        "GM12878_WGBS.tab:md5,b2a4cf14f91fec52c1df5a86ed0db158"
                     ]
                 ],
                 "1": [
@@ -97,14 +97,14 @@
                 "countsbed": [
                     [
                         {
-                            "id": "kidney_P0",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "kidney_P0_WGBS.tab:md5,2a091b25aa544a10014701e71446802d"
+                        "GM12878_WGBS.tab:md5,b2a4cf14f91fec52c1df5a86ed0db158"
                     ]
                 ],
                 "versions_awk": [
@@ -139,10 +139,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T12:45:22.194598",
+        "timestamp": "2026-10-02T13:38:11.347728421",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     }
 }

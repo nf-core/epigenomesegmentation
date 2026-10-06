@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	61/366e90	75331	CUSTOM_BAMCOUNTS (GM12878)	COMPLETED	0	2026-10-02 16:26:44.868	34.8s	7s	99.8%	832.4 MB	2.2 GB	57 MB	3.8 MB

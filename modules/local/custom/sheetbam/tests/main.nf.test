@@ -16,10 +16,18 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'kidney_P0',
+                    'GM12878',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'H3K27me3',
+                            modality: 'ChIP-seq',
+                            paired_end: false,
+                            distribution: 'NBI'
+                        ],
+                        [
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -28,10 +36,12 @@ nextflow_process {
                         ]
                     ],
                     [
-                        file(params.pipelines_testdata_base_path + '/modules/H3K4me3_mm10_kidney_chr12_reduced.nochr.bam', checkIfExists: true)
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF633BHN_chr12_chr13.nochr.bam", checkIfExists: true),
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF911YNM_chr12_chr13.nochr.bam", checkIfExists: true)
                     ],
                     [
-                        file(params.pipelines_testdata_base_path + '/modules/H3K4me3_mm10_kidney_chr12_reduced.nochr.bam.bai', checkIfExists: true)
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF633BHN_chr12_chr13.nochr.bam.bai", checkIfExists: true),
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF911YNM_chr12_chr13.nochr.bam.bai", checkIfExists: true)
                     ]
                 ]
                 """
@@ -58,10 +68,18 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'kidney_P0',
+                    'GM12878',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'H3K27me3',
+                            modality: 'ChIP-seq',
+                            paired_end: false,
+                            distribution: 'NBI'
+                        ],
+                        [
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -70,10 +88,12 @@ nextflow_process {
                         ]
                     ],
                     [
-                        file(params.pipelines_testdata_base_path + '/modules/H3K4me3_mm10_kidney_chr12_reduced.nochr.bam', checkIfExists: true)
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF633BHN_chr12_chr13.nochr.bam", checkIfExists: true),
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF911YNM_chr12_chr13.nochr.bam", checkIfExists: true)
                     ],
                     [
-                        file(params.pipelines_testdata_base_path + '/modules/H3K4me3_mm10_kidney_chr12_reduced.nochr.bam.bai', checkIfExists: true)
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF633BHN_chr12_chr13.nochr.bam.bai", checkIfExists: true),
+                        file("${projectDir}/assets/testdata/bamcounts/ENCFF911YNM_chr12_chr13.nochr.bam.bai", checkIfExists: true)
                     ]
                 ]
                 """

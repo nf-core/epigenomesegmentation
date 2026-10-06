@@ -1,0 +1,88 @@
+Oct-02 15:35:44.532 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/meta/nextflow.log run /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test-3fec559de16b5f1b7170429cc66ceb04.nf -c /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config -c /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config -params-file /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/meta/params.json -ansi-log false -profile test,singularity -with-trace /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/meta/trace.csv -w /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/work
+Oct-02 15:35:44.590 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.7
+Oct-02 15:35:44.609 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/aaryanjaitly/.nextflow/plugins; core-plugins: nf-amazon@2.15.0-patch1,nf-azure@1.16.0-patch1,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.1,nf-k8s@1.0.0,nf-tower@1.11.4-patch1,nf-wave@1.12.1
+Oct-02 15:35:44.635 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Oct-02 15:35:44.636 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Oct-02 15:35:44.638 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Oct-02 15:35:44.647 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Oct-02 15:35:44.663 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 15:35:44.667 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 15:35:44.667 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config
+Oct-02 15:35:44.668 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 15:35:44.668 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 15:35:44.668 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config
+Oct-02 15:35:44.690 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/aaryanjaitly/.nextflow/secrets/store.json
+Oct-02 15:35:44.693 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@10ec523c] - activable => nextflow.secret.LocalSecretsProvider@10ec523c
+Oct-02 15:35:44.711 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Oct-02 15:35:45.977 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Oct-02 15:35:46.240 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test,singularity`
+Oct-02 15:35:46.252 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bih, cfc_dev, uzl_omics, ifb_core, embl_hd, mcw_rcc, denbi_qbic, alice, mjolnir_globe, uppmax, giga, verily_workbench, incliva, ilifu, ki_luria, uge, icr_alma, rosalind_uge, lugh, mccleary, unibe_ibu, vai, czbiohub_aws, jax, roslin, iris, tes, unc_longleaf, tigem, tubingen_apg, apollo, ipop_up, vsc_calcua, pdc_kth, saga_sigma2, ceci_nic5, ccga_cau, humantechnopole, stjude, daisybio, eddie, medair, biowulf, mahuika, apptainer, bi, bigpurple, adcra, cedars, pawsey_setonix, vsc_kul_uhasselt, purdue_gautschi, rki, ucl_myriad, charliecloud, fred_hutch, seattlechildrens, ceres, purdue_negishi, munin, rosalind, hasta, cfc, emulate_amd64, uzh, shu_bmrc, ebi_codon_slurm, ebc, ccga_dx, crick, ku_sund_danhead, marvin, lrz_cm4, purdue_bell, shifter, biohpc_gen, kelvin2, mana, mamba, york_viking, unc_lccc, wehi, awsbatch, arcc, ceci_dragon2, imperial, maestro, cannon, genotoul, nci_gadi, abims, eva_grace, janelia, nu_genomics, googlebatch, oist, sahmri, kaust, alliance_canada, arm64, mpcdf, leicester, vsc_ugent, create, sage, cambridge, jex, podman, ebi_codon, cheaha, xanadu, nyu_hpc, test, marjorie, palmetto, computerome, ucd_sonic, gpu, seg_globe, mssm, sanger, dkfz, bluebear, pasteur, einstein, ethz_euler, m3c, test_full, imb, ucl_cscluster, tuos_stanage, azurebatch, seadragon, crukmi, csiro_petrichor, naiss, qmul_apocrita, wave, docker, engaging, gis, hypatia, psmn, eva, unity, cropdiversityhpc, nygc, fgcz, conda, crg, singularity, mpcdf_viper, dirac, self_hosted_runner, tufts, uw_hyak_pedslabs, binac2, debug, hki_genie, genouest, cbe, unsw_katana, utd_juno, hazel, slurm, phoenix, seawulf, uod_hpc, fub_curta, lovelace, uct_hpc, aws_tower, fsu_draco]
+Oct-02 15:35:46.276 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 by global default
+Oct-02 15:35:46.290 [main] INFO  nextflow.cli.CmdRun - Launching `/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test-3fec559de16b5f1b7170429cc66ceb04.nf` [pedantic_fourier] DSL2 - revision: d7c6188b98
+Oct-02 15:35:46.291 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins declared=[nf-schema@2.5.1]
+Oct-02 15:35:46.291 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Oct-02 15:35:46.291 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[nf-schema@2.5.1]
+Oct-02 15:35:46.292 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-schema version: 2.5.1
+Oct-02 15:35:46.301 [main] INFO  org.pf4j.AbstractPluginManager - Plugin 'nf-schema@2.5.1' resolved
+Oct-02 15:35:46.301 [main] INFO  org.pf4j.AbstractPluginManager - Start plugin 'nf-schema@2.5.1'
+Oct-02 15:35:46.306 [main] DEBUG nextflow.plugin.BasePlugin - Plugin started nf-schema@2.5.1
+Oct-02 15:35:46.343 [main] DEBUG nextflow.Session - Session UUID: 06dbad07-294d-4b78-b38c-338ea50c0125
+Oct-02 15:35:46.343 [main] DEBUG nextflow.Session - Run name: pedantic_fourier
+Oct-02 15:35:46.343 [main] DEBUG nextflow.Session - Executor pool size: 256
+Oct-02 15:35:46.348 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Oct-02 15:35:46.352 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=768; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-02 15:35:46.367 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.7 build 5955
+  Created: 08-09-2025 13:29 UTC (15:29 CEST)
+  System: Linux 6.1.0-49-amd64
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 23.0.2-internal-adhoc.conda.src
+  Encoding: UTF-8 (ANSI_X3.4-1968)
+  Process: 3689099@triton-cs-03 [127.0.1.1]
+  CPUs: 256 - Mem: 1007.5 GB (938.4 GB) - Swap: 0 (0)
+Oct-02 15:35:46.392 [main] DEBUG nextflow.Session - Work-dir: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/work [nfs]
+Oct-02 15:35:46.454 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Oct-02 15:35:46.463 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Oct-02 15:35:46.503 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Oct-02 15:35:46.505 [main] DEBUG nextflow.Session - Observer factory (v2): ValidationObserverFactory
+Oct-02 15:35:46.528 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Oct-02 15:35:46.535 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 257; maxThreads: 1000
+Oct-02 15:35:46.591 [main] DEBUG nextflow.Session - Session start
+Oct-02 15:35:46.594 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/meta/trace.csv
+Oct-02 15:35:46.802 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Oct-02 15:35:46.988 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withLabel:process_single` matches labels `process_single` for process with name CUSTOM_JOINBED
+Oct-02 15:35:46.990 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CUSTOM_JOINBED` matches process CUSTOM_JOINBED
+Oct-02 15:35:47.005 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: null
+Oct-02 15:35:47.006 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'slurm'
+Oct-02 15:35:47.013 [main] DEBUG nextflow.executor.Executor - [warm up] executor > slurm
+Oct-02 15:35:47.017 [main] DEBUG n.processor.TaskPollingMonitor - Creating task monitor for executor 'slurm' > capacity: 100; pollInterval: 5s; dumpInterval: 5m 
+Oct-02 15:35:47.018 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: slurm)
+Oct-02 15:35:47.020 [main] DEBUG n.executor.AbstractGridExecutor - Creating executor 'slurm' > queue-stat-interval: 1m
+Oct-02 15:35:47.034 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'CUSTOM_JOINBED': maxForks=0; fair=false; array=0
+Oct-02 15:35:47.075 [main] DEBUG nextflow.Session - Config process names validation disabled as requested
+Oct-02 15:35:47.077 [main] DEBUG nextflow.Session - Igniting dataflow network (1)
+Oct-02 15:35:47.077 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CUSTOM_JOINBED
+Oct-02 15:35:47.077 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_ea0edff46e40a855: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test-3fec559de16b5f1b7170429cc66ceb04.nf
+  Script_0e6695a2616c2f27: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/modules/local/custom/joinbed/main.nf
+Oct-02 15:35:47.077 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Oct-02 15:35:47.077 [main] DEBUG nextflow.Session - Session await
+Oct-02 15:35:47.129 [Actor Thread 7] DEBUG nextflow.container.SingularityCache - Singularity found local store for image=https://depot.galaxyproject.org/singularity/ubuntu:22.04; path=/walter/projects/students/aaryanjaitly/singularity_store/depot.galaxyproject.org-singularity-ubuntu-22.04.img
+Oct-02 15:35:47.256 [Task submitter] DEBUG nextflow.executor.GridTaskHandler - [SLURM] submitted process CUSTOM_JOINBED (GM12878) > jobId: 75286; workDir: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/work/29/ebe837c9de77edc2b13396f120ce32
+Oct-02 15:35:47.257 [Task submitter] INFO  nextflow.Session - [29/ebe837] Submitted process > CUSTOM_JOINBED (GM12878)
+Oct-02 15:35:52.034 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[jobId: 75286; id: 1; name: CUSTOM_JOINBED (GM12878); status: COMPLETED; exit: 0; error: -; workDir: /jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/3fec559de16b5f1b7170429cc66ceb04/work/29/ebe837c9de77edc2b13396f120ce32 started: 1790948152024; exited: 2026-10-02T13:35:48.583592981Z; ]
+Oct-02 15:35:52.035 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=768; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-02 15:35:52.064 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=768; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Oct-02 15:35:52.069 [main] DEBUG nextflow.Session - Session await > all processes finished
+Oct-02 15:35:57.024 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: slurm) - terminating tasks monitor poll loop
+Oct-02 15:35:57.025 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Oct-02 15:35:57.028 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Oct-02 15:35:57.028 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Oct-02 15:35:57.046 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=14ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=1; peakCpus=1; peakMemory=6 GB; ]
+Oct-02 15:35:57.046 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Oct-02 15:35:57.048 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Oct-02 15:35:57.474 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Oct-02 15:35:57.549 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Oct-02 15:35:57.602 [main] INFO  org.pf4j.AbstractPluginManager - Stop plugin 'nf-schema@2.5.1'
+Oct-02 15:35:57.602 [main] DEBUG nextflow.plugin.BasePlugin - Plugin stopped nf-schema
+Oct-02 15:35:57.603 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Oct-02 15:35:57.603 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

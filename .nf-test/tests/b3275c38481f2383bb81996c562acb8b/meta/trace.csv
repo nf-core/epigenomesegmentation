@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	c3/1b168b	75291	CUSTOM_SORTREF (hg38)	COMPLETED	0	2026-10-02 15:36:58.680	4.8s	52ms	73.9%	3.2 MB	4.3 MB	170.7 KB	842 B

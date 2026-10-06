@@ -10,17 +10,17 @@ nextflow_process {
     tag "episegmix"
     tag "episegmix/bestdistribution"
 
-    test("Kidney - EPISEGMIX_BESTDISTRIBUTION") {
+    test("GM12878 - EPISEGMIX_BESTDISTRIBUTION") {
 
         when {
             process {
                 """
                 input[0] = [
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_NBI_2_H3K4me3.log', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_SI_2_H3K4me3.log', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_BNB_2_H3K4me3.log', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_NBI_2_H3K4me3/Model/GM12878_NBI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_SI_2_H3K4me3/Model/GM12878_SI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_BNB_2_H3K4me3/Model/GM12878_BNB_2_H3K4me3.log", checkIfExists: true)
                 ]
-                input[1] = file(params.pipelines_testdata_base_path + '/modules/fitting/samplesheet.csv', checkIfExists: true)
+                input[1] = file("${projectDir}/assets/testdata/samplesheet/samplesheet.csv", checkIfExists: true)
                 """
             }
         }
@@ -37,7 +37,7 @@ nextflow_process {
 
     }
 
-    test("Kidney - EPISEGMIX_BESTDISTRIBUTION - stub") {
+    test("GM12878 - EPISEGMIX_BESTDISTRIBUTION - stub") {
 
         options "-stub"
 
@@ -45,11 +45,11 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_NBI_2_H3K4me3.log', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_SI_2_H3K4me3.log', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/fitting/kidney_P0_BNB_2_H3K4me3.log', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_NBI_2_H3K4me3/Model/GM12878_NBI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_SI_2_H3K4me3/Model/GM12878_SI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_BNB_2_H3K4me3/Model/GM12878_BNB_2_H3K4me3.log", checkIfExists: true)
                 ]
-                input[1] = file(params.pipelines_testdata_base_path + '/modules/fitting/samplesheet.csv', checkIfExists: true)
+                input[1] = file("${projectDir}/assets/testdata/samplesheet/samplesheet.csv", checkIfExists: true)
                 """
             }
         }

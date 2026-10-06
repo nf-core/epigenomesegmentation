@@ -10,16 +10,16 @@ nextflow_process {
     tag "episegmix"
     tag "episegmix/config"
 
-    test("Kidney - EPISEGMIX_CONFIG") {
+    test("GM12878 - EPISEGMIX_CONFIG") {
 
         when {
             process {
                 """
                 input[0] = [
-                    'kidney_P0_2',
+                    'GM12878_2',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -27,7 +27,7 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
                     [ id: 'no_bed_counts' ],
                     [],
                     2
@@ -48,7 +48,7 @@ nextflow_process {
 
     }
 
-    test("Kidney - EPISEGMIX_CONFIG - stub") {
+    test("GM12878 - EPISEGMIX_CONFIG - stub") {
 
         options "-stub"
 
@@ -56,10 +56,10 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'kidney_P0_2',
+                    'GM12878_2',
                     [
                         [
-                            id: 'kidney_P0',
+                            id: 'GM12878',
                             replicate: 1,
                             epigenetic_mark: 'H3K4me3',
                             modality: 'ChIP-seq',
@@ -67,7 +67,7 @@ nextflow_process {
                             distribution: 'NBI'
                         ]
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/kidney_P0.tab', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
                     [ id: 'no_bed_counts' ],
                     [],
                     2

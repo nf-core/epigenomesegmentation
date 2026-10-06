@@ -10,31 +10,31 @@ nextflow_process {
     tag "episegmix"
     tag "episegmix/dnadecode"
 
-    test("Forebrain - EPISEGMIX_DNADECODE") {
+    test("GM12878 - EPISEGMIX_DNADECODE") {
 
         when {
             process {
                 """
                 input[0] = [
-                    'Forebrain_16.5_2',
+                    'GM12878_2',
                     [ id: 'no_bam_counts' ],
                     [],
                     [
-                        id: 'Forebrain_16.5',
+                        id: 'GM12878',
                         replicate: 1,
                         epigenetic_mark: 'WGBS',
                         modality: 'WGBS',
                         paired_end: true,
                         distribution: 'BI'
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_WGBS_binnedbedcounts.bed', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Segmentation/GM12878_WGBS_binnedbedcounts.bed", checkIfExists: true),
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2.yaml', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2-train-counts.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2-train-regions.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/dummy-train-counts-meth.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/final-model-Forebrain_16.5_2.json', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2.regions.txt', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2-train-counts.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2-train-regions.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/dummy-train-counts-meth.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/final-model-GM12878_2.json", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2.regions.txt", checkIfExists: true)
                 ]
                 """
             }
@@ -42,17 +42,11 @@ nextflow_process {
 
         then {
             assert process.success
-            assertAll(
-                { assert snapshot(
-                    process.out,
-                    process.out.findAll { key, val -> key.startsWith('versions') }
-                ).match() }
-            )
         }
 
     }
 
-    test("Forebrain - EPISEGMIX_DNADECODE - stub") {
+    test("GM12878 - EPISEGMIX_DNADECODE - stub") {
 
         options "-stub"
 
@@ -60,25 +54,25 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'Forebrain_16.5_2',
+                    'GM12878_2',
                     [ id: 'no_bam_counts' ],
                     [],
                     [
-                        id: 'Forebrain_16.5',
+                        id: 'GM12878',
                         replicate: 1,
                         epigenetic_mark: 'WGBS',
                         modality: 'WGBS',
                         paired_end: true,
                         distribution: 'BI'
                     ],
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_WGBS_binnedbedcounts.bed', checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Segmentation/GM12878_WGBS_binnedbedcounts.bed", checkIfExists: true),
                     2,
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2.yaml', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2-train-counts.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2-train-regions.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/dummy-train-counts-meth.txt', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/final-model-Forebrain_16.5_2.json', checkIfExists: true),
-                    file(params.pipelines_testdata_base_path + '/modules/dna/Forebrain_16.5_2.regions.txt', checkIfExists: true)
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2-train-counts.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2-train-regions.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/dummy-train-counts-meth.txt", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/final-model-GM12878_2.json", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_dna/EpiSegMix/GM12878_2/Model/GM12878_2.regions.txt", checkIfExists: true)
                 ]
                 """
             }

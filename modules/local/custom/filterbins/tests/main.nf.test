@@ -12,12 +12,14 @@ nextflow_process {
 
     test("mm10 - FILTERBINS") {
 
+        options "--binsize 200 --genome hg38"
+
         when {
             process {
                 """
                 input[0] = [
-                    [ id: 'mm10' ],
-                    file(params.pipelines_testdata_base_path + '/modules/mm10_10000bp.bed', checkIfExists: true)
+                    [ id: 'hg38' ],
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_200bp.bed", checkIfExists: true)
                 ]
                 """
             }
@@ -37,14 +39,14 @@ nextflow_process {
 
     test("mm10 - FILTERBINS - stub") {
 
-        options "-stub"
+        options "-stub --binsize 200 --genome hg38"
 
         when {
             process {
                 """
                 input[0] = [
-                    [ id: 'mm10' ],
-                    file(params.pipelines_testdata_base_path + '/modules/mm10_10000bp.bed', checkIfExists: true)
+                    [ id: 'hg38' ],
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_200bp.bed", checkIfExists: true)
                 ]
                 """
             }

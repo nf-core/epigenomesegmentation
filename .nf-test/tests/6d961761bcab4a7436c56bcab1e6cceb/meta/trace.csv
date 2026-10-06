@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	d2/3881e2	75282	CUSTOM_FILTERBINS (hg38)	COMPLETED	0	2026-10-02 15:34:51.153	4.8s	1s	69.3%	5.9 MB	22.8 MB	25.1 MB	25 MB

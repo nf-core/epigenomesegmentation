@@ -1,4 +1,41 @@
 {
+    "GM12878 - EPISEGMIX_BESTDISTRIBUTION - stub": {
+        "content": [
+            {
+                "0": [
+                    "best_samplesheet.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    "all_parsed_loglikelihoods.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "2": [
+                    [
+                        "EPISEGMIX_BESTDISTRIBUTION",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "results_all": [
+                    "all_parsed_loglikelihoods.tsv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "samplesheet": [
+                    "best_samplesheet.csv:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_BESTDISTRIBUTION",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:35:31.206005422",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
     "Kidney - EPISEGMIX_BESTDISTRIBUTION": {
         "content": [
             {
@@ -80,6 +117,52 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
+        }
+    },
+    "GM12878 - EPISEGMIX_BESTDISTRIBUTION": {
+        "content": [
+            {
+                "0": [
+                    "best_samplesheet.csv:md5,9e815c705ee67f1672e002a6b41df7e0"
+                ],
+                "1": [
+                    "all_parsed_loglikelihoods.tsv:md5,1ad9e7f09fcce3e2d5c1dd48b2e0ef9c"
+                ],
+                "2": [
+                    [
+                        "EPISEGMIX_BESTDISTRIBUTION",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "results_all": [
+                    "all_parsed_loglikelihoods.tsv:md5,1ad9e7f09fcce3e2d5c1dd48b2e0ef9c"
+                ],
+                "samplesheet": [
+                    "best_samplesheet.csv:md5,9e815c705ee67f1672e002a6b41df7e0"
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_BESTDISTRIBUTION",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_BESTDISTRIBUTION",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:35:17.446413949",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
         }
     }
 }

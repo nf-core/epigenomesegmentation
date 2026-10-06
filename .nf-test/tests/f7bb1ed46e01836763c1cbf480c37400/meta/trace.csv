@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	e1/d2d0af	75306	EPISEGMIX_DNADECODE (GM12878_2)	COMPLETED	0	2026-10-02 15:43:46.383	4.8s	31ms	91.8%	3.4 MB	4.4 MB	200.6 KB	330 B

@@ -1,4 +1,102 @@
 {
+    "GM12878 - EPISEGMIX_DMDECODE": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMDECODE",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMDECODE",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMDECODE",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:43:38.894658013",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
     "Kidney - EPISEGMIX_DMDECODE - stub": {
         "content": [
             {
@@ -182,6 +280,93 @@
         "meta": {
             "nf-test": "0.9.5",
             "nextflow": "26.04.6"
+        }
+    },
+    "GM12878 - EPISEGMIX_DMDECODE - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMDECODE",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMDECODE",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:43:53.841722365",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
         }
     }
 }

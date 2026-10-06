@@ -16,8 +16,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'mm10',
-                    file(params.pipelines_testdata_base_path + '/modules/filtered_mm10.chrom.sizes.v2', checkIfExists: true)
+                    'hg38',
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_chr12_chr13.chrom.sizes.v2", checkIfExists: true)
                 ]
                 """
             }
@@ -43,8 +43,8 @@ nextflow_process {
             process {
                 """
                 input[0] = [
-                    'mm10',
-                    file(params.pipelines_testdata_base_path + '/modules/filtered_mm10.chrom.sizes.v2', checkIfExists: true)
+                    'hg38',
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_chr12_chr13.chrom.sizes.v2", checkIfExists: true)
                 ]
                 """
             }

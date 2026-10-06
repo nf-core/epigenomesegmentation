@@ -4,8 +4,8 @@
             {
                 "0": [
                     [
-                        "kidney_P0",
-                        "no_header_kidney_P0.bed:md5,dde053adb42fa943d7725f5c47dd7566"
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,f2cae1a2d82b9fc3fa39ba27c02f5a79"
                     ]
                 ],
                 "1": [
@@ -17,8 +17,8 @@
                 ],
                 "noheader": [
                     [
-                        "kidney_P0",
-                        "no_header_kidney_P0.bed:md5,dde053adb42fa943d7725f5c47dd7566"
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,f2cae1a2d82b9fc3fa39ba27c02f5a79"
                     ]
                 ],
                 "versions_tail": [
@@ -39,10 +39,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T13:36:15.349087",
+        "timestamp": "2026-10-02T13:41:44.594852835",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     },
     "Kidney - STRIPHEADER - stub": {
@@ -50,8 +50,8 @@
             {
                 "0": [
                     [
-                        "kidney_P0",
-                        "no_header_kidney_P0.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "1": [
@@ -63,8 +63,8 @@
                 ],
                 "noheader": [
                     [
-                        "kidney_P0",
-                        "no_header_kidney_P0.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
                 ],
                 "versions_tail": [
@@ -76,10 +76,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T13:36:19.160641",
+        "timestamp": "2026-10-02T13:41:58.580347917",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.04.7"
         }
     }
 }

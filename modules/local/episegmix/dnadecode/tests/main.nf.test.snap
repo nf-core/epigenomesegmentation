@@ -1,10 +1,10 @@
 {
-    "Forebrain - EPISEGMIX_DNADECODE - stub": {
+    "GM12878 - EPISEGMIX_DNADECODE - stub": {
         "content": [
             {
                 "0": [
                     [
-                        "Forebrain_16.5_2",
+                        "GM12878_2",
                         {
                             "id": "no_bam_counts"
                         },
@@ -12,20 +12,20 @@
                             
                         ],
                         {
-                            "id": "Forebrain_16.5",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
                         2,
-                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
-                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
-                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
                         "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
                         [
                             
                         ]
@@ -40,7 +40,7 @@
                 ],
                 "Segmentation": [
                     [
-                        "Forebrain_16.5_2",
+                        "GM12878_2",
                         {
                             "id": "no_bam_counts"
                         },
@@ -48,20 +48,20 @@
                             
                         ],
                         {
-                            "id": "Forebrain_16.5",
+                            "id": "GM12878",
                             "replicate": 1,
                             "epigenetic_mark": "WGBS",
                             "modality": "WGBS",
                             "paired_end": true,
                             "distribution": "BI"
                         },
-                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
                         2,
-                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
-                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
-                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
                         "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
                         [
                             
                         ]
@@ -76,104 +76,10 @@
                 ]
             }
         ],
-        "timestamp": "2026-07-26T16:34:33.307307",
+        "timestamp": "2026-10-02T15:11:59.131410285",
         "meta": {
             "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
-        }
-    },
-    "Forebrain - EPISEGMIX_DNADECODE": {
-        "content": [
-            {
-                "0": [
-                    [
-                        "Forebrain_16.5_2",
-                        {
-                            "id": "no_bam_counts"
-                        },
-                        [
-                            
-                        ],
-                        {
-                            "id": "Forebrain_16.5",
-                            "replicate": 1,
-                            "epigenetic_mark": "WGBS",
-                            "modality": "WGBS",
-                            "paired_end": true,
-                            "distribution": "BI"
-                        },
-                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
-                        2,
-                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
-                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
-                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
-                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
-                        [
-                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,48b6aaf0c77ecf1a473bada3a37bd45b",
-                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,60f797f6c6db19c7980c062819230359"
-                        ]
-                    ]
-                ],
-                "1": [
-                    [
-                        "EPISEGMIX_DNADECODE",
-                        "episegmix",
-                        "episegmix 1.0.0"
-                    ]
-                ],
-                "Segmentation": [
-                    [
-                        "Forebrain_16.5_2",
-                        {
-                            "id": "no_bam_counts"
-                        },
-                        [
-                            
-                        ],
-                        {
-                            "id": "Forebrain_16.5",
-                            "replicate": 1,
-                            "epigenetic_mark": "WGBS",
-                            "modality": "WGBS",
-                            "paired_end": true,
-                            "distribution": "BI"
-                        },
-                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
-                        2,
-                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
-                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
-                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
-                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
-                        [
-                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,48b6aaf0c77ecf1a473bada3a37bd45b",
-                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,60f797f6c6db19c7980c062819230359"
-                        ]
-                    ]
-                ],
-                "versions_episegmix": [
-                    [
-                        "EPISEGMIX_DNADECODE",
-                        "episegmix",
-                        "episegmix 1.0.0"
-                    ]
-                ]
-            },
-            {
-                "versions_episegmix": [
-                    [
-                        "EPISEGMIX_DNADECODE",
-                        "episegmix",
-                        "episegmix 1.0.0"
-                    ]
-                ]
-            }
-        ],
-        "timestamp": "2026-07-26T16:34:29.475882",
-        "meta": {
-            "nf-test": "0.9.5",
-            "nextflow": "26.04.6"
+            "nextflow": "25.10.4"
         }
     }
 }

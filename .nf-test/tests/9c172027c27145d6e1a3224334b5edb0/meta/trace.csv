@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	3d/9ef692	13638	CUSTOM_FILTERBED (GM12878)	FAILED	125	2026-10-02 11:24:10.152	4s	3.8s	-	-	-	-	-
