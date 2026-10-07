@@ -10,34 +10,34 @@ using namespace boost::property_tree;
 
 /**
  * @brief parse parameters for the given distribution
- * 
- * @param states 
- * @param m 
- * @param distribution 
- * @param parameters 
- * @param emission 
+ *
+ * @param states
+ * @param m
+ * @param distribution
+ * @param parameters
+ * @param emission
  */
 void parse_distribution(int states, int m, const std::string& distribution, bool methylation, ptree& parameters, Matrix<std::shared_ptr<DiscreteDistribution>>& emission);
 
 /**
  * @brief read initial state distribution
- * 
- * @param tree 
- * @return std::vector<double> 
+ *
+ * @param tree
+ * @return std::vector<double>
  */
 std::vector<double> parse_initial_state_distribution(boost::property_tree::ptree& tree);
 
 /**
  * @brief read transition matrix
- * 
- * @return matrix<double> 
+ *
+ * @return matrix<double>
  */
 Matrix<double> parse_transition_matrix(int, boost::property_tree::ptree&);
 
 /**
  * @brief create property tree for distribution parameters
- * 
- * @return ptree 
+ *
+ * @return ptree
  */
 ptree get_distribution_parameters(const Matrix<std::shared_ptr<DiscreteDistribution>>&, int, int);
 
@@ -47,6 +47,7 @@ std::ostream& operator<<(std::ostream& out, const HMM& model)
 
     root.put("states", model.N);
 
+    // one column input
     ptree marker;
     for (auto& name: model.marker)
     {
@@ -56,7 +57,15 @@ std::ostream& operator<<(std::ostream& out, const HMM& model)
     }
     root.add_child("marker", marker);
 
-    root.put("methylation", model.methylation);
+    // two column input
+    ptree coverage_marker;
+    for (auto& name: model.coverage_marker)
+    {
+        ptree marker_entry;
+        marker_entry.put("", name);
+        coverage_marker.push_back(std::make_pair("", marker_entry));
+    }
+    root.add_child("coverage_marker", coverage_marker);
 
     ptree emission;
     for (size_t i = 0; i < model.emission.nrows(); ++i)
@@ -133,7 +142,7 @@ std::istream& operator>>(std::istream& in, HMM& model)
     if (root.find("states") == root.not_found())
         throw std::ios_base::failure("Missing <states> parameter.");
     model.N = root.get<int>("states");
-    
+
     if (root.find("marker") == root.not_found())
         throw std::ios_base::failure("Missing <marker> parameter.");
     for (ptree::value_type& p : root.get_child("marker"))
@@ -141,34 +150,31 @@ std::istream& operator>>(std::istream& in, HMM& model)
         model.marker.push_back(p.second.get_value<std::string>());
     }
     model.m = model.marker.size();
-    
-    model.methylation = false;
-    if (root.find("methylation") != root.not_found())
-    {
-        model.methylation = root.get<bool>("methylation");
+
+    if (root.find("coverage_marker") != root.not_found()){
+        for (ptree::value_type& p : root.get_child("coverage_marker"))
+        {
+            model.coverage_marker.push_back(p.second.get_value<std::string>());
+        }
+        model.cm = model.coverage_marker.size();
     }
 
-    if (root.find("emission") == root.not_found())
-        throw std::ios_base::failure("Missing <emission> parameter.");
-
-    size_t dim = model.methylation ? model.m + 1 : model.m;
+    size_t dim = model.m + model.cm;
     model.emission = Matrix<std::shared_ptr<DiscreteDistribution>> (model.N, dim);
     int s = 0;
     for (ptree::value_type& row : root.get_child("emission"))
     {
         if (s >= model.N)
             throw std::ios_base::failure("Too many states.");
-        
+
         int m = 0;
         for (ptree::value_type& cell : row.second)
         {
             if (m >= dim)
-                throw std::ios_base::failure("Distributions per state and number of markers must be the same (plus one if methylation is true).");
-            
+                throw std::ios_base::failure("Distributions per state and number of markers (+ coverage markers) must be the same.");
+
             std::string distribution = cell.second.get<std::string>("distribution");
-            bool meth = false;
-            if (model.methylation && m == dim-1)
-                meth = true;
+            bool meth = m >= model.m;
             parse_distribution(s, m, distribution, meth, cell.second.get_child("parameters"), model.emission);
             ++m;
         }
@@ -235,7 +241,7 @@ void parse_distribution(int s, int m, const std::string& distribution, bool meth
         {
             if (parameters.find("alpha") == parameters.not_found() || parameters.find("beta") == parameters.not_found() || parameters.find("r") == parameters.not_found())
                 throw std::ios_base::failure("Beta negative binomial distribution requires parameters <alpha>, <beta> and <r>.");
-            
+
             emission(s, m) = std::make_shared<BetaNegativeBinomial>(BetaNegativeBinomial(parameters.get<double>("alpha"), parameters.get<double>("beta"), parameters.get<double>("r")));
         }
         else if (distribution == "ZAP")
@@ -248,30 +254,30 @@ void parse_distribution(int s, int m, const std::string& distribution, bool meth
         {
             if (parameters.find("p") == parameters.not_found() || parameters.find("r") == parameters.not_found() || parameters.find("pi") == parameters.not_found())
                 throw std::ios_base::failure("Zero adjusted negative binomial distribution requires parameters <p> and <r> and <pi>.");
-            
+
             emission(s, m) = std::make_shared<ZeroAdjustedNegativeBinomial>(ZeroAdjustedNegativeBinomial(parameters.get<double>("p"), parameters.get<double>("r"), parameters.get<double>("pi")));
         }
         else if (distribution == "ZABNB")
         {
             if (parameters.find("alpha") == parameters.not_found() || parameters.find("beta") == parameters.not_found() || parameters.find("r") == parameters.not_found() || parameters.find("pi") == parameters.not_found())
                 throw std::ios_base::failure("Zero adjusted beta negative binomial distribution requires parameters <alpha>, <beta>, <r> and <pi>.");
-            
+
             emission(s, m) = std::make_shared<ZeroAdjustedBetaNegativeBinomial>(ZeroAdjustedBetaNegativeBinomial(parameters.get<double>("alpha"), parameters.get<double>("beta"), parameters.get<double>("r"), parameters.get<double>("pi")));
         }
         else if (distribution == "GA")
-        {        
+        {
             if (parameters.find("mean") == parameters.not_found() || parameters.find("std") == parameters.not_found())
                 throw std::ios_base::failure("Gaussian distribution requires parameters <mean> and <std>.");
             emission(s, m) = std::make_shared<Gaussian>(Gaussian(parameters.get<double>("mean"), parameters.get<double>("std")));
         }
         else if (distribution == "SI")
-        {        
+        {
             if (parameters.find("mu") == parameters.not_found() || parameters.find("sigma") == parameters.not_found() || parameters.find("v") == parameters.not_found())
                 throw std::ios_base::failure("Sichel distribution requires parameters <mu> and <sigma> and <v>.");
             emission(s, m) = std::make_shared<Sichel>(Sichel(parameters.get<double>("mu"), parameters.get<double>("sigma"), parameters.get<double>("v")));
         }
         else if (distribution == "ZASI")
-        {        
+        {
             if (parameters.find("mu") == parameters.not_found() || parameters.find("sigma") == parameters.not_found() || parameters.find("v") == parameters.not_found() || parameters.find("pi") == parameters.not_found())
                 throw std::ios_base::failure("Zero adjusted Sichel distribution requires parameters <mu>, <sigma>, <v> and <pi>.");
             emission(s, m) = std::make_shared<ZeroAdjustedSichel>(ZeroAdjustedSichel(parameters.get<double>("mu"), parameters.get<double>("sigma"), parameters.get<double>("v"), parameters.get<double>("pi")));
@@ -282,7 +288,7 @@ void parse_distribution(int s, int m, const std::string& distribution, bool meth
                 throw std::ios_base::failure("Bernoulli distribution requires parameter <p>.");
             emission(s, m) = std::make_shared<Bernoulli>(Bernoulli(parameters.get<double>("p")));
         }
-        else 
+        else
         {
             throw std::ios_base::failure("Unknown distribution.");
         }
@@ -302,12 +308,12 @@ void parse_distribution(int s, int m, const std::string& distribution, bool meth
             emission(s, m) = std::make_shared<BetaBinomial>(BetaBinomial(parameters.get<double>("alpha"), parameters.get<double>("beta")));
         }
         else if (distribution == "AB")
-        {        
+        {
             if (parameters.find("alpha") == parameters.not_found() || parameters.find("beta") == parameters.not_found() || parameters.find("pi") == parameters.not_found())
                 throw std::ios_base::failure("Adjusted beta distribution requires parameters <alpha>, <beta> and <pi>.");
             emission(s, m) = std::make_shared<AdjustedBeta>(AdjustedBeta(parameters.get<double>("alpha"), parameters.get<double>("beta"), parameters.get<double>("pi")));
         }
-        else 
+        else
         {
             throw std::ios_base::failure("Unsupported distribution for DNA methylation.");
         }
@@ -373,31 +379,31 @@ ptree get_distribution_parameters(const Matrix<std::shared_ptr<DiscreteDistribut
         parameters.put("pi", emission(i, j)->get_parameters()[3]);
     }
     else if (emission(i, j)->get_name() == "GA")
-    {        
+    {
         parameters.put("mean", emission(i, j)->get_parameters()[0]);
         parameters.put("std", emission(i, j)->get_parameters()[1]);
     }
     else if (emission(i, j)->get_name() == "SI")
-    {        
+    {
         parameters.put("mu", emission(i, j)->get_parameters()[0]);
         parameters.put("sigma", emission(i, j)->get_parameters()[1]);
         parameters.put("v", emission(i, j)->get_parameters()[2]);
     }
     else if (emission(i, j)->get_name() == "ZASI")
-    {        
+    {
         parameters.put("mu", emission(i, j)->get_parameters()[0]);
         parameters.put("sigma", emission(i, j)->get_parameters()[1]);
         parameters.put("v", emission(i, j)->get_parameters()[2]);
         parameters.put("pi", emission(i, j)->get_parameters()[3]);
     }
     else if (emission(i, j)->get_name() == "AB")
-    {        
+    {
         parameters.put("alpha", emission(i, j)->get_parameters()[0]);
         parameters.put("beta", emission(i, j)->get_parameters()[1]);
         parameters.put("pi", emission(i, j)->get_parameters()[2]);
     }
     else if (emission(i, j)->get_name() == "B")
-    {        
+    {
         parameters.put("p", emission(i, j)->get_parameters()[0]);
     }
 
@@ -471,7 +477,14 @@ std::ostream& operator<<(std::ostream& out, const AdjustableDurationHMM& model)
     }
     root.add_child("marker", marker);
 
-    root.put("methylation", model.methylation);
+    ptree coverage_marker;
+    for (auto& name: model.coverage_marker)
+    {
+        ptree marker_entry;
+        marker_entry.put("", name);
+        coverage_marker.push_back(std::make_pair("", marker_entry));
+    }
+    root.add_child("coverage_marker", coverage_marker);
 
     ptree emission;
     for (size_t i = 0; i < model.emission.nrows(); ++i)
@@ -553,6 +566,15 @@ std::istream& operator>>(std::istream& in, AdjustableDurationHMM& model)
     }
     model.m = model.marker.size();
 
+    if (root.find("coverage_marker") != root.not_found())
+    {
+        for (ptree::value_type& p : root.get_child("coverage_marker"))
+        {
+            model.coverage_marker.push_back(p.second.get_value<std::string>());
+        }
+        model.cm = model.coverage_marker.size();
+    }
+
     if (root.find("states") == root.not_found())
         throw std::ios_base::failure("Missing <states> parameter.");
     size_t states = root.get<int>("states");
@@ -562,7 +584,7 @@ std::istream& operator>>(std::istream& in, AdjustableDurationHMM& model)
 
     model.N = 0;
     for (ptree::value_type& state : root.get_child("topology"))
-    { 
+    {
         std::vector<size_t> subHMM;
         for (ptree::value_type& s : state.second)
         {
@@ -582,16 +604,11 @@ std::istream& operator>>(std::istream& in, AdjustableDurationHMM& model)
         }
     }
 
-    model.methylation = false;
-    if (root.find("methylation") != root.not_found())
-    {
-        model.methylation = root.get<bool>("methylation");
-    }
 
     if (root.find("emission") == root.not_found())
         throw std::ios_base::failure("Missing <emission> parameter.");
 
-    size_t dim = model.methylation ? model.m + 1 : model.m;
+    size_t dim = model.m + model.cm;
 
     model.emission = Matrix<std::shared_ptr<DiscreteDistribution>> (model.stateIndices.size(), dim);
     int s = 0;
@@ -599,17 +616,15 @@ std::istream& operator>>(std::istream& in, AdjustableDurationHMM& model)
     {
         if (s >= model.stateIndices.size())
             throw std::ios_base::failure("Too many states.");
-        
+
         int m = 0;
         for (ptree::value_type& cell : row.second)
         {
             if (m >= dim)
-                throw std::ios_base::failure("Distributions per state and number of markers must be the same (plus one if methylation is true).");
-            
+                throw std::ios_base::failure("Distributions per state and number of markers (+ coverage markers) must be the same.");
+
             std::string distribution = cell.second.get<std::string>("distribution");
-            bool meth = false;
-            if (model.methylation && m == dim-1)
-                meth = true;
+            bool meth = m >= model.m;
             parse_distribution(s, m, distribution, meth, cell.second.get_child("parameters"), model.emission);
             ++m;
         }

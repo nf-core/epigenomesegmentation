@@ -1,0 +1,91 @@
+{
+    "Kidney - JOINBED - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "WGBS",
+                                "modality": "WGBS",
+                                "paired_end": true,
+                                "distribution": "BI"
+                            }
+                        ],
+                        "GM12878_meth.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "joined_ch_tab": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "WGBS",
+                                "modality": "WGBS",
+                                "paired_end": true,
+                                "distribution": "BI"
+                            }
+                        ],
+                        "GM12878_meth.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T15:10:18.996796795",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    },
+    "Kidney - JOINBED": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "WGBS",
+                                "modality": "WGBS",
+                                "paired_end": true,
+                                "distribution": "BI"
+                            }
+                        ],
+                        "GM12878_meth.tab:md5,9c5bf35e2689a899cd2fe363b6f090e0"
+                    ]
+                ],
+                "joined_ch_tab": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "WGBS",
+                                "modality": "WGBS",
+                                "paired_end": true,
+                                "distribution": "BI"
+                            }
+                        ],
+                        "GM12878_meth.tab:md5,9c5bf35e2689a899cd2fe363b6f090e0"
+                    ]
+                ]
+            },
+            {
+                
+            }
+        ],
+        "timestamp": "2026-10-02T15:10:08.546192148",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.10.4"
+        }
+    }
+}

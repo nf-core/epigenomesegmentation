@@ -1,0 +1,43 @@
+Oct-02 11:08:32.203 [main] DEBUG nextflow.cli.Launcher - $> nextflow -quiet -log /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/50087612af7ae3af5772bd03c46dfb3c/meta/nextflow.log run /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test-50087612af7ae3af5772bd03c46dfb3c.nf -c /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config -c /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config -params-file /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/50087612af7ae3af5772bd03c46dfb3c/meta/params.json -ansi-log false -profile test -with-trace /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/50087612af7ae3af5772bd03c46dfb3c/meta/trace.csv -w /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/50087612af7ae3af5772bd03c46dfb3c/work --binsize 200 --genome hg38
+Oct-02 11:08:32.375 [main] INFO  nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Oct-02 11:08:32.419 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/aaryanjaitly/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Oct-02 11:08:32.484 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Oct-02 11:08:32.531 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Oct-02 11:08:32.539 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Oct-02 11:08:32.583 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Oct-02 11:08:32.872 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Oct-02 11:08:32.999 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 11:08:33.010 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 11:08:33.055 [main] DEBUG nextflow.config.ConfigBuilder - User config file: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config
+Oct-02 11:08:33.059 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 11:08:33.061 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/nextflow.config
+Oct-02 11:08:33.062 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/tests/nextflow.config
+Oct-02 11:08:33.117 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test`
+Oct-02 11:08:35.748 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test`
+Oct-02 11:08:36.491 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `test`
+Oct-02 11:08:36.526 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bih, cfc_dev, uzl_omics, ifb_core, embl_hd, mcw_rcc, denbi_qbic, alice, mjolnir_globe, uppmax, giga, verily_workbench, incliva, ilifu, ki_luria, uge, icr_alma, rosalind_uge, lugh, mccleary, unibe_ibu, vai, czbiohub_aws, jax, roslin, iris, tes, unc_longleaf, tigem, tubingen_apg, apollo, ipop_up, vsc_calcua, pdc_kth, saga_sigma2, ceci_nic5, ccga_cau, humantechnopole, stjude, daisybio, eddie, medair, biowulf, mahuika, apptainer, bi, bigpurple, adcra, cedars, pawsey_setonix, vsc_kul_uhasselt, purdue_gautschi, rki, ucl_myriad, charliecloud, fred_hutch, seattlechildrens, ceres, purdue_negishi, munin, rosalind, hasta, cfc, emulate_amd64, uzh, shu_bmrc, ebi_codon_slurm, ebc, ccga_dx, crick, ku_sund_danhead, marvin, lrz_cm4, purdue_bell, shifter, biohpc_gen, kelvin2, mana, mamba, york_viking, unc_lccc, wehi, awsbatch, arcc, ceci_dragon2, imperial, maestro, cannon, genotoul, nci_gadi, abims, eva_grace, janelia, nu_genomics, googlebatch, oist, sahmri, kaust, alliance_canada, arm64, mpcdf, leicester, vsc_ugent, create, sage, cambridge, jex, podman, ebi_codon, cheaha, xanadu, nyu_hpc, test, marjorie, palmetto, computerome, ucd_sonic, gpu, seg_globe, mssm, sanger, dkfz, bluebear, pasteur, einstein, ethz_euler, m3c, test_full, imb, ucl_cscluster, tuos_stanage, azurebatch, seadragon, crukmi, csiro_petrichor, naiss, qmul_apocrita, wave, docker, engaging, gis, hypatia, psmn, eva, unity, cropdiversityhpc, nygc, fgcz, conda, crg, singularity, mpcdf_viper, dirac, self_hosted_runner, tufts, uw_hyak_pedslabs, binac2, debug, hki_genie, genouest, cbe, unsw_katana, utd_juno, hazel, slurm, phoenix, seawulf, uod_hpc, fub_curta, lovelace, uct_hpc, aws_tower, fsu_draco]
+Oct-02 11:08:36.615 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins declared=[nf-schema@2.5.1]
+Oct-02 11:08:36.617 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Oct-02 11:08:36.620 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[nf-schema@2.5.1]
+Oct-02 11:08:36.855 [main] DEBUG n.plugin.HttpPluginRepository - Registry request: https://registry.nextflow.io/api/v1/plugins/dependencies?plugins=nf-schema%402.5.1&nextflowVersion=25.10.4
+- code: 200
+- body: {"plugins":[{"id":"nf-schema","releases":[{"version":"2.5.1","url":"https://registry.nextflow.io/api/v1/plugins/nf-schema/2.5.1/download/nf-schema-2.5.1.zip","date":"2025-09-02T14:48:39.714892Z","sha512sum":"82c9c17a9f77319386e670e7b52cf79b067320001f083ccdfec77dada9fd53499506200fd10b493cf8f6fc0420f42e2314481c353ca14b3a92f354bf07ad5c13","requires":">=25.04.0","dependsOn":[],"status":"PUBLISHED"}],"projectUrl":"https://github.com/nextflow-io/nf-schema","provider":"nextflow-io"}]}
+Oct-02 11:08:36.960 [main] DEBUG nextflow.plugin.PluginUpdater - Installing plugin nf-schema version: 2.5.1
+Oct-02 11:08:37.009 [main] ERROR nextflow.cli.Launcher - @unknown
+org.pf4j.PluginRuntimeException: Cannot find the manifest path
+	at org.pf4j.ManifestPluginDescriptorFinder.readManifestFromDirectory(ManifestPluginDescriptorFinder.java:142)
+	at org.pf4j.ManifestPluginDescriptorFinder.readManifest(ManifestPluginDescriptorFinder.java:72)
+	at org.pf4j.ManifestPluginDescriptorFinder.find(ManifestPluginDescriptorFinder.java:58)
+	at org.pf4j.AbstractPluginManager.loadPluginFromPath(AbstractPluginManager.java:894)
+	at org.pf4j.DefaultPluginManager.loadPluginFromPath(DefaultPluginManager.java:139)
+	at nextflow.plugin.CustomPluginManager.loadPluginFromPath(CustomPluginManager.groovy:46)
+	at nextflow.plugin.LocalPluginManager.loadPluginFromPath(LocalPluginManager.groovy:98)
+	at nextflow.plugin.PluginUpdater.load0(PluginUpdater.groovy:381)
+	at nextflow.plugin.PluginUpdater.installPlugin(PluginUpdater.groovy:225)
+	at nextflow.plugin.PluginUpdater.prepareAndStart(PluginUpdater.groovy:171)
+	at nextflow.plugin.PluginsFacade.start(PluginsFacade.groovy:401)
+	at nextflow.plugin.PluginsFacade.load(PluginsFacade.groovy:291)
+	at nextflow.plugin.Plugins.load(Plugins.groovy:50)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:364)
+	at nextflow.cli.Launcher.run(Launcher.groovy:515)
+	at nextflow.cli.Launcher.main(Launcher.groovy:675)

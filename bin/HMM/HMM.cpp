@@ -8,13 +8,12 @@
 #include "HMM.h"
 #include "log_prob.h"
 
-HMM::HMM(size_t states, Matrix<std::shared_ptr<DiscreteDistribution>>& emission, bool methylation):
-N(states), emission(emission), methylation(methylation)
+HMM::HMM(size_t states, Matrix<std::shared_ptr<DiscreteDistribution>>& emission, size_t marker, size_t cov_marker):
+N(states), emission(emission), m(marker), cm(cov_marker)
 {
     if (states != emission.nrows())
         throw std::invalid_argument("Number of rows in the emmission matrix must be equal to number of states.");
 
-    m = methylation ? emission.ncols()-1 : emission.ncols();
     init_transitions();
     init_initial();
 }
@@ -46,7 +45,7 @@ void HMM::set_transitions(const Matrix<double>& A)
 {
     if (A.nrows() != N || A.ncols() != N)
         throw std::invalid_argument("Transition matrix has wrong dimensions.");
-    
+
     logA = Matrix<double> (N, N);
     for (size_t i = 0; i < A.nrows(); ++i)
     {
@@ -64,7 +63,7 @@ void HMM::set_initial(const std::vector<double>& pi)
 {
     if (pi.size() != N)
         throw std::invalid_argument("Initial state distribution has wrong dimensions.");
-    
+
     logPi = std::vector<double> (N);
     for (size_t i = 0; i < pi.size(); ++i)
     {
@@ -124,7 +123,7 @@ void HMM::train(const_matrix_ptr<int> observations, const_matrix_ptr<int> nObser
         for (size_t k = 0; k < obs; ++k)
         {
             calculate_log_emission(logEmission[k], observations, nObservation, index[k]);
-            std::thread backwardPass(&HMM::backward, this, logEmission[k], logBeta[k]); 
+            std::thread backwardPass(&HMM::backward, this, logEmission[k], logBeta[k]);
             double logL = 0.0;
             forward(logEmission[k], logAlpha[k], logL);
             backwardPass.join();
@@ -178,7 +177,7 @@ void HMM::train(const_matrix_ptr<int> observations, const_matrix_ptr<int> nObser
 }
 
 double HMM::log_likelihood(const_matrix_ptr<int> observation, const_matrix_ptr<int> nObservation, std::pair<size_t, size_t> range) const
-{    
+{
     if (observation->ncols() + nObservation->ncols() / 2 != emission.ncols())
         throw std::invalid_argument("Number of columns in the observation matrices must together be equal to the number of columns in the emission matrix.");
 
@@ -197,7 +196,7 @@ std::pair<double, std::vector<int>> HMM::viterbi_decoding(std::pair<size_t, size
 {
     if (observation->ncols() + nObservation->ncols() / 2 != emission.ncols())
         throw std::invalid_argument("Number of columns in the observation matrices must together be equal to the number of columns in the emission matrix.");
-    
+
     size_t T = range.second - range.first;
     matrix_ptr<double> logEmission = std::make_shared<Matrix<double>> (Matrix<double>(T, N));
     Matrix<double> trellis (T, N);
@@ -258,7 +257,7 @@ std::vector<std::pair<int, double>> HMM::posterior_decoding(std::pair<size_t, si
 {
     if (observation->ncols() + nObservation->ncols() / 2 != emission.ncols())
         throw std::invalid_argument("Number of columns in the observation matrices must together be equal to the number of columns in the emission matrix.");
-    
+
     size_t T = range.second - range.first;
     matrix_ptr<double> logAlpha = std::make_shared<Matrix<double>> (Matrix<double>(T, N));
     matrix_ptr<double> logBeta = std::make_shared<Matrix<double>> (Matrix<double>(T, N));
@@ -268,7 +267,7 @@ std::vector<std::pair<int, double>> HMM::posterior_decoding(std::pair<size_t, si
     calculate_log_emission(logEmission, observation, nObservation, range.first);
     std::thread backwardPass(&HMM::backward, this, logEmission, logBeta);
     forward(logEmission, logAlpha, logLikelihood);
-    backwardPass.join();    
+    backwardPass.join();
 
     std::vector<std::pair<int, double>> stateSequence (T);
     for (size_t t = 0; t < T; ++t)
@@ -312,7 +311,7 @@ std::vector<HMM::matrix_ptr<double>> HMM::membership_coefficients(std::vector<si
     for (size_t k = 0; k < obs; ++k)
     {
         calculate_log_emission(logEmission[k], observation, nObservation, index[k]);
-        std::thread backwardPass(&HMM::backward, this, logEmission[k], logBeta[k]); 
+        std::thread backwardPass(&HMM::backward, this, logEmission[k], logBeta[k]);
         double logL = 0.0;
         forward(logEmission[k], logAlpha[k], logL);
         backwardPass.join();
@@ -322,7 +321,7 @@ std::vector<HMM::matrix_ptr<double>> HMM::membership_coefficients(std::vector<si
 }
 
 void HMM::calculate_log_emission(matrix_ptr<double> logEmission, const_matrix_ptr<int> observation, const_matrix_ptr<int> nObservation, size_t start) const
-{    
+{
     size_t T = logEmission->nrows();
     #pragma omp parallel for collapse(2) schedule(static)
     for (size_t t = 0; t < T; ++t)
@@ -340,11 +339,11 @@ void HMM::calculate_log_emission(matrix_ptr<double> logEmission, const_matrix_pt
                     ++it;
                 }
             }
-            if (methylation)
+            for (size_t k = 0; k < cm; ++k)
             {
                 auto mIt = nObservation->row_begin(start+t);
                 std::shared_ptr<TwoValueDiscreteDistribution> dis = std::dynamic_pointer_cast<TwoValueDiscreteDistribution>(emission(i, m));
-                p = lp::log_mul(p, dis->log_pmf((*nObservation)(start+t, 0), (*nObservation)(start+t, 1)));
+                p = lp::log_mul(p, dis->log_pmf((*nObservation)(start+t, 2 * k), (*nObservation)(start+t, 2 * k + 1)));
             }
             (*logEmission)(t, i) = p;
         }
@@ -354,7 +353,7 @@ void HMM::calculate_log_emission(matrix_ptr<double> logEmission, const_matrix_pt
 void HMM::forward(const_matrix_ptr<double> logEmission, matrix_ptr<double> logAlpha, double& likelihood) const
 {
     size_t T = logEmission->nrows();
-    
+
     for (size_t i = 0; i < N; ++i)
     {
         (*logAlpha)(0, i) = lp::log_mul(logPi[i], (*logEmission)(0, i));
@@ -419,13 +418,13 @@ void HMM::E_step(const_matrix_ptr<double> logEmission, matrix_ptr<double> logAlp
 }
 
 void HMM::M_step(const_matrix_ptr<int> observations, const_matrix_ptr<int> nObservations, std::vector<matrix_ptr<double>>& logEmission, std::vector<matrix_ptr<double>>& logGamma, std::vector<matrix_ptr<double>>& logBeta, bool update_init)
-{    
+{
     size_t obs = logGamma.size();
     size_t totalT = observations->nrows() > 0 ?  observations->nrows() : nObservations->nrows();
     double lowerProbBound = lp::ext_log(pow(10.0, -10.0));
     bool normalize = false;
     Matrix<double> new_logA = Matrix<double> (N, N);
-    
+
     #pragma omp parallel for schedule(static)
     for (size_t i = 0; i < N; ++i)
     {
@@ -503,10 +502,10 @@ void HMM::M_step(const_matrix_ptr<int> observations, const_matrix_ptr<int> nObse
             {
                 emission(i, k)->update(completeGamma.begin(), completeGamma.end(), observations->col_begin(k), observations->col_end(k));
             }
-            if (methylation)
+            for (size_t k = 0; k < cm; ++k)
             {
                 std::shared_ptr<TwoValueDiscreteDistribution> dis = std::dynamic_pointer_cast<TwoValueDiscreteDistribution>(emission(i, m));
-                dis->update_methylation(completeGamma.begin(), completeGamma.end(), nObservations->col_begin(0), nObservations->col_begin(1));
+                dis->update_methylation(completeGamma.begin(), completeGamma.end(), nObservations->col_begin(2 * k), nObservations->col_begin(2 * k + 1));
             }
         }
     }

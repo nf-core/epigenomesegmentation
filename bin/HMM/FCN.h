@@ -6,19 +6,19 @@
 
 /**
  * @brief Functor calculating log likelihood to pass to minimizer
- * 
+ *
  * @param T function to calculate log pmf (double*, std::vector<double>&) -> double
- * 
+ *
 **/
 template<typename T>
 class LogLikelihoodFunction
 {
     public:
-    LogLikelihoodFunction(DiscreteDistribution::g_iterator gBegin, DiscreteDistribution::g_iterator gEnd, 
+    LogLikelihoodFunction(DiscreteDistribution::g_iterator gBegin, DiscreteDistribution::g_iterator gEnd,
                             DiscreteDistribution::o_iterator oBegin, DiscreteDistribution::o_iterator oEnd, std::vector<double>& lp, T f):
                             gammaBegin(gBegin), gammaEnd(gEnd), obsBegin(oBegin), obsEnd(oEnd), calculate_pmf(f) {logpmf = lp;}
-    
-    double operator () (const double* x) 
+
+    double operator () (const double* x)
     {
         // try-catch block needed for Sichel distribution (due to inprecison and overflow problems of Bessel function)
         try
@@ -56,19 +56,19 @@ class LogLikelihoodFunction
 
 /**
  * @brief Functor calculating log likelihood to pass to minimizer for beta binomial (fixed parameter n)
- * 
+ *
  * @param T function to calculate log pmf (double*, int, std::vector<double>&) -> double
- * 
+ *
 **/
 template<typename T>
 class LogLikelihoodFunctionBB
 {
     public:
-    LogLikelihoodFunctionBB(DiscreteDistribution::g_iterator gBegin, DiscreteDistribution::g_iterator gEnd, 
+    LogLikelihoodFunctionBB(DiscreteDistribution::g_iterator gBegin, DiscreteDistribution::g_iterator gEnd,
                             DiscreteDistribution::o_iterator oBegin, DiscreteDistribution::o_iterator oEnd, std::vector<double>& lp, int n, T f):
                             gammaBegin(gBegin), gammaEnd(gEnd), obsBegin(oBegin), obsEnd(oEnd), calculate_pmf(f) {logpmf = lp; N = n;}
-    
-    double operator () (const double* x) 
+
+    double operator () (const double* x)
     {
         calculate_pmf(x, N, logpmf);
 
@@ -96,19 +96,19 @@ class LogLikelihoodFunctionBB
 
 /**
  * @brief Functor calculating log likelihood to pass to minimizer for DNA methylation data
- * 
+ *
  * @param T function to calculate log pmf (double*, int, int) -> double
- * 
+ *
 **/
 template<typename T>
 class LogLikelihoodFunctionMeth
 {
     public:
-    LogLikelihoodFunctionMeth(TwoValueDiscreteDistribution::dna_g_iterator gBegin, TwoValueDiscreteDistribution::dna_g_iterator gEnd, 
+    LogLikelihoodFunctionMeth(TwoValueDiscreteDistribution::dna_g_iterator gBegin, TwoValueDiscreteDistribution::dna_g_iterator gEnd,
                             TwoValueDiscreteDistribution::dna_o_iterator cBegin, TwoValueDiscreteDistribution::dna_o_iterator mBegin, T f):
                             gammaBegin(gBegin), gammaEnd(gEnd), covBegin(cBegin), methBegin(mBegin), calculate_pmf(f) {}
-    
-    double operator () (const double* x) 
+
+    double operator () (const double* x)
     {
         double logL = 0.0;
         auto covIt = covBegin;

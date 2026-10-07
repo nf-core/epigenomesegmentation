@@ -52,73 +52,54 @@ Processed alignment files that have been filtered (e.g., "nochr" suffix) and ind
 <summary>Output files</summary>
 
 - `Counts/`
-  - `[SampleID]/`
-    - `[SampleID]_Histones/`: Contains binned histone mark counts.
-    - `*_refined_counts.txt`: The final count matrix used as input for the EpiSegMix model.
+  - `[SampleID]_Histone/`: Histone count matrices generated from BAM input (`*.tab`).
+  - `[SampleID]_Methylation/`: Methylation/coverage count files generated from BED input (`*.tab` and intermediate binned BED files).
 
 </details>
 
-If `--merge` is enabled, these matrices will also include WGBS (Methylation) data intersected with the histone bins.
 
 ### EpiSegMix
 
-This is the core results directory, containing the output of the segmentation modeling. Files are organized by sample and state number (e.g., `_s10`).
+This is the core results directory, containing the output of the segmentation modeling. Files are organized by sample and state number (e.g., `_10`).
 
 #### 1. Segmentation
+
 <details markdown="1">
 <summary>Output files</summary>
 
 - `EpiSegMix/[SampleID]/Segmentation/`
   - `*.bed.gz`: Compressed BED file containing the genomic coordinates and assigned chromatin states.
-  - `*.txt`: A tab-delimited text version of the segmentation results.
+  - `*.tab`: A tab-delimited text version of the segmentation results.
 
 </details>
 
 #### 2. Models
+
 <details markdown="1">
 <summary>Output files</summary>
 
-- `EpiSegMix/[SampleID]/Models/`
+- `EpiSegMix/[SampleID]/Model/`
   - `final-model-*.json`: The trained HMM parameters.
   - `*.yaml`: The configuration used for the modeling run.
   - `*.log`: Log files tracking the training and decoding steps.
-  - `*-train-counts.txt`: The specific data matrix used during the training phase.
+  - `*-train-counts.txt`: The data matrix used during the training phase.
 
 </details>
 
 #### 3. Plots
-<details markdown="1">
-<summary>Output files</summary>
-
-- `EpiSegMix/[SampleID]/Plots/`
-  - `*-correlation.png`: Correlation matrix of input marks.
-  - `*-histogram.png`: Signal distribution for each mark.
-  - `*-transitionMatrix.png`: Probabilities of transitioning between chromatin states.
-  - `*-meanEmission-viterbi.png` / `*-normEmission-viterbi.png`: Heatmaps showing the signal signature for each state.
-  - `*-stateDistribution-viterbi.png`: Percentage of the genome occupied by each state.
-  - `*-viterbi.html`: **Interactive HTML report** for exploring the segmentation results.
-
-</details>
-
----
-
-### Pipeline information
 
 <details markdown="1">
 <summary>Output files</summary>
 
-- `pipeline_info/`
-- `EpiSegMix/[SampleID]/Plots/`
-  - `*-correlation.png`: Correlation matrix of input marks.
-  - `*-histogram.png`: Signal distribution for each mark.
-  - `*-transitionMatrix.png`: Probabilities of transitioning between chromatin states.
-  - `*-meanEmission-viterbi.png` / `*-normEmission-viterbi.png`: Heatmaps showing the signal signature for each state.
-  - `*-stateDistribution-viterbi.png`: Percentage of the genome occupied by each state.
-  - `*-viterbi.html`: **Interactive HTML report** for exploring the segmentation results.
+- `EpiSegMix/[ModelID]/Plots/`
+  - `<model-id>-correlation.png`: Model-level correlation matrix of input marks (generated once per model, not once per sample).
+  - `<model-id>-histogram.png`: Model-level signal distributions (generated once per model).
+  - `<model-id>-methylation-density.png`: Model-level methylation density plot; LDM may also publish a per-sample copy.
+  - `<sample-id>-meanEmission*.png`, `<sample-id>-normEmission*.png`, `<sample-id>-transitionMatrix.png`: Per-sample emission and transition plots. DM filenames include `-viterbi` for some plots.
+  - `<sample-id>-stateDistribution.png`, `<sample-id>-stateLength*.png`, `<sample-id>-stateMembership*.png`, `<sample-id>-state-colors.png`: Per-sample state plots; exact available plots depend on the selected model.
+  - `<sample-id>_report.md`: Per-sample Markdown report linking to that sample’s plots and the shared model-level plots. These are Markdown files, not interactive HTML reports.
 
 </details>
-
----
 
 ### Pipeline information
 

@@ -1,0 +1,2 @@
+task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
+1	50/cc9718	75276	CUSTOM_BEDCOUNTS (GM12878)	COMPLETED	0	2026-10-02 15:32:56.804	34.8s	10.8s	57.4%	34.1 MB	66.4 MB	706.9 MB	603.3 MB

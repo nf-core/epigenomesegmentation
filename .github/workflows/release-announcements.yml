@@ -20,7 +20,6 @@ jobs:
           echo "description=$(curl -s https://nf-co.re/pipelines.json | jq -r '.remote_workflows[] | select(.full_name == "${{ github.repository }}") | .description')" >> $GITHUB_OUTPUT
       - uses: rzr/fediverse-action@master
         with:
-          access-token: ${{ secrets.MASTODON_ACCESS_TOKEN }}
           host: "mstdn.science" # custom host if not "mastodon.social" (default)
           # GitHub event payload
           # https://docs.github.com/en/developers/webhooks-and-events/webhooks/webhook-events-and-payloads#release

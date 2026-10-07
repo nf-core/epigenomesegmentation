@@ -1,0 +1,34 @@
+name: "PIPELINE_INITIALISATION"
+description: "Utility functions and pipeline-specific configuration for epigenomesegmentation."
+keywords:
+  - epigenomesegmentation pipeline
+  - nf-core pipeline
+  - utils for epigenomesegmentation file
+components:
+  - utils_nfschema_plugin
+  - nf-schema
+  - utils_nfcore_pipeline
+  - utils_nextflow_pipeline
+  - completionemail
+  - completionsummary
+input:
+  - samplesheet:
+      type: file
+      description: |
+        A tab-delimited file containing sample information for the epigenomesegmentation pipeline.
+        Structure: [ path(samplesheet.tsv) ]
+output:
+  - versions:
+      type: file
+      description: |
+        File containing software versions collated from all tools in the subworkflow.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+tools:
+  - "nextflow":
+      description: "Nextflow is a bioinformatics workflow manager."
+      homepage: "https://www.nextflow.io"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

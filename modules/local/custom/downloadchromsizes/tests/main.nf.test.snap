@@ -1,0 +1,73 @@
+{
+    "mm10 - chromsizes": {
+        "content": [
+            {
+                "0": [
+                    "mm10.chrom.sizes:md5,5a103c9a15dd660c295a089ef5035672"
+                ],
+                "1": [
+                    [
+                        "CUSTOM_DOWNLOADCHROMSIZES",
+                        "wget",
+                        "1.18"
+                    ]
+                ],
+                "chromsizes": [
+                    "mm10.chrom.sizes:md5,5a103c9a15dd660c295a089ef5035672"
+                ],
+                "versions_wget": [
+                    [
+                        "CUSTOM_DOWNLOADCHROMSIZES",
+                        "wget",
+                        "1.18"
+                    ]
+                ]
+            },
+            {
+                "versions_wget": [
+                    [
+                        "CUSTOM_DOWNLOADCHROMSIZES",
+                        "wget",
+                        "1.18"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T12:49:49.862275",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "mm10 - chromsizes - stub": {
+        "content": [
+            {
+                "0": [
+                    "mm10.chrom.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "1": [
+                    [
+                        "CUSTOM_DOWNLOADCHROMSIZES",
+                        "wget",
+                        "1.18"
+                    ]
+                ],
+                "chromsizes": [
+                    "mm10.chrom.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                ],
+                "versions_wget": [
+                    [
+                        "CUSTOM_DOWNLOADCHROMSIZES",
+                        "wget",
+                        "1.18"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T12:50:00.432346",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

@@ -1,29 +1,46 @@
-name: prepare_genome
-description: Downloads chromosome sizes and generates genomic bins.
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "prepare_genome"
+description: Prepares genomic reference files by downloading (if necessary) and filtering chromosome sizes, generating fixed-size genomic windows (bins), and sorting the reference files.
 keywords:
   - genome
+  - reference
+  - chromsizes
   - bins
-  - reference_preparation
-  - chromosome_sizes
+  - bedtools
+  - windows
 components:
-  - generate/genome/bins
-  - get/genome/chrom/size
-input:
-  - genome:
-      type: string
-      description: Name of the reference genome being used (e.g., hg38, mm10)
-  - binsize:
-      type: integer
-      description: The size in base pairs for the generated genomic windows
+  - custom/downloadchromsizes
+  - custom/filterchromsizes
+  - bedtools/makewindows
+  - custom/filterbins
+  - custom/sortref
+input: []
 output:
   - chrom_sizes:
       type: file
-      description: File containing the lengths of all chromosomes in the reference genome
+      description: |
+        Channel containing the filtered chromosome sizes file.
+        Structure: [ val(genome), path("filtered_*.chrom.sizes") ]
+      pattern: "filtered_*.chrom.sizes"
+  - chrom_sizes_sort:
+      type: file
+      description: |
+        Channel containing the sorted and reformatted chromosome sizes file with start coordinates.
+        Structure: [ val(genome), path("*.v2") ]
+      pattern: "*.v2"
   - bins:
       type: file
-      description: BED file containing the generated genomic windows for analysis
+      description: |
+        Channel containing the filtered genomic windows (bins) BED file.
+        Structure: [ val(meta), path("filtered_*.bed") ]
+      pattern: "filtered_*.bed"
   - versions:
       type: file
-      description: File containing software versions for genome preparation tools
+      description: |
+        File containing software versions aggregated from the components.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
 authors:
+  - "@aaryanjaitly"
+maintainers:
   - "@aaryanjaitly"

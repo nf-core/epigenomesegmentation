@@ -23,48 +23,54 @@
 
 **nf-core/epigenomesegmentation** is a bioinformatics pipeline for chromatin segmentation. It uses a hidden Markov model (HMM) to annotate genomic regions with functional states (e.g., enhancers, promoters) based on combinations of epigenetic modifications, capturing spatial relations via transition probabilities.
 
-![nf-core/epigenomesegmentation metro map](docs/images/nf-core-epigenomesegmentation_dark.svg)
+![nf-core/epigenomesegmentation metro map](docs/images/nf-core-epigenomesegmentation_dark.png)
 
 <a href='https://www.denbi.de/about'> <img src="docs/images/denbi-logo.png" align="right" width="150"> </a>
 
 This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
 
-## Default Workflow: Standard Mode
 
-By default, the EPIGENOMESEGMENTATION pipeline executes the **Standard Mode** (`--standard true` or remains unspecified, and `--merge false`). This primary pathway processes histone data (BAM files) to generate segmentation models, bypassing methylation processing.
+## Default Workflow: Topology Modelling
+By default, the pipeline runs the topology-modeling (LDM) segmentation workflow. Use `--duration` to select the duration-modeling (DM) workflow, `--dna` for methylation/coverage-only segmentation, or `--fitting` to evaluate candidate count distributions instead of running the usual segmentation workflow. `--jointrain` is an optional shared-training mode and is disabled by default.
 
 ### Execution Steps
 
-1. **Genome Preparation** (`PREPARE_GENOME` & `GENERATE_BINS`): Fetches chromosome size files and generates the required genomic bins.
-2. **Processing Branching (Histone & Methylation)**: Parses the input samplesheet and evaluates the `--merge` flag:
-    * **Histone Processing** (`PROCESS_HISTONES`): Maps BAM files against genomic bins to extract count matrices. 
-    * **Methylation Processing** (`PROCESS_METHYL`): Triggered if `--merge true`. Processes BED files at base-pair resolution with merged +/- strands to maintain signal fidelity.
-3. **Count Merging & Synchronization** (`MERGE_DATA`): If `--merge` is enabled, the pipeline intersects the processed matrices. This synchronizes the Histone (binned) and Methylation (base-pair) data into a consistent windowed format to ensure all multi-omic layers are aligned to the same coordinate system.
-4. **Segmentation Modeling**: Based on the selected parameters (`--standard`, `--duration`, or `--dna`), the data is routed through a specific modeling subworkflow:
-    * **Standard** (`MODEL_TRAINING_STD`): Default HMM-based segmentation.
-    * **Duration-Aware** (`MODEL_TRAINING_DM`): Incorporates state duration modeling.
-    * **DNA-Centric** (`MODEL_TRAINING_DNA`): Optimized for DNA-specific features.
-    * *Note: Each subworkflow executes four consecutive modules: `prepare`, `train`, `decode`, and `report`.*
-5. **Distribution Fitting & Automated Selection** (`DISTRIBUTION_FITTING`): If the `fitting` mode is triggered, the pipeline identifies the optimal statistical distribution for the data using:
-    * `distfit_histone_train`: Trains models across statistical distributions.
-    * `distfit_histone_assess`: Evaluates and selects the distribution with the best fit.
-    * **Automated Step**: If the `--best_fit_segmentation` flag is present, the pipeline automatically executes the segmentation workflow (Step 4). By default, this runs in `standard` mode unless `--duration` is explicitly specified.
+1. **Genome Processing:** It includes 4 modules (`GET_CHROMSIZES`, `FILTER_CHROMSIZES`, `SORT_REFRENCE` & `MAKE_WINDOWS`) to generate a binned window size reference BED file based on parameter `--binsize and --genome` (200 and hg38 by default) along with a sorted reference chromosome sizes tab file.
+
+2. **BAM Processing:** It includes 4 modules (`SAMTOOLS_REHEADER`, `SAMTOOLS_INDEX`, `BAM_SHEET` & `BAM_COUNTS`) to generate a count matrix for histone marks using BAM files as input for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+3. **BED Processing:** It includes 2 modules (`BED_COUTNS` & `BEDTOOLS_MAP`) to generate a count matrix for coverage markers using BED files as input for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+4. **Merging:** It includes 4 modules (`STRIPHEADER`, `BEDTOOLS_INTERSECT`, `FILTER_BED` & `JOINBED`) to standardize the files to have the same number of rows and same genomic positions between histone and coverage counts is also responsible for merging the different coverage counts files together in one file.
+
+5. **EpiSegMix Prepare:** It includes 2 modules (`CONFIG` & `TRAINCOUNTS`) These generate a config file along with the training counts for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+6. **EpiSegMix Topology Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on topology modeling HMM.
+
+7. **EpiSegMix Standard Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on standard modeling HMM.
+
+8. **EpiSegMix Methylation Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on topology modeling HMM but <strong>only for coverage markers</strong>.
+
+9. **EpiSegMix Fitting:** It includes 2 modules (`TRAIN` & `BEST_DISTRIBUTION`) to give us a new samplesheet containing the best distribution that fits our data.
 
 ---
 
 ### **Subworkflow Reference**
+
 The pipeline logic is organized into the following modular components:
 
-| Category | Subworkflows |
-| :--- | :--- |
-| **Setup** | `PREPARE_GENOME`, `GENERATE_BINS` |
-| **Data Processing** | `PROCESS_HISTONES`, `PROCESS_METHYL`, `MERGE_DATA` |
-| **Modeling Modes** | `MODEL_TRAINING_STD`, `MODEL_TRAINING_DM`, `MODEL_TRAINING_DNA` |
-| **Optimization** | `DISTRIBUTION_FITTING` |
+| Category            | Subworkflows                                                    |
+| :------------------ | :-------------------------------------------------------------- |
+| **Setup**           | `GET_CHROMSIZES`, `FILTER_CHROMSIZES`, `SORT_REFRENCE`, `MAKE_WINDOWS`, `CONFIG` & `TRAINCOUNTS`                             |
+| **Data Processing** | `SAMTOOLS_REHEADER`, `SAMTOOLS_INDEX`, `BAM_SHEET`, `BAM_COUNTS`, `BED_COUTNS` & `BEDTOOLS_MAP`             |
+| **Modeling**  | `TRAIN`, `DECODE` & `REPORT` |
+| **Optimization**    | `BEST_DISTRIBUTION`                                          |
 
 ---
 
-> **Note:** You can set the execution mode using the primary `--episegmix_mode` flag (e.g., `standard`, `duration`, `dna`, or `fitting`) or by using direct shortcut flags: `--standard`, `--duration`, `--dna`, or `--fitting`.
+> **Note:** Use `--counts` to generate and publish count files without training a model or creating segmentations. See the [usage documentation](docs/usage.md#count-generation-only) for details.
+
+**Note:** Precomputed count matrices can be supplied with `--methcounts` and/or `--histonecounts`; see the [usage documentation](docs/usage.md#using-precomputed-counts) for their requirements.
 
 ## Usage
 
@@ -73,7 +79,7 @@ The pipeline logic is organized into the following modular components:
 
 First, prepare a samplesheet with your input data that looks as follows:
 
-***samplesheet.csv***:
+_**samplesheet.csv**_:
 
 ```csv
 sample_id,replicate,epigenetic_mark,file_name,modality,paired_end,distribution
@@ -85,13 +91,13 @@ Each row represents a specific assay file associated with a sample. The pipeline
 
 ### Column Specifications
 
-* **`sample_id`**: A unique identifier for your sample (e.g., `Kidney`). Files sharing the same `sample_id` will be grouped and processed together.
-* **`replicate`**: The replicate number for the sample (e.g., `1`).
-* **`epigenetic_mark`**: The specific target or assay type (e.g., `H3K27ac` for histones, `WGBS` for methylation).
-* **`file_name`**: The file path. Histone data must be `.bam` or `.bam.gz`. Methylation data must be `.bed` or `.bed.gz`.
-* **`modality`**: The type of experiment performed (e.g., `ChIP-seq`, `WGBS`).
-* **`paired_end`**: A boolean value (`true` or `false`) indicating if the sequencing data is paired-end.
-* **`distribution`**: The statistical distribution to apply during model training for this mark (e.g., `NBI` for Negative Binomial, `BI` for Binomial). Leave empty to use global defaults.
+- **`sample_id`**: A unique identifier for your sample (e.g., `Kidney`). Files sharing the same `sample_id` will be grouped and processed together.
+- **`replicate`**: The replicate number for the sample (e.g., `1`).
+- **`epigenetic_mark`**: The specific target or assay type (e.g., `H3K27ac` for histones, `WGBS` for methylation).
+- **`file_name`**: The file path. Histone data must be `.bam` or `.bam.gz`. Methylation data must be `.bed` or `.bed.gz`.
+- **`modality`**: The type of experiment performed (e.g., `ChIP-seq`, `WGBS`).
+- **`paired_end`**: A boolean value (`true` or `false`) indicating if the sequencing data is paired-end.
+- **`distribution`**: The statistical distribution to apply during model training for this mark (e.g., `NBI` for Negative Binomial, `BI` for Binomial). Leave empty to use global defaults.
 
 Now, you can run the pipeline using:
 
@@ -99,9 +105,8 @@ Now, you can run the pipeline using:
 nextflow run nf-core/epigenomesegmentation \
    --input samplesheet.csv \
    --outdir <OUTDIR> \
-   --episegmix_mode standard \
    --genome hg38 \
-   -profile <docker/singularity/.../institute> 
+   -profile <docker/singularity/.../institute>
 ```
 
 > [!WARNING]
@@ -119,14 +124,16 @@ For more details about the output files and reports, please refer to the
 
 The original framework EpiSegMix that was used in ESM (https://doi.org/10.1093/bioinformatics/btae178) and ESMM (https://doi.org/10.1101/2025.07.25.666820) was written by Johanna Elena Schmitz and [Nihit Aggarwal](mailto:nihit.aggarwal@uni-saarland.de) (Saarland University).
 
-The pipeline was rewritten in Nextflow DSL2 by Aaryan Jaitly (Saarland University). 
+The pipeline was rewritten in Nextflow DSL2 by Aaryan Jaitly (Saarland University).
 
 **EpiSegMix tool was developed and designed by:**
+
 - [Nihit Aggarwal](mailto:nihit.aggarwal@uni-saarland.de)
 - Johanna Elena Schmitz
 - Dr. AbdulRahman Salhab
 - Prof. Dr. Jörn Walter
 - Prof. Dr. Sven Rahmann
+
 ## Contributions and Support
 
 If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).

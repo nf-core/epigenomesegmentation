@@ -9,7 +9,7 @@ double EPS = std::pow(10, -8);
 TEST(Poisson, pmf)
 {
     Poisson dis = Poisson(3.0);
-    
+
     EXPECT_NEAR(0.049787068, dis.pmf(0), EPS);
     EXPECT_NEAR(0.021604031, dis.pmf(7), EPS);
     EXPECT_NEAR(0.2240418076, dis.pmf(3), EPS);
@@ -31,7 +31,7 @@ TEST(Poisson, pmf)
 TEST(Binomial, pmf)
 {
     Binomial dis = Binomial(0.5, 20);
-    
+
     EXPECT_NEAR(0.176197052, dis.pmf(10), EPS);
     EXPECT_NEAR(0.0, dis.pmf(21), EPS);
     EXPECT_NEAR(0.001087188, dis.pmf(17), EPS);
@@ -74,7 +74,7 @@ TEST(Binomial, pmf)
 TEST(Gaussian, pmf)
 {
     Gaussian dis = Gaussian(10, 5);
-    
+
     EXPECT_NEAR(0.079788456, dis.pmf(10), EPS);
     EXPECT_NEAR(0.0070949185, dis.pmf(21), EPS);
     EXPECT_NEAR(0.0299454931, dis.pmf(17), EPS);
@@ -89,7 +89,7 @@ TEST(Gaussian, pmf)
 TEST(NegativeBinomial, pmf)
 {
     NegativeBinomial dis = NegativeBinomial(0.5, 10);
-    
+
     EXPECT_NEAR(0.06109619140, dis.pmf(5), EPS);
     EXPECT_NEAR(0.0009765625, dis.pmf(0), EPS);
     EXPECT_NEAR(0.070078372, dis.pmf(12), EPS);
@@ -113,7 +113,7 @@ TEST(NegativeBinomial, pmf)
 TEST(BetaBinomial, pmf)
 {
     BetaBinomial dis = BetaBinomial(0.2, 0.25, 10);
-    
+
     EXPECT_NEAR(0.3435192871, dis.pmf(0), EPS);
     EXPECT_NEAR(0.035248498, dis.pmf(4), EPS);
     EXPECT_NEAR(0.0451332432, dis.pmf(8), EPS);
@@ -152,7 +152,7 @@ TEST(BetaBinomial, pmf)
 TEST(Sichel, pmf)
 {
     Sichel dis = Sichel(80, 2, 0.5, 10);
-    
+
     EXPECT_NEAR(0.00001184083, dis.pmf(0), EPS);
     EXPECT_NEAR(0.00082845141, dis.pmf(5), EPS);
     EXPECT_NEAR(0.002318059, dis.pmf(10), EPS);
@@ -164,7 +164,7 @@ TEST(Sichel, pmf)
     EXPECT_NEAR(0.05927062, dis.pmf(5), EPS);
     EXPECT_NEAR(0.11180423, dis.pmf(2), EPS);
     EXPECT_NEAR(0.01206296, dis.pmf(15), EPS);
-    EXPECT_NEAR(0.00000269, dis.pmf(1000), EPS);   
+    EXPECT_NEAR(0.00000269, dis.pmf(1000), EPS);
 }
 
 TEST(Beta, pmf)
@@ -173,17 +173,17 @@ TEST(Beta, pmf)
     EXPECT_NEAR(0.8 * 0.000542398, dis.pmf(10, 1), EPS);
     EXPECT_NEAR(0.2, dis.pmf(0, 0), EPS);
     EXPECT_NEAR(2.3984 * std::pow(10, -6), dis.pmf(3, 3), EPS);
-    EXPECT_NEAR(0.8 * 2.997999 * std::pow(10, -6), dis.pmf(3, 0), EPS); 
+    EXPECT_NEAR(0.8 * 2.997999 * std::pow(10, -6), dis.pmf(3, 0), EPS);
 
     dis = AdjustedBeta(0.5, 0.5, 0.0);
     EXPECT_NEAR(0.001058687, dis.pmf(10, 1), EPS);
     EXPECT_NEAR(0.0, dis.pmf(0, 0), EPS);
     EXPECT_NEAR(0.020135041, dis.pmf(3, 3), EPS);
-    EXPECT_NEAR(0.020135041, dis.pmf(3, 0), EPS);  
-    EXPECT_NEAR(0.000640578, dis.pmf(9, 4), EPS); 
+    EXPECT_NEAR(0.020135041, dis.pmf(3, 0), EPS);
+    EXPECT_NEAR(0.000640578, dis.pmf(9, 4), EPS);
 
     dis = AdjustedBeta(5, 1, 0.0);
     EXPECT_NEAR(5.10100501 * std::pow(10, -7), dis.pmf(10, 1), EPS);
     EXPECT_NEAR(0.004990009, dis.pmf(3, 3), EPS);
-    EXPECT_NEAR(0.0001951902, dis.pmf(9, 4), EPS); 
+    EXPECT_NEAR(0.0001951902, dis.pmf(9, 4), EPS);
 }

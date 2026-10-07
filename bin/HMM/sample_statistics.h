@@ -1,40 +1,40 @@
 #ifndef _SAMPLE_STATISTICS_H
 #define _SAMPLE_STATISTICS_H
 
-namespace stat 
+namespace stat
 {
     /**
      * @brief calculates the membership weighted sample mean
-     * 
-     * @param gammaBegin 
-     * @param gammaEnd 
-     * @param obsBegin 
-     * @param obsEnd 
-     * @return mean 
+     *
+     * @param gammaBegin
+     * @param gammaEnd
+     * @param obsBegin
+     * @param obsEnd
+     * @return mean
      */
     template<typename It1, typename It2>
     double sample_mean(It1 gammaBegin, It1 gammaEnd, It2 obsBegin, It2 obsEnd);
 
     /**
      * @brief calculates the membership weighted sample variance
-     * 
-     * @param mean 
-     * @param gammaBegin 
-     * @param gammaEnd 
-     * @param obsBegin 
-     * @param obsEnd 
-     * @return variance 
+     *
+     * @param mean
+     * @param gammaBegin
+     * @param gammaEnd
+     * @param obsBegin
+     * @param obsEnd
+     * @return variance
      */
     template<typename It1, typename It2>
     double sample_variance(double mean, It1 gammaBegin, It1 gammaEnd, It2 obsBegin, It2 obsEnd);
 
     /**
      * @brief calculates the membership weighted zero frequency
-     * 
-     * @param gammaBegin 
-     * @param gammaEnd 
-     * @param obsBegin 
-     * @param obsEnd 
+     *
+     * @param gammaBegin
+     * @param gammaEnd
+     * @param obsBegin
+     * @param obsEnd
      * @return zero_frequency
      */
     template<typename It1, typename It2>
@@ -42,11 +42,11 @@ namespace stat
 
     /**
      * @brief calculates the membership weighted mean ignoring zero values
-     * 
-     * @param gammaBegin 
-     * @param gammaEnd 
-     * @param obsBegin 
-     * @param obsEnd 
+     *
+     * @param gammaBegin
+     * @param gammaEnd
+     * @param obsBegin
+     * @param obsEnd
      * @return mean
      */
     template<typename It1, typename It2>
@@ -54,11 +54,11 @@ namespace stat
 
     /**
      * @brief calculates the membership weighted variance ignoring zero values
-     * 
-     * @param gammaBegin 
-     * @param gammaEnd 
-     * @param obsBegin 
-     * @param obsEnd 
+     *
+     * @param gammaBegin
+     * @param gammaEnd
+     * @param obsBegin
+     * @param obsEnd
      * @return mean
      */
     template<typename It1, typename It2>
@@ -136,7 +136,7 @@ double stat::sample_mean_without_zeros(It1 gammaBegin, It1 gammaEnd, It2 obsBegi
         if (*obsIt != 0)
         {
             denom += *it;
-            num += (*it) * (*obsIt);   
+            num += (*it) * (*obsIt);
         }
         ++obsIt;
     }

@@ -29,10 +29,11 @@ void AdjustableDurationHMM::calculate_log_emission(HMM::matrix_ptr<double> logEm
                     ++it;
                 }
             }
-            if (methylation)
+
+            for (size_t k = 0; k < cm; ++k)
             {
                 std::shared_ptr<TwoValueDiscreteDistribution> dis = std::dynamic_pointer_cast<TwoValueDiscreteDistribution>(emission(disIndex, m));
-                p = lp::log_mul(p, dis->log_pmf((*nObservation)(start+t, 0), (*nObservation)(start+t, 1)));
+                p = lp::log_mul(p, dis->log_pmf((*nObservation)(start+t, 2*k), (*nObservation)(start+t, 2*k+1)));
             }
             (*logEmission)(t, i) = p;
         }
@@ -45,7 +46,7 @@ void AdjustableDurationHMM::update_transitions(size_t index, std::vector<HMM::ma
     size_t numStates = substates.size();
     size_t startIndex = substates[0];
     size_t endIndex = substates[numStates-1];
-    
+
     size_t obs = logGamma.size();
     double lowerProbBound = lp::ext_log(pow(10.0, -10.0));
     double xi_tij = 0;
@@ -129,7 +130,7 @@ void AdjustableDurationHMM::update_transitions(size_t index, std::vector<HMM::ma
         new_logA(endIndex, endIndex) = lp::log_mul(num, -denom);
 
 
-        // update outgoing transitions of last state 
+        // update outgoing transitions of last state
         denom = NAN;
         for (size_t k = 0; k < obs; ++k)
         {
@@ -139,7 +140,7 @@ void AdjustableDurationHMM::update_transitions(size_t index, std::vector<HMM::ma
                 denom = lp::log_add(denom, (*logGamma[k])(t, endIndex));
             }
         }
-        
+
         double sum = NAN;
         for (size_t j = 0; j < N; ++j)
         {
@@ -162,13 +163,13 @@ void AdjustableDurationHMM::update_transitions(size_t index, std::vector<HMM::ma
         }
 
 
-        // normalize outgoing transitions to one 
+        // normalize outgoing transitions to one
         double ratio = lp::log_mul(new_logA(substates[0], substates[1]), -sum);
         for (size_t j = 0; j < N; ++j)
         {
             if (j != endIndex)
             {
-                new_logA(endIndex, j) = lp::log_mul(new_logA(endIndex, j), ratio);  
+                new_logA(endIndex, j) = lp::log_mul(new_logA(endIndex, j), ratio);
             }
         }
     }
@@ -206,10 +207,10 @@ void AdjustableDurationHMM::update_emission(size_t state, HMM::const_matrix_ptr<
         {
             emission(state, k)->update(completeGamma.begin(), completeGamma.end(), observation->col_begin(k), observation->col_end(k));
         }
-        if (methylation)
+        for (size_t k = 0; k < cm; ++k)
         {
             std::shared_ptr<TwoValueDiscreteDistribution> dis = std::dynamic_pointer_cast<TwoValueDiscreteDistribution>(emission(state, m));
-            dis->update_methylation(completeGamma.begin(), completeGamma.end(), nObservation->col_begin(0), nObservation->col_begin(1));
+            dis->update_methylation(completeGamma.begin(), completeGamma.end(), nObservation->col_begin(2 * k), nObservation->col_begin(2 * k + 1));
         }
     }
 }
@@ -218,7 +219,7 @@ void AdjustableDurationHMM::M_step(HMM::const_matrix_ptr<int> observation, HMM::
 {
     size_t states = stateIndices.size();
     Matrix<double> new_logA = Matrix<double> (N, N, NAN);
-    
+
     #pragma omp parallel for schedule(static)
     for (size_t i = 0; i < states; ++i)
     {
@@ -241,7 +242,7 @@ void AdjustableDurationHMM::init_initial()
 void AdjustableDurationHMM::init_transitions(const std::vector<double>& selfP)
 {
     size_t states = stateIndices.size();
-    
+
     logA = Matrix<double> (N, N, NAN);
 
     // outgoing transition probabilities are initialized uniformly (considering fixed self transition probability)
@@ -249,7 +250,7 @@ void AdjustableDurationHMM::init_transitions(const std::vector<double>& selfP)
     {
         double logSelfP = lp::ext_log(selfP[i]);
         double logNextP = lp::ext_log((1.0 - selfP[i]));
-        
+
         // set transition probabilities for inner states of  the sub-HMM
         const std::vector<size_t>& subHMM = stateIndices[i];
         for (size_t j = 0; j < subHMM.size()-1; ++j)
@@ -257,7 +258,7 @@ void AdjustableDurationHMM::init_transitions(const std::vector<double>& selfP)
             logA(subHMM[j], subHMM[j+1]) = logNextP;
             logA(subHMM[j], subHMM[j]) = logSelfP;
         }
-        
+
         // set transition probabilities for last state of the sub-HMM
         double logSwicthP = lp::ext_log((1.0 - selfP[i]) * (1.0 / (states-1)));
         size_t endState = subHMM[subHMM.size()-1];
@@ -269,13 +270,13 @@ void AdjustableDurationHMM::init_transitions(const std::vector<double>& selfP)
                 size_t nextState = stateIndices[j][0];
                 logA(endState, nextState) = logSwicthP;
             }
-        } 
-    }    
+        }
+    }
 }
 
 void AdjustableDurationHMM::init_transitions()
 {
-    init_transitions(std::vector<double>(stateIndices.size(), 0.8));   
+    init_transitions(std::vector<double>(stateIndices.size(), 0.8));
 }
 
 void AdjustableDurationHMM::process_state_sequence(std::vector<int>& stateSequence) const
@@ -312,7 +313,7 @@ std::vector<std::vector<size_t>> AdjustableDurationHMM::calculate_segement_lengt
     return std::move(segmentLengths);
 }
 
-void AdjustableDurationHMM::adjust_topology(const_matrix_ptr<int> observation, const_matrix_ptr<int> nObservation, std::vector<size_t>& startIndex)
+void AdjustableDurationHMM::adjust_topology(const_matrix_ptr<int> observation, const_matrix_ptr<int> nObservation, std::vector<size_t>& startIndex, size_t max_states, double max_prob)
 {
     size_t states = stateIndices.size();
     size_t T = observation->nrows() > 0 ? observation->nrows() : nObservation->nrows();
@@ -329,13 +330,22 @@ void AdjustableDurationHMM::adjust_topology(const_matrix_ptr<int> observation, c
 
     std::vector<double> selfP;
     std::vector<size_t> subStates;
-    double p = 0.9;
 
     for (size_t i = 0; i < states; ++i)
     {
-        double mean = std::accumulate(segmentLengths[i].begin(), segmentLengths[i].end(), 0.0) / segmentLengths[i].size();
+        size_t n = segmentLengths[i].size();
+        double mean = std::accumulate(segmentLengths[i].begin(), segmentLengths[i].end(), 0.0) / n;
+
+        auto variance_func = [&mean, &n](double accumulator, const double& x) {
+            return accumulator + ((x - mean)*(x - mean) / (n - 1));
+        };
+        double var = std::accumulate(segmentLengths[i].begin(), segmentLengths[i].end(), 0.0, variance_func);
+
+        double p = 1 - mean / var;
+        p = std::max<double>(0.0, std::min<double>(p, max_prob));
         double r = mean * (1.0 - p) / p;
-        subStates.push_back(std::min<size_t>(5, std::ceil(r)));
+        size_t nsubstates = std::min<size_t>(max_states, std::max<size_t>(1, std::round(r)));
+        subStates.push_back(nsubstates);
         selfP.push_back(r >= 1.0 ? p : lp::ext_exp(logA(stateIndices[i][0], stateIndices[i][0])));
     }
 

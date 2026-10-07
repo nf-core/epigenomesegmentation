@@ -20,7 +20,7 @@ You will need to create a samplesheet with information about the samples you wou
 
 The `sample_id` identifiers must be identical for all data files that belong to the same biological sample. The pipeline groups all files sharing the same `sample_id` and processes them together to build a unified segmentation model for that sample.
 
-If you have multiple files for the **exact same histone mark** within a single sample, the pipeline treats them as biological or technical replicates. You must assign each of these files a unique integer in the `replicate` column. 
+If you have multiple files for the **exact same histone mark** within a single sample, the pipeline treats them as biological or technical replicates. You must assign each of these files a unique integer in the `replicate` column.
 
 **NOTE:** Replicates for methylation data (`.bed` or `.bed.gz` files) are not currently supported by the pipeline. Methylation data should only have one entry per `sample_id`.
 
@@ -38,6 +38,7 @@ SAMPLE_A,1,WGBS,./data/sampleA_methyl.bed.gz,WGBS,true,BI
 
 The pipeline uses a **7-column structured format** to process and group epigenetic data.  
 File types are inferred automatically:
+
 - Histone -> `.bam`, `.bam.gz`
 - Methylation -> `.bed`, `.bed.gz`
 
@@ -56,33 +57,32 @@ TREATMENT,1,H3K27ac,./data/treatment_H3K27ac.bam,ChIP-seq,true,NBI
 TREATMENT,1,WGBS,./data/treatment_methyl.bed.gz,WGBS,true,BI
 ```
 
-| Column | Description |
-|--------|-------------|
-| `sample_id` | Custom sample name. Must be identical across all entries of the same sample. |
-| `replicate` | Integer replicate number. Unique for same `epigenetic_mark` within a sample. |
-| `epigenetic_mark` | Target mark or assay type (e.g., `H3K4me3`, `H3K27ac`, `WGBS`). |
-| `file_name` | Full path to file. `.bam` / `.bam.gz` (histone), `.bed` / `.bed.gz` (methylation). |
-| `modality` | Supported: `ChIP-seq`, `WGBS`, `ATAC-seq`, `NOMe-seq`, `chip`, `wgbs`, `atac`, `nome`. |
-| `paired_end` | Boolean (`true` or `false`). |
-| `distribution` | Statistical distribution used for modeling. |
+| Column            | Description                                                                            |
+| ----------------- | -------------------------------------------------------------------------------------- |
+| `sample_id`       | Custom sample name. Must be identical across all entries of the same sample.           |
+| `replicate`       | Integer replicate number. Unique for same `epigenetic_mark` within a sample.           |
+| `epigenetic_mark` | Target mark or assay type (e.g., `H3K4me3`, `H3K27ac`, `WGBS`).                        |
+| `file_name`       | Full path to file. `.bam` / `.bam.gz` (histone), `.bed` / `.bed.gz` (methylation).     |
+| `modality`        | Supported: `ChIP-seq`, `WGBS`, `ATAC-seq`, `NOMe-seq`, `chip`, `wgbs`, `atac`, `nome`. |
+| `paired_end`      | Boolean (`true` or `false`).                                                           |
+| `distribution`    | Optional statistical distribution used for modeling. Leave empty to use the default. |
 
 ### Supported Distributions
 
-| Code | Name |
-|------|------|
-| `PO` | Poisson |
-| `ZAP` | Zero Adjusted Poisson |
-| `BI` | Binomial |
-| `NBI` | Negative Binomial |
-| `ZANBI` | Zero Adjusted Negative Binomial |
-| `BB` | Beta Binomial |
-| `BNB` | Beta Negative Binomial |
-| `ZABNB` | Zero Adjusted Beta Negative Binomial |
-| `SI` | Sichel |
-| `ZASI` | Zero Adjusted Sichel |
-| `GA` | Gaussian |
-| `B` | Bernoulli *(requires binarized input)* |
-
+| Code    | Name                                   |
+| ------- | -------------------------------------- |
+| `PO`    | Poisson                                |
+| `ZAP`   | Zero Adjusted Poisson                  |
+| `BI`    | Binomial                               |
+| `NBI`   | Negative Binomial                      |
+| `ZANBI` | Zero Adjusted Negative Binomial        |
+| `BB`    | Beta Binomial                          |
+| `BNB`   | Beta Negative Binomial                 |
+| `ZABNB` | Zero Adjusted Beta Negative Binomial   |
+| `SI`    | Sichel                                 |
+| `ZASI`  | Zero Adjusted Sichel                   |
+| `GA`    | Gaussian                               |
+| `B`     | Bernoulli _(requires binarized input)_ |
 
 An [example samplesheet](../assets/samplesheet.csv) has been provided with the pipeline.
 
@@ -109,25 +109,35 @@ If you wish to repeatedly use the same parameters for multiple runs, rather than
 
 Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <file>`.
 
-### EpiSegMix Run Modes
+## Segmentation
 
-The pipeline's behavior can be significantly altered using modes for EpiSegMix tool as boolean flags `--standard, --duration, --DNA, --fitting` and the `--merge` flag. By default, the pipeline runs in `standard` mode.
+The pipeline routes inputs by file extension: BAM files are used for histone counts, while BED/BED.GZ files are used for methylation or coverage-marker counts. When both modalities are supplied, the default workflow combines them for segmentation; histone-only samples are segmented using histone data. For methylation/coverage-only segmentation, use `--dna`.
 
-#### Standard Mode (Default)
+### Pipeline modes
+By default, the pipeline runs topology modeling (LDM). `--dna`, `--fitting`, `--jointrain`, and `--counts` change the workflow path; use only compatible options together. `--duration` selects the model type and can be combined with compatible workflow options such as `--jointrain`. `--methcounts` and `--histonecounts` are inputs for precomputed counts, not modes.
 
-```bash
---standard
-```
+#### Count generation only
 
-Processes only histone data (BAM files) to generate chromatin segmentation models. Methylation data provided in the samplesheet will be ignored in this mode.
-
-#### DNA Mode
+Use `--counts` to run the BAM/BED count-generation steps and stop before model training and segmentation:
 
 ```bash
---DNA
+nextflow run nf-core/epigenomesegmentation \
+  --input samplesheet.csv \
+  --outdir results \
+  --genome hg38 \
+  --counts \
+  -profile docker
 ```
 
-Bypasses histone processing entirely. The pipeline will process only methylation data (BED files), generate methylation-specific bins, and train a DNA-only segmentation model.
+For BAM inputs, the pipeline generates histone count matrices. For BED/BED.GZ inputs, it generates binned methylation/coverage count files. Outputs are published under `Counts/<sample>_Histone/` and `Counts/<sample>_Methylation/`, respectively. This mode uses raw BAM/BED inputs; use `--histonecounts` and/or `--methcounts` to supply precomputed counts for a segmentation run instead. `--counts` does not generate segmentations or model reports.
+
+#### Methylation or CoverageMarker Mode
+
+```bash
+--dna
+```
+
+With this flag, BAM processing is skipped and the pipeline performs methylation/coverage-only segmentation from BED inputs. The workflow generates and bins the BED-based counts before training and decoding the model.
 
 #### Duration Mode
 
@@ -135,7 +145,7 @@ Bypasses histone processing entirely. The pipeline will process only methylation
 --duration
 ```
 
-Executes the duration-based Hidden Markov Model (HMM). This is useful for modeling states with explicit length distributions to better capture the spatial characteristics of epigenetic domains.
+Selects the duration-modeling (DM) HMM, which models segment duration. Without this flag, the default segmentation workflow uses topology modeling (LDM).
 
 #### Fitting Mode
 
@@ -143,15 +153,28 @@ Executes the duration-based Hidden Markov Model (HMM). This is useful for modeli
 --fitting
 ```
 
-This mode does not perform full segmentation. Instead, it extracts counts and runs distribution-fitting algorithms to help you determine the optimal statistical distributions (e.g., NBI, BI, SI, BNB) for your specific epigenetic marks. You can specify a comma-separated list of distributions to test using the `--distributions` parameter.
-However, if `--best_fit_segmentation` is set to true along with fitting, it will run segmentation on the best-fitting distribution found. You can also mention `--duration` with it for segmentation to be done using duration modules.
+This mode fits candidate distributions to the count data rather than running the usual segmentation workflow. Specify the comma-separated candidates with `--distributions`, for example `--distributions 'NBI,SI,BNB'`. The workflow uses the fitting results to produce an updated samplesheet with the best-fitting distribution.
 
-#### Merging Histone and Methylation Data
+
+#### Jointrain Mode
 
 ```bash
---merge
+--jointrain
 ```
-When the `--merge` flag is provided, the pipeline processes **both** histone BAM files and methylation BED files. It merges their respective count matrices into a single, comprehensive dataset and trains a combined segmentation model across all modalities.
+
+This opt-in mode trains a shared model from the combined counts of the input samples for each requested state, then decodes each sample separately. It can make state labels comparable across samples; each sample still receives its own segmentation. It is disabled by default.
+
+**Note:** `--jointrain` can be combined with `--duration`. Do not combine it with `--dna`, `--fitting`, or `--counts`; those select different workflow paths.
+
+#### Using precomputed counts
+
+```bash
+--methcounts <path to count matrix>  --histonecounts <path to count matrix>
+```
+
+Use these options when count matrices have already been generated. Supply `--histonecounts` for histone counts and `--methcounts` for methylation/coverage counts; supplying both enables a combined run. The pipeline still uses `--input` to obtain sample and assay metadata and to determine how inputs are grouped. For methylation-only segmentation, also set `--dna`.
+
+**Important limitation:** Each option is currently resolved as one file path (or a glob whose first match is used) and paired with metadata from the samplesheet. The workflow does not currently document or guarantee automatic per-sample matching of multiple count files. Confirm the expected count-file layout and sample association before relying on custom count inputs for multiple samples.
 
 #### Exploring Multiple States
 
@@ -159,7 +182,7 @@ When the `--merge` flag is provided, the pipeline processes **both** histone BAM
 --states 8,10,12
 ```
 
-The `--states` parameter defines the number of chromatin states for the segmentation model. You can provide a single integer or a comma separated list of values (e.g., `8,10,12`) to train models for multiple state configurations simultaneously in parallel. The pipeline itself automatically handles the creation and management of all necessary configuration files for each state!
+The `--states` parameter defines the number of chromatin states for the segmentation model. You can provide a single integer or a comma-separated list (e.g., `8,10,12`) to run multiple state configurations. The pipeline creates a model configuration for each requested state.
 
 #### Parameter Estimation Chromosome
 
@@ -168,7 +191,6 @@ The `--states` parameter defines the number of chromatin states for the segmenta
 ```
 
 The `--chr_parameter_estimation` parameter defines which chromosome should be used for the initial parameter estimation step before full model training. By default, it uses chromosome `12`. You can provide an integer (e.g., `12`, `22`), or a string identifier if you are using specific custom reference genomes or pilot data (e.g., `pilot_hg38`).
-
 
 > [!WARNING]
 > Do not use `-c <file>` to specify parameters as this will result in errors. Custom config files specified with `-c` must only be used for [tuning process resource specifications](https://nf-co.re/docs/usage/configuration#tuning-workflow-resources), other infrastructural tweaks (such as output directories), or module arguments (args).

@@ -1,54 +1,89 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
 name: "custom_filterchromsizes"
-description: Filters raw chromosome sizes files to retain only standard chromosomes.
+description: Filters and sorts a chromosome sizes file to retain only standard chromosomes and normalizes their naming conventions.
 keywords:
-  - filter
-  - chromosome
   - genomics
+  - reference
+  - filter
+  - chromsizes
+  - awk
+  - sort
 tools:
-  - "custom":
-      description: "Custom processing utilizing core terminal utilities like awk or grep."
-      homepage: ""
-      documentation: ""
-      tool_dev_url: ""
+  - "coreutils":
+      description: "GNU core utilities (includes sort, ls, cp, etc.) for basic file manipulation."
+      homepage: "https://www.gnu.org/software/coreutils/"
+      documentation: "https://www.gnu.org/software/coreutils/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/coreutils.git"
       doi: ""
-      licence: null
-      identifier: null
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+  - "awk":
+      description: "GNU Awk (gawk) is a pattern scanning and processing language."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
 
 input:
   - chromsizes:
       type: file
-      description: Path to the raw chromosome sizes file.
+      description: The raw chromosome sizes file to be filtered (typically downloaded from UCSC).
       pattern: "*.chrom.sizes"
 
 output:
-  - filtered_chromsizes:
-      - "*.filtered.chrom.sizes":
+  filtered_chromsizes:
+    - - genome:
+          type: string
+          description: The genome assembly name (e.g., `hg38`, `mm10`) derived from `params.genome`.
+      - "filtered_*":
           type: file
-          description: Filtered chromosome sizes file.
-          pattern: "*.filtered.chrom.sizes"
-  - versions_custom:
-      - - ${task.process}:
-            type: string
-            description: The name of the process
-        - awk:
-            type: string
-            description: The name of the tool reporting the version
-        - awk -W version 2>&1 | head -n 1 | awk '{print $2}':
-            type: eval
-            description: The expression to obtain the version of the tool
+          description: The filtered and sorted chromosome sizes file.
+          pattern: "filtered_*"
+
+  versions_sort:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "sort":
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+
+  versions_awk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "awk":
+          type: string
+          description: The name of the tool
+      - "awk --version | head -n 1 | awk '{print $3}'":
+          type: eval
+          description: The expression to obtain the version of awk
 
 topics:
   versions:
     - - ${task.process}:
           type: string
           description: The name of the process
+      - sort:
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+    - - ${task.process}:
+          type: string
+          description: The name of the process
       - awk:
           type: string
-          description: The name of the tool reporting the version
-      - awk -W version 2>&1 | head -n 1 | awk '{print $2}':
+          description: The name of the tool
+      - "awk --version | head -n 1 | awk '{print $3}'":
           type: eval
-          description: The expression to obtain the version of the tool
+          description: The expression to obtain the version of awk
 
 authors:
   - "@aaryanjaitly"

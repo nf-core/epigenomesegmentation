@@ -1,10 +1,10 @@
 # C++ Implementation of a flexible distribution HMM for chromatin segmentation
 
-Implementation of a multivariate HMM, supporting several distributions (**PO, BI, NBI, BB, BNB, SI, ZAP, ZANBI, ZASI, ZABNB**) to calculate the emission probability in a state for discrete data, like histone modifications and optionally DNA methylation as additional input (two columns, distributions: **BI, BB, AB**). 
+Implementation of a multivariate HMM, supporting several distributions (**PO, BI, NBI, BB, BNB, SI, ZAP, ZANBI, ZASI, ZABNB**) to calculate the emission probability in a state for discrete data, like histone modifications and optionally DNA methylation as additional input (two columns, distributions: **BI, BB, AB**).
 
 ## Dependencies
 
-- C++ compiler with support for C++ 17. 
+- C++ compiler with support for C++ 17.
 - CMake version >= 3.16 (<https://cmake.org/>)
 - Boost >= 1.55.0 (<https://www.boost.org/>)
 - OpenMP (on Linux if not available install with `sudo apt-get install libomp-dev`)
@@ -19,7 +19,7 @@ cmake ..
 make -j 4
 ```
 
-To also build the tests use instead 
+To also build the tests use instead
 ```
 cmake .. -DGTEST_SRC_DIR=/usr/src/googletest/
 ```
@@ -29,33 +29,33 @@ depending on the path to googletest. The tests can then be run with `make test`.
 ### Executable **./HMMChromSeg**
 ```
   -h [ --help ]                         Output help message.
-  -m [ --modelInput ] arg               Serialized HMM with starting 
+  -m [ --modelInput ] arg               Serialized HMM with starting
                                         parameters.
-  -r [ --regions ] arg                  Start indices for independent regions 
-                                        (starting at zero and whitespace 
-                                        separated), if not set no splitting is 
+  -r [ --regions ] arg                  Start indices for independent regions
+                                        (starting at zero and whitespace
+                                        separated), if not set no splitting is
                                         performed.
   -c [ --countMatrix ] arg              Count matrix for training or decoding.
-  -x [ --methylationMatrix ] arg        Optional matrix for DNA methylation, 
-                                        only required if model has set 
+  -x [ --methylationMatrix ] arg        Optional matrix for DNA methylation,
+                                        only required if model has set
                                         methylation to true.
   -t [ --train ]                        Should the HMM model be trained first?
-  -i [ --maxIteration ] arg (=300)      Maximum number of iteration during 
+  -i [ --maxIteration ] arg (=300)      Maximum number of iteration during
                                         training.
   -j [ --iterationsPretrain ] arg (=5)  Number of iterations before topology is
                                         adjusted.
-  -n [ --numAdjustments ] arg (=2)      How often should the topology be 
+  -n [ --numAdjustments ] arg (=2)      How often should the topology be
                                         adjusted?
   -e [ --epsilon ] arg (=0.1)           Convergence of likelihoods as  
                                         termination criterion during training.
-  -o [ --modelOutput ] arg              Optional output file for parameters of 
-                                        new HMM (only required if HMM is 
+  -o [ --modelOutput ] arg              Optional output file for parameters of
+                                        new HMM (only required if HMM is
                                         trained first).
   -v [ --viterbiPath ] arg              Optional output file for state sequence
                                         using Viterbi decoding.
   -d [ --posteriorDecoding ] arg        Optional output file for state sequence
                                         using posterior decoding.
-  -p [ --threads ] arg (=1)             Number of threads for training the HMM 
+  -p [ --threads ] arg (=1)             Number of threads for training the HMM
                                         model.
 ```
 
@@ -64,34 +64,34 @@ depending on the path to googletest. The tests can then be run with `make test`.
 ```
 Command line options:
   -h [ --help ]                         Output help message.
-  -m [ --modelInput ] arg               Serialized HMM with starting 
+  -m [ --modelInput ] arg               Serialized HMM with starting
                                         parameters.
-  -r [ --regions ] arg                  Start indices for independent regions 
-                                        (starting at zero and whitespace 
-                                        separated), if not set no splitting is 
+  -r [ --regions ] arg                  Start indices for independent regions
+                                        (starting at zero and whitespace
+                                        separated), if not set no splitting is
                                         performed.
   -c [ --countMatrix ] arg              Count matrix for training or decoding.
-  -x [ --methylationMatrix ] arg        Optional matrix for DNA methylation, 
-                                        only required if model has set 
+  -x [ --methylationMatrix ] arg        Optional matrix for DNA methylation,
+                                        only required if model has set
                                         methylation to true.
   -t [ --train ]                        Should the HMM model be trained first?
-  -a [ --adjustTopology ]               Should the HMM topology be updated 
+  -a [ --adjustTopology ]               Should the HMM topology be updated
                                         during training?
-  -i [ --maxIteration ] arg (=300)      Maximum number of iteration during 
+  -i [ --maxIteration ] arg (=300)      Maximum number of iteration during
                                         training.
-  -j [ --iterationsPretrain ] arg (=5)  Number of iterations before topolgy is 
+  -j [ --iterationsPretrain ] arg (=5)  Number of iterations before topolgy is
                                         adjusted.
   -e [ --epsilon ] arg (=0.10000000000000001)
-                                        Convergence of likelihoods as 
+                                        Convergence of likelihoods as
                                         termination criterion during training.
-  -o [ --modelOutput ] arg              Optional output file for parameters of 
-                                        new HMM (only required if HMM is 
+  -o [ --modelOutput ] arg              Optional output file for parameters of
+                                        new HMM (only required if HMM is
                                         trained first).
   -v [ --viterbiPath ] arg              Optional output file for state sequence
                                         using Viterbi decoding.
   -d [ --posteriorDecoding ] arg        Optional output file for state sequence
                                         using posterior decoding.
-  -p [ --threads ] arg (=1)             Number of threads for training the HMM 
+  -p [ --threads ] arg (=1)             Number of threads for training the HMM
                                         model.
 ```
 

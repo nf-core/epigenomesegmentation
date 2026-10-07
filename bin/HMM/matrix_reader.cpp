@@ -34,11 +34,11 @@ Matrix<int> Reader::parse_matrix(std::istream& strm)
 
     std::string buffer;
     for (size_t i = 0; i < rows; ++i)
-    {   
+    {
         std::getline(strm, buffer);
         std::vector<std::string> row;
         boost::split(row, buffer, boost::is_any_of("\t "), boost::token_compress_on);
-        
+
         if (row.size() != cols)
         {
             message = "Error: not all rows have the same number of columns.";
@@ -106,11 +106,11 @@ Matrix<int> Reader::parse_methylation_matrix(std::istream& strm)
 
     std::string buffer;
     for (size_t i = 0; i < rows; ++i)
-    {   
+    {
         std::getline(strm, buffer);
         std::vector<std::string> row;
         boost::split(row, buffer, boost::is_any_of("\t "), boost::token_compress_on);
-        
+
         if (row.size() != cols)
         {
             message = "Error: not all rows have the same number of columns.";

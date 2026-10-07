@@ -7,7 +7,7 @@
 #include <initializer_list>
 
 template <class T>
-class Matrix 
+class Matrix
 {
     public:
 
@@ -18,28 +18,28 @@ class Matrix
 
     /**
      * @brief Construct empty matrix
-     * 
+     *
      */
     Matrix() : Matrix(0, 0, T()){};
 
     /**
      * @brief Construct a empty matrix of size nrows x ncols
-     * 
-     * @param nrows 
-     * @param ncols 
+     *
+     * @param nrows
+     * @param ncols
      */
     Matrix(std::size_t nrows, std::size_t ncols) : Matrix(nrows, ncols, T()) {}
 
     /**
      * @brief Construct a matrix of size nrows x ncols with inital value init
-     * 
-     * @param nrows 
-     * @param ncols 
-     * @param init 
+     *
+     * @param nrows
+     * @param ncols
+     * @param init
      */
     Matrix(std::size_t nrows, std::size_t ncols, T init): nrows_(nrows), ncols_(ncols), data_(std::make_unique<T[]>(nrows * ncols))
     {
-        for (std::size_t i = 0, end = nrows * ncols; i < end; ++i) 
+        for (std::size_t i = 0, end = nrows * ncols; i < end; ++i)
         {
             data_[i] = init;
         }
@@ -47,30 +47,30 @@ class Matrix
 
     /**
      * @brief Construct matrix from exisiting matrix (copy constructor)
-     * 
-     * @param m 
+     *
+     * @param m
      */
-    Matrix(const Matrix& m) : nrows_(m.nrows()), ncols_(m.ncols()), data_() 
+    Matrix(const Matrix& m) : nrows_(m.nrows()), ncols_(m.ncols()), data_()
     {
         data_ = std::make_unique<T[]>(nrows_ * ncols_);
         std::copy(m.data_.get(), m.data_.get() + (nrows_ * ncols_), data_.get());
     }
-    
+
     /**
      * @brief Construct matrix from initializer list
-     * 
-     * @param elements 
+     *
+     * @param elements
      */
     Matrix(std::initializer_list<std::initializer_list<T>> elements)
-    : nrows_(elements.size()), ncols_(0), data_() 
+    : nrows_(elements.size()), ncols_(0), data_()
     {
         ncols_ = elements.begin()->size();
         data_ = std::make_unique<T[]>(nrows_ * ncols_);
 
         std::size_t i = 0;
-        for (auto row : elements) 
+        for (auto row : elements)
         {
-            for (auto e : row) 
+            for (auto e : row)
             {
                 data_[i] = e;
                 ++i;
@@ -80,17 +80,17 @@ class Matrix
 
     /**
      * @brief copy same elements from m to the matrix
-     * 
-     * @param m 
-     * @return Matrix& 
+     *
+     * @param m
+     * @return Matrix&
      */
-    Matrix& operator=(const Matrix& m) 
+    Matrix& operator=(const Matrix& m)
     {
-        if (this == &m) 
+        if (this == &m)
         {
             return *this;
         }
-        if (nrows_ * ncols_ != m.nrows() * m.ncols()) 
+        if (nrows_ * ncols_ != m.nrows() * m.ncols())
         {
             data_ = std::make_unique<T[]>(m.nrows() * m.ncols());
         }
@@ -103,58 +103,58 @@ class Matrix
 
     /**
      * @brief get refernece to value at position (i,j)
-     * 
-     * @param i 
-     * @param j 
-     * @return value 
+     *
+     * @param i
+     * @param j
+     * @return value
      */
-    T& operator()(std::size_t i, std::size_t j) 
+    T& operator()(std::size_t i, std::size_t j)
     {
         return data_[i * ncols_ + j];
     }
 
     /**
      * @brief get copy of value at position (i, j)
-     * 
-     * @param i 
-     * @param j 
+     *
+     * @param i
+     * @param j
      * @return value
      */
-    T operator()(std::size_t i, std::size_t j) const 
+    T operator()(std::size_t i, std::size_t j) const
     {
         return data_[i * ncols_ + j];
     }
 
     /**
      * @brief return number of rows
-     * 
-     * @return std::size_t 
+     *
+     * @return std::size_t
      */
     std::size_t nrows() const { return nrows_; }
 
     /**
      * @brief return number of columns
-     * 
-     * @return std::size_t 
+     *
+     * @return std::size_t
      */
     std::size_t ncols() const { return ncols_; }
 
     /**
      * @brief return iterator to begin of column col_num
-     * 
-     * @param col_num 
-     * @return col_iterator 
+     *
+     * @param col_num
+     * @return col_iterator
      */
     col_iterator col_begin(std::size_t col_num)
     {
-        return col_iterator(&(this->operator()(0, col_num)), ncols_);     
+        return col_iterator(&(this->operator()(0, col_num)), ncols_);
     }
 
     /**
      * @brief return const iterator to begin of column col_num
-     * 
-     * @param col_num 
-     * @return const_col_iterator 
+     *
+     * @param col_num
+     * @return const_col_iterator
      */
     const_col_iterator col_begin(std::size_t col_num) const
     {
@@ -164,9 +164,9 @@ class Matrix
 
     /**
      * @brief return iterator to end of column col_num
-     * 
-     * @param col_num 
-     * @return col_iterator 
+     *
+     * @param col_num
+     * @return col_iterator
      */
     col_iterator col_end(std::size_t col_num)
     {
@@ -175,9 +175,9 @@ class Matrix
 
     /**
      * @brief return const iterator to end of column col_num
-     * 
-     * @param col_num 
-     * @return const_col_iterator 
+     *
+     * @param col_num
+     * @return const_col_iterator
      */
     const_col_iterator col_end(std::size_t col_num) const
     {
@@ -187,9 +187,9 @@ class Matrix
 
     /**
      * @brief return iterator to begin of row row_num
-     * 
-     * @param row_num 
-     * @return row_iterator 
+     *
+     * @param row_num
+     * @return row_iterator
      */
     row_iterator row_begin(std::size_t row_num)
     {
@@ -198,9 +198,9 @@ class Matrix
 
     /**
      * @brief return const iterator to begin of row row_num
-     * 
-     * @param row_num 
-     * @return const_row_iterator 
+     *
+     * @param row_num
+     * @return const_row_iterator
      */
     const_row_iterator row_begin(std::size_t row_num) const
     {
@@ -210,9 +210,9 @@ class Matrix
 
     /**
      * @brief return iterator to end of row row_num
-     * 
-     * @param row_num 
-     * @return row_iterator 
+     *
+     * @param row_num
+     * @return row_iterator
      */
     row_iterator row_end(std::size_t row_num)
     {
@@ -221,16 +221,16 @@ class Matrix
 
     /**
      * @brief return const iterator to end of row row_num
-     * 
-     * @param row_num 
-     * @return const_row_iterator 
+     *
+     * @param row_num
+     * @return const_row_iterator
      */
     const_row_iterator row_end(std::size_t row_num) const
     {
         const T* p = &data_[0] + (row_num+1) * (ncols_);
         return const_row_iterator(p);
     }
-    
+
     private:
     std::size_t nrows_;
     std::size_t ncols_;
@@ -241,11 +241,11 @@ class Matrix
 * Output matrix in row major ordering
 */
 template <typename T>
-std::ostream& operator<<(std::ostream& os, const Matrix<T>& m) 
+std::ostream& operator<<(std::ostream& os, const Matrix<T>& m)
 {
-    for (std::size_t i = 0; i < m.nrows(); ++i) 
+    for (std::size_t i = 0; i < m.nrows(); ++i)
     {
-        for (std::size_t j = 0; j < m.ncols() - 1; ++j) 
+        for (std::size_t j = 0; j < m.ncols() - 1; ++j)
         {
             os << m(i, j) << ' ';
         }
@@ -275,7 +275,7 @@ class Matrix<T>::col_iterator
         /**
          * return pointer to next element
          */
-        col_iterator& operator++() 
+        col_iterator& operator++()
         {
             curr += ncols;
             return *this;
@@ -327,7 +327,7 @@ class Matrix<T>::const_col_iterator
         /**
          * return pointer to next element
          */
-        const_col_iterator& operator++() 
+        const_col_iterator& operator++()
         {
             curr += ncols;
             return *this;
@@ -382,7 +382,7 @@ class Matrix<T>::row_iterator
         /**
          * return pointer to next element
          */
-        row_iterator& operator++() 
+        row_iterator& operator++()
         {
             curr += 1;
             return *this;
@@ -427,13 +427,13 @@ class Matrix<T>::const_row_iterator
         using value_type        = T;
         using pointer           = T*;
         using reference         = T&;
-        
+
         const_row_iterator(const T* p) : curr(p) {}
 
         /**
          * return pointer to next element
          */
-        const_row_iterator& operator++() 
+        const_row_iterator& operator++()
         {
             curr += 1;
             return *this;
@@ -475,29 +475,29 @@ class Matrix3D
 
     /**
      * @brief Construct empty matrix
-     * 
+     *
      */
     Matrix3D() : Matrix3D(0, 0, 0, T()){};
 
     /**
      * @brief Construct a empty matrix of size nrows x ncols
-     * 
-     * @param nrows 
-     * @param ncols 
+     *
+     * @param nrows
+     * @param ncols
      */
     Matrix3D(std::size_t dim1, std::size_t dim2, std::size_t dim3) : Matrix3D(dim1, dim2, dim3, T()) {}
 
     /**
      * @brief Construct a matrix of size nrows x ncols with inital value init
-     * 
-     * @param nrows 
-     * @param ncols 
-     * @param init 
+     *
+     * @param nrows
+     * @param ncols
+     * @param init
      */
     Matrix3D(std::size_t dim1, std::size_t dim2, std::size_t dim3, T init): dim1_(dim1), dim2_(dim2), dim3_(dim3), data_(std::make_unique<T[]>(dim1 * dim2 * dim3))
     {
         std::size_t size = dim1 * dim2 * dim3;
-        for (std::size_t i = 0; i < size; ++i) 
+        for (std::size_t i = 0; i < size; ++i)
         {
             data_[i] = init;
         }
@@ -505,10 +505,10 @@ class Matrix3D
 
     /**
      * @brief Construct matrix from exisiting matrix (copy constructor)
-     * 
-     * @param m 
+     *
+     * @param m
      */
-    Matrix3D(const Matrix3D& m) : dim1_(m.dim(FIRST)), dim2_(m.dim(SECOND)), dim3_(m.dim(THIRD)),data_() 
+    Matrix3D(const Matrix3D& m) : dim1_(m.dim(FIRST)), dim2_(m.dim(SECOND)), dim3_(m.dim(THIRD)),data_()
     {
         data_ = std::make_unique<T[]>(dim1_ * dim2_ * dim3_);
         std::copy(m.data_.get(), m.data_.get() + (dim1_ * dim2_ * dim3_), data_.get());
@@ -516,17 +516,17 @@ class Matrix3D
 
     /**
      * @brief copy same elements from m to the matrix
-     * 
-     * @param m 
-     * @return Matrix& 
+     *
+     * @param m
+     * @return Matrix&
      */
-    Matrix3D& operator=(const Matrix3D& m) 
+    Matrix3D& operator=(const Matrix3D& m)
     {
-        if (this == &m) 
+        if (this == &m)
         {
             return *this;
         }
-        if (dim1_ * dim2_ * dim3_ != m.dim(FIRST) * m.dim(SECOND) * m.dim(THIRD)) 
+        if (dim1_ * dim2_ * dim3_ != m.dim(FIRST) * m.dim(SECOND) * m.dim(THIRD))
         {
             data_ = std::make_unique<T[]>(m.dim(FIRST) * m.dim(SECOND) * m.dim(THIRD));
         }
@@ -539,37 +539,37 @@ class Matrix3D
 
     /**
      * @brief get refernece to value at position (i,j,k)
-     * 
-     * @param i 
-     * @param j 
+     *
+     * @param i
+     * @param j
      * @param k
-     * @return value 
+     * @return value
      */
-    T& operator()(std::size_t i, std::size_t j, std::size_t k) 
+    T& operator()(std::size_t i, std::size_t j, std::size_t k)
     {
         return data_[(i * dim2_ + j) * dim3_+ k];
     }
 
     /**
      * @brief get copy of value at position (i, j, k)
-     * 
-     * @param i 
-     * @param j 
+     *
+     * @param i
+     * @param j
      * @param k
      * @return value
      */
-    T operator()(std::size_t i, std::size_t j, std::size_t k) const 
+    T operator()(std::size_t i, std::size_t j, std::size_t k) const
     {
         return data_[(i * dim2_ + j) * dim3_+ k];
     }
 
     /**
-     * @brief return size of dimension dim 
-     * 
-     * @return std::size_t 
+     * @brief return size of dimension dim
+     *
+     * @return std::size_t
      */
-    std::size_t dim(dimension d) const 
-    { 
+    std::size_t dim(dimension d) const
+    {
         switch(d)
         {
             case (FIRST):
@@ -582,7 +582,7 @@ class Matrix3D
                 throw std::invalid_argument("Unknown dimension");
         }
      };
-    
+
     private:
     std::size_t dim1_;
     std::size_t dim2_;

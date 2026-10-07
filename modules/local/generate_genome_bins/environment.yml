@@ -1,6 +1,0 @@
-name: generate_genome_bins
-channels:
-  - conda-forge
-  - bioconda
-dependencies:
-  - bioconda::bedtools=2.31.1

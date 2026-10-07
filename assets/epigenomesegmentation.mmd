@@ -1,0 +1,116 @@
+%%metro title: epigenomesegmentation
+%%metro file: input_files | CSV | Samples
+%%metro line: genome | Genome Processing | #4DD0E1
+%%metro line: bam | BAM Processing | #F06292
+%%metro line: bed | BED Processing | #FFB74D
+%%metro line: merge | Merging  | #AED581
+%%metro line: prepare | EpiSegMix Preparing | #7986CB
+%%metro line: episegmix | EpiSegMix Segmentation | #B39DDB
+
+graph LR
+
+    subgraph input [Input]
+        input_files[Input Files]
+    end
+
+    subgraph genome_processing [Genome Processing]
+        downloadchromsizes[Get ChromSizes]
+        filterchromsizes[Filter Sizes]
+        makewindows[Make Windows]
+        sortreference[Sort Reference]
+
+        downloadchromsizes -->|genome| filterchromsizes
+        filterchromsizes -->|genome| makewindows
+        filterchromsizes -->|genome| sortreference
+    end
+
+    subgraph bam_processing [BAM Processing]
+        reheader[Reheader]
+        index[Index]
+        sheetbam[BAM Sheet]
+        bamcounts[BAM Counts]
+
+        reheader -->|bam| index
+        index -->|bam| sheetbam
+        sheetbam -->|bam| bamcounts
+    end
+
+    subgraph bed_processing [BED Processing]
+        bedcounts[BED Counts]
+        map[Map]
+
+        bedcounts -->|bed| map
+    end
+
+    subgraph merging [Merging]
+        stripheader[Strip Header]
+        intersect[Intersect]
+        filterbed[Filter BED]
+
+        stripheader -->|merge| intersect
+        intersect -->|merge| filterbed
+    end
+
+    subgraph preparing [EpiSegMix Preparing]
+        episegmixconfig[Config]
+        episegmixtraincounts[Train Counts]
+
+
+        episegmixconfig -->|prepare| episegmixtraincounts
+    end
+
+    subgraph dm_segmentation [DM Segmentation]
+        %%metro direction: LR
+        episegmixdmtrain[DM Train]
+        episegmixdmdecoder[DM Decode]
+        episegmixdmreport[DM Report]
+
+        episegmixdmtrain -->|episegmix| episegmixdmdecoder
+        episegmixdmdecoder -->|episegmix| episegmixdmreport
+    end
+
+    subgraph ldm_segmentation [LDM Segmentation]
+        %%metro direction: LR
+        episegmixldmtrain[LDM Train]
+        episegmixldmdecoder[LDM Decode]
+        episegmixldmreport[LDM Report]
+        episegmixbestdistribution[Best Distribution]
+
+        episegmixldmtrain -->|episegmix| episegmixldmdecoder
+        episegmixldmdecoder -->|episegmix| episegmixldmreport
+        episegmixldmtrain -->|episegmix| episegmixbestdistribution
+    end
+
+
+    subgraph DNA_segmentation [DNA Segmentation]
+        %%metro direction: LR
+        episegmixmethtrain[DNA Train]
+        episegmixmethdecoder[DNA Decode]
+        episegmixmethreport[DNA Report]
+
+        episegmixmethtrain -->|episegmix| episegmixmethdecoder
+        episegmixmethdecoder -->|episegmix| episegmixmethreport
+    end
+
+    %% Cross-subgraph connections
+    input_files -->|genome| downloadchromsizes
+    input_files -->|bam| reheader
+    input_files -->|bed| bedcounts
+
+    sortreference -->|genome| reheader
+    makewindows -->|genome| bedcounts
+
+    %% Merge map and bamcounts OUTSIDE the subgraph
+    map -->|bed| _pre_merge_external_hub
+    bamcounts -->|bam| _pre_merge_external_hub
+
+    %% Feed the bundled lines into Strip Header AND bypass to Config
+    _pre_merge_external_hub -->|bam,bed| stripheader
+    _pre_merge_external_hub -->|bam,bed| episegmixconfig
+
+    %% Corrected: filterbed gets the "merge" color line
+    filterbed -->|merge| episegmixconfig
+
+    episegmixtraincounts -->|prepare| episegmixldmtrain
+    episegmixtraincounts -->|prepare| episegmixdmtrain
+    episegmixtraincounts -->|prepare| episegmixmethtrain

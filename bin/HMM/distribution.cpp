@@ -6,7 +6,7 @@
 
 #include "boost/math/special_functions/digamma.hpp"
 #include "boost/math/special_functions/bessel.hpp"
-#include "boost/math/special_functions/beta.hpp" 
+#include "boost/math/special_functions/beta.hpp"
 
 #include "FCN.h"
 #include "Math/Factory.h"
@@ -40,7 +40,7 @@ std::vector<double> Poisson::get_parameters() const
 }
 
 void Poisson::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
-{    
+{
     double sampleMean = stat::sample_mean(gammaBegin, gammaEnd, obsBegin, obsEnd);
     if (sampleMean > 0.0)
     {
@@ -70,7 +70,7 @@ double ZeroAdjustedPoisson::log_pmf(int x) const
 {
     if (x == 0)
         return lp::ext_log(pi);
-    
+
     if (pi > 1.0 - std::numeric_limits<double>::epsilon())
         return NAN;
 
@@ -84,9 +84,9 @@ std::vector<double> ZeroAdjustedPoisson::get_parameters() const
 }
 
 void ZeroAdjustedPoisson::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
-{   
+{
     pi = stat::zero_frequency(gammaBegin, gammaEnd, obsBegin, obsEnd);
-    
+
     if (pi > 1.0 - std::numeric_limits<double>::epsilon())
     {
         pi = 1.0;
@@ -121,7 +121,7 @@ void ZeroAdjustedPoisson::precalculate_log_pmf(const double* params, std::vector
 
     double lambda = params[0];
     double prob0 = lp::ext_exp(-lambda);
-  
+
     for (size_t i = 1; i < logpmf.size(); ++i)
     {
         logpmf[i] = i * log(lambda) - lambda - lgamma(i+1) - lp::log1x(-prob0);
@@ -132,7 +132,7 @@ Binomial::Binomial(double p, int n): p(p), n(n)
 {
     if (n <= 0)
         throw std::invalid_argument("N must be greater than 0.");
-    
+
     if (p < 0.0 || p > 1.0)
         throw std::invalid_argument("P must be in the interval [0, 1].");
 
@@ -140,7 +140,7 @@ Binomial::Binomial(double p, int n): p(p), n(n)
 }
 
 Binomial::Binomial(double p): p(p)
-{    
+{
     if (p < 0.0 || p > 1.0)
         throw std::invalid_argument("P must be in the interval [0, 1].");
     n = 0;
@@ -155,7 +155,7 @@ double Binomial::log_pmf(int x) const
 {
     if (x > n)
         return NAN;
-    return lgammaN - lgamma(x+1) - lgamma(n-x+1) + lp::xlogy(x, p) + lp::xlogy(n-x, 1-p); 
+    return lgammaN - lgamma(x+1) - lgamma(n-x+1) + lp::xlogy(x, p) + lp::xlogy(n-x, 1-p);
 }
 
 double Binomial::pmf(int n, int x) const
@@ -173,8 +173,8 @@ double Binomial::log_pmf(int n, int x) const
 
     if (n == 0 & x == 0)
         return 0.0;
-        
-    return lgamma(n+1) - lgamma(x+1) - lgamma(n-x+1) + lp::xlogy(x, p) + lp::xlogy(n-x, 1-p); 
+
+    return lgamma(n+1) - lgamma(x+1) - lgamma(n-x+1) + lp::xlogy(x, p) + lp::xlogy(n-x, 1-p);
 }
 
 std::vector<double> Binomial::get_parameters() const
@@ -184,7 +184,7 @@ std::vector<double> Binomial::get_parameters() const
 
 void Binomial::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
 {
-    double sampleMean = stat::sample_mean(gammaBegin, gammaEnd, obsBegin, obsEnd); 
+    double sampleMean = stat::sample_mean(gammaBegin, gammaEnd, obsBegin, obsEnd);
     p = sampleMean / n;
 }
 
@@ -235,7 +235,7 @@ std::vector<double> NegativeBinomial::get_parameters() const
 }
 
 void NegativeBinomial::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
-{    
+{
     double sampleMean = stat::sample_mean(gammaBegin, gammaEnd, obsBegin, obsEnd);
     double sampleVariance = stat::sample_variance(sampleMean, gammaBegin, gammaEnd, obsBegin, obsEnd);
 
@@ -329,7 +329,7 @@ std::vector<double> ZeroAdjustedNegativeBinomial::get_parameters() const
 }
 
 void ZeroAdjustedNegativeBinomial::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
-{    
+{
     pi = stat::zero_frequency(gammaBegin, gammaEnd, obsBegin, obsEnd);
     if (pi > 1.0 - std::numeric_limits<double>::epsilon())
     {
@@ -375,7 +375,7 @@ BetaBinomial::BetaBinomial(double a, double b, int n): alpha(a), beta(b), n(n)
 {
     if (n <= 0)
         throw std::invalid_argument("N must be greater than 1.");
-    
+
     if (alpha <= 0.0 || beta <= 0.0)
         throw std::invalid_argument("Both alpha and beta of the beta binomial distribution must be > 0.");
 
@@ -391,7 +391,7 @@ BetaBinomial::BetaBinomial(double a, double b, int n): alpha(a), beta(b), n(n)
 }
 
 BetaBinomial::BetaBinomial(double a, double b): alpha(a), beta(b)
-{   
+{
     if (alpha <= 0.0 || beta <= 0.0)
         throw std::invalid_argument("Both alpha and beta of the beta binomial distribution must be > 0.");
 
@@ -544,7 +544,7 @@ void BetaBinomial::precalculate_log_pmf(const double* params, int n, std::vector
 
     for (size_t i = 0; i < logpmf.size(); ++i)
     {
-        logpmf[i] = lgamma(n+1) + lgamma((i) + alpha) + lgamma(n-i+beta) + lgamma(alpha+beta) 
+        logpmf[i] = lgamma(n+1) + lgamma((i) + alpha) + lgamma(n-i+beta) + lgamma(alpha+beta)
                     - (lgamma(i+1) + lgamma(n-i+1) + lgamma(n + alpha + beta) + lgamma(alpha) + lgamma(beta));
     }
 }
@@ -558,7 +558,7 @@ BetaNegativeBinomial::BetaNegativeBinomial(double a, double b, double r): alpha(
     lgammaAR = lgamma(alpha + r);
     lgammaAB = lgamma(alpha + beta);
     lgammaA = lgamma(alpha);
-    lgammaB = lgamma(beta); 
+    lgammaB = lgamma(beta);
 
     minimizer = std::unique_ptr<ROOT::Math::Minimizer>(ROOT::Math::Factory::CreateMinimizer("Minuit2", "Migrad"));
     minimizer->SetMaxFunctionCalls(300);
@@ -572,7 +572,7 @@ double BetaNegativeBinomial::pmf(int x) const
 
 double BetaNegativeBinomial::log_pmf(int x) const
 {
-    return lgamma(r + x) + lgammaAR + lgamma(beta + x) + lgammaAB - (lgamma(x+1) + lgammaR + lgamma(alpha + r + beta + x) + lgammaA + lgammaB); 
+    return lgamma(r + x) + lgammaAR + lgamma(beta + x) + lgammaAB - (lgamma(x+1) + lgammaR + lgamma(alpha + r + beta + x) + lgammaA + lgammaB);
 }
 
 std::vector<double> BetaNegativeBinomial::get_parameters() const
@@ -588,7 +588,7 @@ void BetaNegativeBinomial::update(g_iterator gammaBegin, g_iterator gammaEnd, o_
     lgammaAR = lgamma(alpha + r);
     lgammaAB = lgamma(alpha + beta);
     lgammaA = lgamma(alpha);
-    lgammaB = lgamma(beta); 
+    lgammaB = lgamma(beta);
 }
 
 void BetaNegativeBinomial::find_mle(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
@@ -622,7 +622,7 @@ void BetaNegativeBinomial::precalculate_log_pmf(const double* params, std::vecto
     double alpha = params[0];
     double beta = params[1];
     double r = params[2];
-  
+
     for (size_t i = 0; i < pmf.size(); ++i)
     {
         pmf[i] = lgamma(r + (i)) + lgamma(alpha + r) + lgamma(beta + i) + lgamma(alpha+beta) - (lgamma(i+1) + lgamma(r) + lgamma(alpha + r + beta + i) + lgamma(alpha) + lgamma(beta));
@@ -642,7 +642,7 @@ ZeroAdjustedBetaNegativeBinomial::ZeroAdjustedBetaNegativeBinomial(double a, dou
     lgammaAR = lgamma(alpha + r);
     lgammaAB = lgamma(alpha + beta);
     lgammaA = lgamma(alpha);
-    lgammaB = lgamma(beta); 
+    lgammaB = lgamma(beta);
 
     minimizer = std::unique_ptr<ROOT::Math::Minimizer>(ROOT::Math::Factory::CreateMinimizer("Minuit2", "Migrad"));
     minimizer->SetMaxFunctionCalls(300);
@@ -663,7 +663,7 @@ double ZeroAdjustedBetaNegativeBinomial::log_pmf(int x) const
         return NAN;
 
     double link = lp::log1x(-lp::ext_exp(lgamma(r + 0) + lgammaAR + lgamma(beta + 0) + lgammaAB - (lgamma(0+1) + lgammaR + lgamma(alpha + r + beta + 0) + lgammaA + lgammaB)));
-    return lp::ext_log(1.0-pi) + lgamma(r + x) + lgammaAR + lgamma(beta + x) + lgammaAB - (lgamma(x+1) + lgammaR + lgamma(alpha + r + beta + x) + lgammaA + lgammaB) - link; 
+    return lp::ext_log(1.0-pi) + lgamma(r + x) + lgammaAR + lgamma(beta + x) + lgammaAB - (lgamma(x+1) + lgammaR + lgamma(alpha + r + beta + x) + lgammaA + lgammaB) - link;
 }
 
 std::vector<double> ZeroAdjustedBetaNegativeBinomial::get_parameters() const
@@ -679,7 +679,7 @@ void ZeroAdjustedBetaNegativeBinomial::update(g_iterator gammaBegin, g_iterator 
     lgammaAR = lgamma(alpha + r);
     lgammaAB = lgamma(alpha + beta);
     lgammaA = lgamma(alpha);
-    lgammaB = lgamma(beta); 
+    lgammaB = lgamma(beta);
 }
 
 void ZeroAdjustedBetaNegativeBinomial::find_mle(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
@@ -709,7 +709,7 @@ void ZeroAdjustedBetaNegativeBinomial::find_mle(g_iterator gammaBegin, g_iterato
         double logL = L(&p[0]);
 
         if (logL > minimizer->MinValue() && minimizer->X()[0] > 1 && minimizer->X()[1] > 0 && minimizer->X()[2] >= 1)
-        {   
+        {
             alpha = minimizer->X()[0];
             beta = minimizer->X()[1];
             r = minimizer->X()[2];
@@ -754,7 +754,7 @@ void Discrete::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obs
     {
         denom += *it;
     }
-    
+
     if (denom <= 0.0)
         throw std::logic_error("Membership coefficients are all zero for at least one state.");
 
@@ -828,7 +828,7 @@ double Sichel::pmf(int x) const
     {
         return pmf_[x];
     }
-    
+
     double alpha = sqrt(1.0 / pow(sigma, 2) + 2.0 * mu / sigma);
     double w = sqrt(pow(mu, 2) + pow(alpha, 2)) - mu;
 
@@ -836,7 +836,7 @@ double Sichel::pmf(int x) const
     {
         return pow(w / alpha, v) * bmath::cyl_bessel_k(v, alpha) / bmath::cyl_bessel_k(v, w);
     }
-    
+
     if (x == 1)
     {
         double p1 = pow(w / alpha, v) * bmath::cyl_bessel_k(v, alpha) / bmath::cyl_bessel_k(v, w);
@@ -892,7 +892,7 @@ void Sichel::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBe
         double logL = L(&p[0]);
 
         if (logL > minimizer->MinValue() && minimizer->X()[0] > 0 && minimizer->X()[1] > 0)
-        {  
+        {
             precalculate_pmf(minimizer->X()[0], minimizer->X()[1], minimizer->X()[2], pmf_);
 
             if (std::find_if(pmf_.begin(), pmf_.end(), [] (double p) {return p > 1.0 || p < 0.0;}) != pmf_.end())
@@ -940,7 +940,7 @@ void Sichel::precalculate_pmf(double mu, double sigma, double v, std::vector<dou
 void Sichel::precalculate_log_pmf(const double* params, std::vector<double>& logpmf)
 {
     precalculate_pmf(params[0], params[1], params[2], logpmf);
-    std::for_each(logpmf.begin(), logpmf.end(), 
+    std::for_each(logpmf.begin(), logpmf.end(),
                     [](double& p){p = p <= 0 ? lp::ext_log(std::numeric_limits<double>::min()) : lp::ext_log(p);});
 }
 
@@ -967,16 +967,16 @@ double ZeroAdjustedSichel::pmf(int x) const
 
     if (pi > 1.0 - std::numeric_limits<double>::epsilon())
         return 0.0;
-    
+
     if (x < pmf_.size())
     {
         return (1.0 - pi) * pmf_[x] / (1.0 - pmf_[0]);
     }
-    
+
     double alpha = sqrt(1.0 / pow(sigma, 2) + 2.0 * mu / sigma);
     double w = sqrt(pow(mu, 2) + pow(alpha, 2)) - mu;
     double p0 = pow(w / alpha, v) * bmath::cyl_bessel_k(v, alpha) / bmath::cyl_bessel_k(v, w);
-    
+
     if (x == 1)
     {
         double p1 = pow(w / alpha, v) * bmath::cyl_bessel_k(v, alpha) / bmath::cyl_bessel_k(v, w);
@@ -1047,7 +1047,7 @@ void ZeroAdjustedSichel::update(g_iterator gammaBegin, g_iterator gammaEnd, o_it
             double logL = L(&p[0]);
 
             if (logL > minimizer->MinValue() && minimizer->X()[0] > 0 && minimizer->X()[1] > 0)
-            {   
+            {
                 Sichel::precalculate_pmf(minimizer->X()[0], minimizer->X()[1], minimizer->X()[2], pmf_);
 
                 if (std::find_if(pmf_.begin(), pmf_.end(), [] (double p) {return p > 1.0 || p < 0.0;}) != pmf_.end())
@@ -1084,7 +1084,7 @@ void ZeroAdjustedSichel::precalculate_log_pmf(const double* params, std::vector<
 }
 
 AdjustedBeta::AdjustedBeta(double a, double b, double p): alpha(a), beta(b), pi(p)
-{   
+{
     if (alpha <= 0.0 || beta <= 0.0)
         throw std::invalid_argument("Both alpha and beta of the beta distribution must be > 0.");
 
@@ -1114,7 +1114,7 @@ double AdjustedBeta::pmf(int n, int x) const
 }
 
 double AdjustedBeta::log_pmf(int n, int x) const
-{   
+{
     return lp::ext_log(pmf(n, x));
 }
 
@@ -1150,7 +1150,7 @@ void AdjustedBeta::update_methylation(dna_g_iterator gammaBegin, dna_g_iterator 
     {
         pi = 1.0;
         alpha = 1.0; beta = 1.0;
-        return; 
+        return;
     }
 
     mean /= denom;
@@ -1214,7 +1214,7 @@ std::vector<double> Bernoulli::get_parameters() const
 }
 
 void Bernoulli::update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
-{    
+{
     double sampleMean = stat::sample_mean(gammaBegin, gammaEnd, obsBegin, obsEnd);
     if (sampleMean >= 0.0 && sampleMean <= 1.0)
     {

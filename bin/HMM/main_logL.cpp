@@ -35,7 +35,7 @@ bool parseArguments(int argc, char* argv[])
     try
     {
         bpo::store(bpo::command_line_parser(argc, argv).options(desc).run(),vm);
-        if (vm.count("help")) 
+        if (vm.count("help"))
         {
             std::cout << "Command line options: " << std::endl;
             std::cout << desc << "\n";
@@ -60,16 +60,16 @@ int main(int argc, char* argv[])
     {
         return -1;
     }
-    
+
     omp_set_num_threads(threads);
 
     std::ifstream counts (countMatrix, std::ifstream::in);
-    if (!counts) 
+    if (!counts)
     {
         std::cerr << "Cannot open input file: " + countMatrix << std::endl;
         return -1;
     }
-    
+
     Reader r;
     HMM::const_matrix_ptr<int> observation = std::make_shared<Matrix<int>>(r.parse_matrix(counts));
     counts.close();
@@ -84,24 +84,24 @@ int main(int argc, char* argv[])
     {
         std::cerr << "Cannot open input file: " + modelInput << std::endl;
         return  -1;
-    } 
+    }
 
     try
     {
         AdjustableDurationHMM hmm;
         startModel >> hmm;
         startModel.close();
-        
+
         HMM::const_matrix_ptr<int> nObservation = std::make_shared<Matrix<int>>(Matrix<int>());
         if (hmm.has_methylation())
         {
             std::ifstream methylation (methylationMatrix, std::ifstream::in);
-            if (!methylation) 
+            if (!methylation)
             {
                 std::cerr << "Cannot open input file: " + methylationMatrix << std::endl;
                 return -1;
             }
-                
+
             nObservation = std::make_shared<Matrix<int>> (r.parse_methylation_matrix(methylation));
             methylation.close();
             if (!r.get_message().empty())
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
         if (!regions.empty())
         {
             std::ifstream index (regions, std::ifstream::in);
-            if (!index) 
+            if (!index)
             {
                 std::cerr << "Cannot open input file: " + regions << std::endl;
                 return -1;
@@ -134,7 +134,7 @@ int main(int argc, char* argv[])
                 return -1;
             }
         }
-        
+
         double logL = 0;
         for (size_t k = 0; k < startIndex.size(); ++k)
         {

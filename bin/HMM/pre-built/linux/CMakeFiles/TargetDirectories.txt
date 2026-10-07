@@ -1,6 +1,0 @@
-/src/HMM/build/CMakeFiles/HMM.dir
-/src/HMM/build/CMakeFiles/HMMChromSeg.dir
-/src/HMM/build/CMakeFiles/TopologyHMM.dir
-/src/HMM/build/CMakeFiles/LogLikelihood.dir
-/src/HMM/build/CMakeFiles/edit_cache.dir
-/src/HMM/build/CMakeFiles/rebuild_cache.dir

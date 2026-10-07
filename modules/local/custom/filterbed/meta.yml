@@ -1,0 +1,59 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_filterbed"
+description: Extracts coverage and methylation count columns from a BED file and formats them into a tab-separated file with a header.
+keywords:
+  - awk
+  - bed
+  - filter
+  - methylation
+  - coverage
+tools:
+  - "awk":
+      description: "GNU Awk is a pattern scanning and processing language."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/gawk.html"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: ["GPL-3.0-or-later"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - meth:
+        type: file
+        description: Input methylation BED file
+        pattern: "*.bed" # Adjust extension if your input is different
+
+output:
+  meth_tab:
+    - - meta:
+          type: map
+          description: |
+            Groovy Map containing sample information
+            e.g. `[ id:'sample1' ]`
+      - "*.tab":
+          type: file
+          description: Tab-separated file containing integer 'Cov' (coverage) and 'Meth' (methylation) columns.
+          pattern: "*.tab"
+
+# Note: The version tracking output is currently commented out in your Nextflow process.
+# If you uncomment it, you can track the awk version.
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - awk:
+          type: string
+          description: The name of the tool
+      - "awk --version | head -n1 | cut -d ' ' -f 3":
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

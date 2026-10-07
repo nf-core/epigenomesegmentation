@@ -9,7 +9,7 @@
 /**
  * @brief Multivariate Hidden Markov Model with duration modelling allowing for different distributions for all variables.
  * Each state can have a different sub-HMM topology (different number of replicate states with same emission probabilities and self-transition probabilities)
- * Variables are assumed to be independent. 
+ * Variables are assumed to be independent.
  * Calculations are performed in log-space for better numerical stability.
  */
 class AdjustableDurationHMM: public HMM
@@ -28,24 +28,25 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Calculate state sequence and adjust HMM topolgy to better model state durations
-     * 
+     *
      * @param observations
      * @param nObservation two column input (trials, successes)
      * @param starting indices of observations
+     * @param maximum number of sub-states
      **/
-    void adjust_topology(const_matrix_ptr<int>, const_matrix_ptr<int>, std::vector<size_t>&);
+    void adjust_topology(const_matrix_ptr<int>, const_matrix_ptr<int>, std::vector<size_t>&, size_t max_states, double max_prob);
 
     /**
      * @brief Outputs the initial state distribution, transition matrix, states in sub-HMMs and parameters of the distribution in the different states.
-     * 
-     * @return std::ostream& 
+     *
+     * @return std::ostream&
      */
     friend std::ostream& operator<<(std::ostream&, const AdjustableDurationHMM&);
 
     /**
      * @brief Reads HMM from input file.
-     * 
-     * @return std::ostream& 
+     *
+     * @return std::ostream&
      */
     friend std::istream& operator>>(std::istream&, AdjustableDurationHMM&);
 
@@ -53,7 +54,7 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Performs M step for multiple observation
-     * 
+     *
      * @param observations
      * @param nObservation two column input (trials, successes)
      * @param logEmission
@@ -65,7 +66,7 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Updates the transition matrix of states i
-     * 
+     *
      * @param index
      * @param logEmission
      * @param logGamma
@@ -77,7 +78,7 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Updates the emission probabilities
-     * 
+     *
      * @param observations
      * @param nObservation two column input (trials, successes)
      * @param logGamma
@@ -86,7 +87,7 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Calculates the emission probability in state s at time t for the given observation.
-     * 
+     *
      * @param log emission probability
      * @param observation
      * @param nObservation
@@ -105,14 +106,14 @@ class AdjustableDurationHMM: public HMM
 
     /**
      * @brief Initialization of the transition matrix.
-     * 
+     *
      * @param self transition probabilities
      */
     void init_transitions(const std::vector<double>&);
 
     /**
      * @brief Calculates the segment lengths of a state decoding with n different states
-     * 
+     *
      * @param n states
      * @param decoding
     */

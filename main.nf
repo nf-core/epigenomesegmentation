@@ -38,7 +38,8 @@ workflow NFCORE_EPIGENOMESEGMENTATION {
     // WORKFLOW: Run pipeline
     //
     EPIGENOMESEGMENTATION (
-        samplesheet
+        samplesheet,
+        params.outdir
     )
 }
 /*

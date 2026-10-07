@@ -44,19 +44,13 @@
             "fa_icon": "fas fa-layer-group",
             "description": "Parameters specific to the EpiSegMix algorithm configuration.",
             "properties": {
-                "standard": {
-                    "type": "boolean",
-                    "description": "Run the standard HMM model (default).",
-                    "fa_icon": "fas fa-cogs",
-                    "default": false
-                },
                 "duration": {
                     "type": "boolean",
                     "description": "Run the duration HMM (DM) model to account for segment length.",
                     "fa_icon": "fas fa-stopwatch",
                     "default": false
                 },
-                "DNA": {
+                "dna": {
                     "type": "boolean",
                     "description": "Run the DNA methylation mode.",
                     "fa_icon": "fas fa-dna",
@@ -70,14 +64,14 @@
                 },
                 "counts": {
                     "type": "boolean",
-                    "description": "Run only count generation (skip all downstream analysis).",
+                    "description": "Generate histone and/or methylation/coverage count files from the supplied BAM and BED inputs, then skip model training and segmentation.",
                     "fa_icon": "fas fa-hashtag",
                     "default": false
                 },
-                "best_fit_segmentation": {
+                "jointrain": {
                     "type": "boolean",
-                    "description": "Automatically run standard segmentation using the best-fit distributions after 'fitting' mode completes.",
-                    "fa_icon": "fas fa-project-diagram",
+                    "description": "Train a shared model from the combined counts of the input samples for each requested state, then decode each sample separately. Disabled by default.",
+                    "fa_icon": "fas fa-play",
                     "default": false
                 },
                 "distributions": {
@@ -99,16 +93,25 @@
                     "fa_icon": "fas fa-file-alt",
                     "help_text": "Use this parameter to provide a custom chromosome sizes file (e.g., if you are not relying on the pipeline to download them automatically based on the `--genome` ID). It should be a tab-separated text file with chromosome names in the first column and sizes in the second."
                 },
+                "methcounts": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to a custom methylation counts file.",
+                    "fa_icon": "fas fa-file-alt",
+                    "help_text": "Use this parameter to provide a custom methylation counts file (e.g., if you are not relying on the pipeline to generate them automatically)."
+                },
+                "histonecounts": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to a custom histone counts file.",
+                    "fa_icon": "fas fa-file-alt",
+                    "help_text": "Use this parameter to provide a custom histone counts file (e.g., if you are not relying on the pipeline to generate them automatically)."
+                },
                 "states": {
                     "type": ["integer", "string"],
                     "default": "8",
                     "description": "Number of chromatin states in the HMM model.",
                     "fa_icon": "fas fa-sort-numeric-up"
-                },
-                "merge": {
-                    "type": "boolean",
-                    "description": "Merge adjacent segments with the same chromatin state label.",
-                    "fa_icon": "fas fa-code-branch"
                 },
                 "decoding": {
                     "type": "string",
@@ -143,18 +146,6 @@
                     "default": "12",
                     "description": "Chromosome used for initial parameter estimation. Specify by index or name.",
                     "fa_icon": "fas fa-dna"
-                },
-                "dist_histone": {
-                    "type": "string",
-                    "default": "NBI",
-                    "description": "Default distribution model for histone modification counts if not specified in the samplesheet (e.g. NBI for negative binomial).",
-                    "fa_icon": "fas fa-chart-bar"
-                },
-                "dist_methyl": {
-                    "type": "string",
-                    "default": "BI",
-                    "description": "Default distribution model for DNA methylation levels if not specified in the samplesheet (e.g. BI for beta-binomial).",
-                    "fa_icon": "fas fa-chart-bar"
                 }
             }
         },

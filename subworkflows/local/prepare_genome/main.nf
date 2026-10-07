@@ -1,7 +1,8 @@
 include { CUSTOM_DOWNLOADCHROMSIZES } from '../../../modules/local/custom/downloadchromsizes/main'
 include { CUSTOM_FILTERCHROMSIZES   } from '../../../modules/local/custom/filterchromsizes/main'
-include { GENERATE_GENOME_BINS      } from '../../../modules/local/generate_genome_bins/main'
-
+include { BEDTOOLS_MAKEWINDOWS      } from '../../../modules/nf-core/bedtools/makewindows/main'
+include { CUSTOM_FILTERBINS } from '../../../modules/local/custom/filterbins/main'
+include { CUSTOM_SORTREF } from '../../../modules/local/custom/sortref/main'
 workflow PREPARE_GENOME {
     main:
     ch_versions = Channel.empty()
@@ -23,17 +24,24 @@ workflow PREPARE_GENOME {
         ch_raw_chromsizes
     )
 
+    ch_for_makewindows = CUSTOM_FILTERCHROMSIZES.out.filtered_chromsizes.map {genome, chromsizes ->
+        def meta = [id: genome]
+        return [meta, chromsizes]
+    }
+
     // 3. BIN: Create fixed-size genomic windows from the filtered sizes
-    GENERATE_GENOME_BINS(
-        CUSTOM_FILTERCHROMSIZES.out.chromsizes_V2,
-        params.genome,
-        params.binsize
-    )
-    ch_versions = ch_versions.mix(GENERATE_GENOME_BINS.out.versions)
+    BEDTOOLS_MAKEWINDOWS(ch_for_makewindows)
+
+    // Filter: filter bins that are not of binsized meaning removal of termainl bins where size != params.binsize
+    CUSTOM_FILTERBINS(BEDTOOLS_MAKEWINDOWS.out.bed)
+
+    CUSTOM_SORTREF(CUSTOM_FILTERCHROMSIZES.out.filtered_chromsizes)
+
 
     emit:
     // Emit the filtered sizes and bins for downstream use
-    chrom_sizes = CUSTOM_FILTERCHROMSIZES.out.chromsizes_V2
-    bins        = GENERATE_GENOME_BINS.out.bins_file
+    chrom_sizes = CUSTOM_FILTERCHROMSIZES.out.filtered_chromsizes
+    chrom_sizes_sort = CUSTOM_SORTREF.out.filtered_chromsizes
+    bins        = CUSTOM_FILTERBINS.out.bed
     versions    = ch_versions
 }

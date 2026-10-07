@@ -1,0 +1,32 @@
+ERROR ~ Error executing process > 'CUSTOM_FILTERBED (GM12878)'
+
+Caused by:
+  Process `CUSTOM_FILTERBED (GM12878)` terminated with an error exit status (125)
+
+
+Command executed:
+
+  echo 
+  
+  touch GM12878_WGBS_meth.tab
+
+Command exit status:
+  125
+
+Command output:
+  (empty)
+
+Command error:
+  docker: Error response from daemon: error while creating mount source path '/home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation': mkdir /home/aaryanjaitly/mnt/jmsh: file exists
+  
+  Run 'docker run --help' for more information
+
+Work dir:
+  /home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/aa124ef0c12cd709f72df7d558e92666/work/ee/14fb58477f43dcd75cf59b4f92bde9
+
+Container:
+  ubuntu:22.04
+
+Tip: you can try to figure out what's wrong by changing to the process work dir and showing the script file named `.command.sh`
+
+ -- Check '/home/aaryanjaitly/mnt/jmsh/projects/students/aaryanjaitly/nf-core/epigenomesegmentation/.nf-test/tests/aa124ef0c12cd709f72df7d558e92666/meta/nextflow.log' file for details

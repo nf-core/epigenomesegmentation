@@ -1,0 +1,424 @@
+{
+    "GM12878 - EPISEGMIX_DMREPORT": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
+                        ],
+                        [
+                            "GM12878-meanEmission-viterbi.png:md5,57602e522e9a03375348b4df06fdff23",
+                            "GM12878-normEmission-viterbi.png:md5,95ee2284774829ed84a1ae05b7ef5af3",
+                            "GM12878-state-colors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "GM12878-stateLength-viterbi.png:md5,b892f5b6136ed68eb8d3b9b774797438",
+                            "GM12878-stateMembership-viterbi.png:md5,0ea657f5d416ba85741cce664c6df4df",
+                            "GM12878-transitionMatrix.png:md5,068d57de2f56d0b61cd4d2e950975d34",
+                            "GM12878_2-correlation.png:md5,bef77b16ad31a0dd1265a3d0f2c8099b",
+                            "GM12878_2-histogram.png:md5,e94f59fd68408756b2aef8184e6ac9ee",
+                            "GM12878_report.md:md5,d4b78fa20f38b3488d35fcf3e5011e85"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
+                        ],
+                        [
+                            "GM12878-meanEmission-viterbi.png:md5,57602e522e9a03375348b4df06fdff23",
+                            "GM12878-normEmission-viterbi.png:md5,95ee2284774829ed84a1ae05b7ef5af3",
+                            "GM12878-state-colors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "GM12878-stateLength-viterbi.png:md5,b892f5b6136ed68eb8d3b9b774797438",
+                            "GM12878-stateMembership-viterbi.png:md5,0ea657f5d416ba85741cce664c6df4df",
+                            "GM12878-transitionMatrix.png:md5,068d57de2f56d0b61cd4d2e950975d34",
+                            "GM12878_2-correlation.png:md5,bef77b16ad31a0dd1265a3d0f2c8099b",
+                            "GM12878_2-histogram.png:md5,e94f59fd68408756b2aef8184e6ac9ee",
+                            "GM12878_report.md:md5,d4b78fa20f38b3488d35fcf3e5011e85"
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:44:38.952744893",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "GM12878 - EPISEGMIX_DMREPORT - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        [
+                            "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:44:53.744548236",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "Kidney - EPISEGMIX_DMREPORT": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,d07638ab81519954ce479fee4d2ae776",
+                        [
+                            "kidney_P0.tab:md5,85833a4dbaac178e75685e86ae329f7e",
+                            "viterbi_kidney_P0.bed.gz:md5,f44a1f9db21603b560010dea051dec29"
+                        ],
+                        [
+                            "kidney_P0_2-correlation.png:md5,c44a0a0eaa1bc1b83ea8deb2a4ef825d",
+                            "kidney_P0_2-histogram.png:md5,eede33276852b7b6809af1a7174d872f",
+                            "kidney_P0_2-meanEmission-viterbi.png:md5,715a0a8bef312ee0c7be2e305ca60bf4",
+                            "kidney_P0_2-normEmission-viterbi.png:md5,6e3c0f5f20ef51cccc0f35433f75c99b",
+                            "kidney_P0_2-state-colors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "kidney_P0_2-stateLength-viterbi.png:md5,2ba335846325eef27f1a22f836d7050b",
+                            "kidney_P0_2-stateMembership-viterbi.png:md5,28ba111cd710d325b4209e54e699b1b8",
+                            "kidney_P0_2-transitionMatrix.png:md5,e6627318bef0ec1316c95464437eeb78",
+                            "kidney_P0_2_viterbi.html:md5,7d38913cac40cd25717906a31c1870d3"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,d07638ab81519954ce479fee4d2ae776",
+                        [
+                            "kidney_P0.tab:md5,85833a4dbaac178e75685e86ae329f7e",
+                            "viterbi_kidney_P0.bed.gz:md5,f44a1f9db21603b560010dea051dec29"
+                        ],
+                        [
+                            "kidney_P0_2-correlation.png:md5,c44a0a0eaa1bc1b83ea8deb2a4ef825d",
+                            "kidney_P0_2-histogram.png:md5,eede33276852b7b6809af1a7174d872f",
+                            "kidney_P0_2-meanEmission-viterbi.png:md5,715a0a8bef312ee0c7be2e305ca60bf4",
+                            "kidney_P0_2-normEmission-viterbi.png:md5,6e3c0f5f20ef51cccc0f35433f75c99b",
+                            "kidney_P0_2-state-colors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "kidney_P0_2-stateLength-viterbi.png:md5,2ba335846325eef27f1a22f836d7050b",
+                            "kidney_P0_2-stateMembership-viterbi.png:md5,28ba111cd710d325b4209e54e699b1b8",
+                            "kidney_P0_2-transitionMatrix.png:md5,e6627318bef0ec1316c95464437eeb78",
+                            "kidney_P0_2_viterbi.html:md5,7d38913cac40cd25717906a31c1870d3"
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T14:56:37.54772",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "Kidney - EPISEGMIX_DMREPORT - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,d07638ab81519954ce479fee4d2ae776",
+                        [
+                            "kidney_P0.tab:md5,85833a4dbaac178e75685e86ae329f7e",
+                            "viterbi_kidney_P0.bed.gz:md5,f44a1f9db21603b560010dea051dec29"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,d07638ab81519954ce479fee4d2ae776",
+                        [
+                            "kidney_P0.tab:md5,85833a4dbaac178e75685e86ae329f7e",
+                            "viterbi_kidney_P0.bed.gz:md5,f44a1f9db21603b560010dea051dec29"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T14:57:47.724895",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

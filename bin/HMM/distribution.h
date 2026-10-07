@@ -16,44 +16,44 @@ class DiscreteDistribution
     using g_iterator = std::vector<double>::iterator;
     using o_iterator = Matrix<int>::const_col_iterator;
 
-    DiscreteDistribution() {}; 
+    DiscreteDistribution() {};
     /**
      * @brief Returns the probability mass function for x using the current parameters of the model.
-     * 
-     * @param x 
-     * @return P(X = x) 
+     *
+     * @param x
+     * @return P(X = x)
      */
     virtual double pmf(int x) const = 0;
 
     /**
      * @brief Returns the logarithm of the probability mass function for x using the current parameters of the model.
-     * 
-     * @param x 
+     *
+     * @param x
      * @return log(P(X = x))
      */
     virtual double log_pmf(int x) const = 0;
 
     /**
      * @brief updates the parameters of the distribution based on the membership coefficients gamma and the current observation.
-     * 
-     * @param gamma_begin 
-     * @param gamma_end 
-     * @param obs_begin 
-     * @param obs_end 
+     *
+     * @param gamma_begin
+     * @param gamma_end
+     * @param obs_begin
+     * @param obs_end
      */
     virtual void update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd) = 0;
 
     /**
      * @brief Returns all parameters of the distribution.
-     * 
-     * @return std::vector<double> 
+     *
+     * @return std::vector<double>
      */
     virtual std::vector<double> get_parameters() const = 0;
 
     /**
      * @brief Returns the name of the distribution
-     * 
-     * @return std::string 
+     *
+     * @return std::string
      */
     virtual std::string get_name() const = 0;
 };
@@ -67,31 +67,31 @@ class TwoValueDiscreteDistribution
     using dna_g_iterator = std::vector<double>::iterator;
     using dna_o_iterator = Matrix<int>::const_col_iterator;
 
-    TwoValueDiscreteDistribution() {}; 
+    TwoValueDiscreteDistribution() {};
     /**
      * @brief Returns the probability mass function for n trials and x successes using the current parameters of the model.
-     * 
-     * @param x 
-     * @return P(X = x) 
+     *
+     * @param x
+     * @return P(X = x)
      */
     virtual double pmf(int n, int x) const = 0;
 
     /**
      * @brief Returns the logarithm of the probability mass function for n trials and x successes using the current parameters of the model.
-     * 
+     *
      * @param n
-     * @param x 
+     * @param x
      * @return log(P(X = x))
      */
     virtual double log_pmf(int n, int x) const = 0;
 
     /**
      * @brief updates the parameters of the distribution based on the membership coefficients gamma and the current observation.
-     * 
-     * @param gamma_begin 
-     * @param gamma_end 
-     * @param obs_begin 
-     * @param obs_end 
+     *
+     * @param gamma_begin
+     * @param gamma_end
+     * @param obs_begin
+     * @param obs_end
      */
     virtual void update_methylation(dna_g_iterator gammaBegin, dna_g_iterator gammaEnd, dna_o_iterator covBegin, dna_o_iterator methBegin) = 0;
 };
@@ -101,8 +101,8 @@ class Poisson : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a Poisson distribution with parameter lambda.
-     * 
-     * @param l 
+     *
+     * @param l
      */
     Poisson(double l);
 
@@ -125,8 +125,8 @@ class ZeroAdjustedPoisson : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a zero adjusted Poisson distribution with parameter lambda and zero probability pi.
-     * 
-     * @param l 
+     *
+     * @param l
      * @param pi
      */
     ZeroAdjustedPoisson(double l, double pi);
@@ -147,7 +147,7 @@ class ZeroAdjustedPoisson : public DiscreteDistribution
     double lambda;
     double pi;
 
-    std::unique_ptr<ROOT::Math::Minimizer> minimizer;  
+    std::unique_ptr<ROOT::Math::Minimizer> minimizer;
 };
 
 class Binomial : public DiscreteDistribution, public TwoValueDiscreteDistribution
@@ -156,16 +156,16 @@ class Binomial : public DiscreteDistribution, public TwoValueDiscreteDistributio
     /**
      * @brief Initializes a Binomial distribution with success parameter p and trials n.
      * The parameter n is assumed to be known thus not updated (e.g. by setting n to the maximum value)
-     * 
-     * @param p 
+     *
+     * @param p
      * @param n
      */
     Binomial(double p, int n);
 
     /**
      * @brief Initializes a Binomial distribution with success parameter p assuming trials and successes as input for pmf and logpmf.
-     * 
-     * @param p 
+     *
+     * @param p
      */
     Binomial(double p);
 
@@ -196,9 +196,9 @@ class NegativeBinomial : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a negative binomial distribution with success probability p and number of successes r.
-     * 
-     * @param p 
-     * @param r 
+     *
+     * @param p
+     * @param r
      */
     NegativeBinomial(double p, double r);
 
@@ -222,7 +222,7 @@ class NegativeBinomial : public DiscreteDistribution
     double r;
     double lgammaR;
 
-    std::unique_ptr<ROOT::Math::Minimizer> minimizer;    
+    std::unique_ptr<ROOT::Math::Minimizer> minimizer;
 };
 
 class ZeroAdjustedNegativeBinomial : public DiscreteDistribution
@@ -230,9 +230,9 @@ class ZeroAdjustedNegativeBinomial : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a zero adjusted negative binomial distribution with success probability p, number of successes r and zero probability pi.
-     * 
-     * @param p 
-     * @param r 
+     *
+     * @param p
+     * @param r
      * @param pi
      */
     ZeroAdjustedNegativeBinomial(double p, double r, double pi);
@@ -266,7 +266,7 @@ class BetaBinomial : public DiscreteDistribution, public TwoValueDiscreteDistrib
     /**
      * @brief Initializes a beta binomial distribution with parameters alpha, beta, n
      * The parameter n is assumed to be known and not updated (e.g., use sample maximum as an approximation for the real n)
-     * 
+     *
      * @param alpha
      * @param beta
      * @param n
@@ -275,7 +275,7 @@ class BetaBinomial : public DiscreteDistribution, public TwoValueDiscreteDistrib
 
     /**
      * @brief Initializes a beta binomial distribution with parameters alpha and beta assuming trials and successes as input for pmf and logpmf.
-     * 
+     *
      * @param alpha
      * @param beta
      */
@@ -322,7 +322,7 @@ class BetaNegativeBinomial : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a beta negative binomial distribution with parameters alpha, beta, r
-     * 
+     *
      * @param alpha
      * @param beta
      * @param r
@@ -362,7 +362,7 @@ class ZeroAdjustedBetaNegativeBinomial : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a zero adjusted beta negative binomial distribution with parameters alpha, beta, r and zero probability pi
-     * 
+     *
      * @param alpha
      * @param beta
      * @param r
@@ -405,7 +405,7 @@ class Sichel : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a Sichel distribution with parameters mu > 0, sigma > 0, -infty < v < infty and precalculates probabilities up to max
-     * 
+     *
      * @param mu
      * @param sigma
      * @param v
@@ -443,10 +443,10 @@ class ZeroAdjustedSichel : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a zero adjusted Sichel distribution with parameters mu > 0, sigma > 0, -infty < v < infty and zero probability pi (probabilities are precalculted up to max)
-     * 
+     *
      * @param mu
      * @param sigma
-     * @param v 
+     * @param v
      * @param pi
      * @param max
      */
@@ -482,8 +482,8 @@ class Discrete : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a discrete distribution with probability vector p (with values 0, ..., len(p))
-     * 
-     * @param p 
+     *
+     * @param p
      */
     Discrete(std::vector<double> p);
 
@@ -507,9 +507,9 @@ class Gaussian : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a gaussian distribution with mean mu and variance sigma^2
-     * 
-     * @param mu 
-     * @param sigma 
+     *
+     * @param mu
+     * @param sigma
      */
     Gaussian(double mu, double sigma);
 
@@ -534,8 +534,8 @@ class Bernoulli : public DiscreteDistribution
     public:
     /**
      * @brief Initializes a bernoulli distribution with parameter p
-     * 
-     * @param p  
+     *
+     * @param p
      */
     Bernoulli(double p);
 
@@ -559,7 +559,7 @@ class AdjustedBeta : public DiscreteDistribution, public TwoValueDiscreteDistrib
     public:
     /**
      * @brief Initializes a Beta distribution with parameters alpha and beta and probability pi for zero coverage.
-     * 
+     *
      * @param alpha
      * @param beta
      */
@@ -577,7 +577,7 @@ class AdjustedBeta : public DiscreteDistribution, public TwoValueDiscreteDistrib
 
     double pmf(int x) const {throw std::invalid_argument("Only two column input valid for beta distribution."); return 0.0;};
     double log_pmf(int x) const {throw std::invalid_argument("Only two column input valid for beta distribution."); return 0.0;};
-    void update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd) 
+    void update(g_iterator gammaBegin, g_iterator gammaEnd, o_iterator obsBegin, o_iterator obsEnd)
         {throw std::invalid_argument("Only two column input valid for beta distribution.");};
 
     private:
