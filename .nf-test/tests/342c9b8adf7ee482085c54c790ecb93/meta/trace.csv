@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	df/3b2dc9	75292	CUSTOM_STRIPHEADER (GM12878)	COMPLETED	0	2026-10-02 15:37:12.615	4.8s	131ms	42.7%	2.6 MB	11 MB	29.9 MB	29.8 MB

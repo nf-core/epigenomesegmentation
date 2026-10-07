@@ -81,7 +81,7 @@ workflow EPIGENOMESEGMENTATION {
             .groupTuple()
             .map { sample_id, meta_list -> [sample_id, meta_list] }
             .combine(ch_histonecounts)
-        
+            
         ch_meth_tab =  Channel.empty()
 
     }

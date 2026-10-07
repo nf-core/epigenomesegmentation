@@ -10,8 +10,6 @@
 
 ## Pipeline tools
 
-## Pipeline tools
-
 - [EpiSegMix] (https://doi.org/10.1093/bioinformatics/btae178)
 
   > Schmitz JE, Aggarwal N, Laufer L, Walter J, Salhab A, Rahmann S. EpiSegMix: a flexible distribution hidden Markov model with duration modeling for chromatin state discovery. Bioinformatics. 2024 Mar 29;40(4):btae178. doi: 10.1093/bioinformatics/btae178. PMID: 38565260; PMCID: PMC11026141.

@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	71/dd6f72	75315	EPISEGMIX_LDMTRAIN (GM12878_2)	COMPLETED	0	2026-10-02 15:48:54.496	2m 5s	1m 35s	227.6%	554.8 MB	1.5 GB	67.9 MB	39.1 KB

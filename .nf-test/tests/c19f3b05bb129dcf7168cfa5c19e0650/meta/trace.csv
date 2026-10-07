@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	5c/238bc9	75297	EPISEGMIX_CONFIG (GM12878_2)	COMPLETED	0	2026-10-02 15:38:23.114	4.8s	36ms	57.8%	3.1 MB	4.3 MB	138.9 KB	330 B

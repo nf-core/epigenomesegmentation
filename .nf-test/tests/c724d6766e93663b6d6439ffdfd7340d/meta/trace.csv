@@ -1,2 +1,0 @@
-task_id	hash	native_id	name	status	exit	submit	duration	realtime	%cpu	peak_rss	peak_vmem	rchar	wchar
-1	88/4286b7	75310	EPISEGMIX_DNATRAIN (GM12878_2)	COMPLETED	0	2026-10-02 15:46:42.870	4.8s	28ms	97.9%	3.4 MB	4.4 MB	197.8 KB	330 B
