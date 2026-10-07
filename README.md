@@ -26,15 +26,9 @@
 ![nf-core/epigenomesegmentation metro map](docs/images/nf-core-epigenomesegmentation_dark.png)
 
 <a href='https://www.denbi.de/about'> <img src="docs/images/denbi-logo.png" align="right" width="150"> </a>
-<<<<<<< HEAD
-=======
 
 This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
 
-## Default Workflow: Standard Mode
->>>>>>> origin/dev
-
-This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
 
 ## Default Workflow: Topology Modelling
 By default, the pipeline runs the topology-modeling (LDM) segmentation workflow. Use `--duration` to select the duration-modeling (DM) workflow, `--dna` for methylation/coverage-only segmentation, or `--fitting` to evaluate candidate count distributions instead of running the usual segmentation workflow. `--jointrain` is an optional shared-training mode and is disabled by default.
