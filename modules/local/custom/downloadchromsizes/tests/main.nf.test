@@ -1,0 +1,57 @@
+// nf-core modules test custom/downloadchromsizes
+nextflow_process {
+
+    name "Test Process CUSTOM_DOWNLOADCHROMSIZES"
+    script "../main.nf"
+    process "CUSTOM_DOWNLOADCHROMSIZES"
+
+    tag "modules"
+    tag "modules_custom"
+    tag "custom"
+    tag "custom/downloadchromsizes"
+
+    test("mm10 - chromsizes") {
+
+        when {
+            process {
+                """
+                input[0] = 'mm10'
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("mm10 - chromsizes - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                // The stub must match the real test input exactly
+                input[0] = 'mm10'
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

@@ -1,0 +1,79 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_sheetbam"
+description: Processes BAM files and sample metadata to generate a structured text file (sheet) using a custom shell script.
+keywords:
+  - genomics
+  - bam
+  - metadata
+  - awk
+  - formatting
+tools:
+  - "gawk":
+      description: "GNU Awk (gawk) is a pattern scanning and processing language used for text processing and data extraction."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+
+input:
+  - - sample_id:
+        type: string
+        description: Identifier combining sample tissue, time point, and/or state.
+    - meta:
+        type: map
+        description: Groovy Map containing sample information (e.g., `epigenetic_mark`, `paired_end`).
+    - bam:
+        type: file
+        description: The input BAM file for the sample.
+        pattern: "*.bam"
+    - bai:
+        type: file
+        description: The corresponding BAM index file.
+        pattern: "*.{bai,bam.bai}"
+
+output:
+  sheetbam:
+    - - sample_id:
+          type: string
+          description: Identifier combining sample tissue, time point, and/or state.
+      - meta:
+          type: map
+          description: Groovy Map containing sample information.
+      - "*.txt":
+          type: file
+          description: The generated text sheet/configuration file for the BAM file.
+          pattern: "*.txt"
+      - bam:
+          type: file
+          description: The input BAM file, passed forward for downstream use.
+          pattern: "*.bam"
+
+  versions_awk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "awk":
+          type: string
+          description: The name of the tool
+      - 'awk --version | head -n1 | cut -d " " -f 3':
+          type: eval
+          description: The expression to obtain the version of awk
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - awk:
+          type: string
+          description: The name of the tool
+      - 'awk --version | head -n1 | cut -d " " -f 3':
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

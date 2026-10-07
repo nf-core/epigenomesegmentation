@@ -12,3 +12,5 @@ bin/
 ro-crate-metadata.json
 modules/nf-core/
 subworkflows/nf-core/
+assets/slackreport.json
+assets/adaptivecard.json

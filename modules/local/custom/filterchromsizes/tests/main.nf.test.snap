@@ -1,0 +1,120 @@
+{
+    "mm10 - FILTERCHROMSIZES": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes:md5,92e56e3b5da021465ecbd0481afac552"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "sort",
+                        "sort (GNU coreutils) 8.32"
+                    ]
+                ],
+                "2": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "awk",
+                        ""
+                    ]
+                ],
+                "filtered_chromsizes": [
+                    [
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes:md5,92e56e3b5da021465ecbd0481afac552"
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "awk",
+                        ""
+                    ]
+                ],
+                "versions_sort": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "sort",
+                        "sort (GNU coreutils) 8.32"
+                    ]
+                ]
+            },
+            {
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "awk",
+                        ""
+                    ]
+                ],
+                "versions_sort": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "sort",
+                        "sort (GNU coreutils) 8.32"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:40:04.7555467",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "mm10 - FILTERCHROMSIZES - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "sort",
+                        "sort (GNU coreutils) 8.32"
+                    ]
+                ],
+                "2": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "awk",
+                        ""
+                    ]
+                ],
+                "filtered_chromsizes": [
+                    [
+                        "hg38",
+                        "filtered_hg38_chr12_chr13.chrom.sizes:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "awk",
+                        ""
+                    ]
+                ],
+                "versions_sort": [
+                    [
+                        "CUSTOM_FILTERCHROMSIZES",
+                        "sort",
+                        "sort (GNU coreutils) 8.32"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:40:18.800619322",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    }
+}

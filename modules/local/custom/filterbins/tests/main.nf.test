@@ -1,0 +1,64 @@
+// nf-core modules test custom/filterbins
+nextflow_process {
+
+    name "Test Process CUSTOM_FILTERBINS"
+    script "../main.nf"
+    process "CUSTOM_FILTERBINS"
+
+    tag "modules"
+    tag "modules_custom"
+    tag "custom"
+    tag "custom/filterbins"
+
+    test("mm10 - FILTERBINS") {
+
+        options "--binsize 200 --genome hg38"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'hg38' ],
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_200bp.bed", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("mm10 - FILTERBINS - stub") {
+
+        options "-stub --binsize 200 --genome hg38"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [ id: 'hg38' ],
+                    file("${projectDir}/assets/testdata/results_ldm/References/hg38/filtered_hg38_200bp.bed", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

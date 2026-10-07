@@ -1,17 +1,19 @@
+repository_type: pipeline
+nf_core_version: 4.1.0
+
 lint:
-  files_exist:
-    - assets/multiqc_config.yml
-    - conf/igenomes.config
-    - conf/igenomes_ignored.config
-    - .github/workflows/linting_comment.yml
   files_unchanged:
     - .github/CONTRIBUTING.md
     - assets/sendmail_template.txt
     - .github/workflows/branch.yml
     - .github/workflows/linting.yml
   multiqc_config: false
-nf_core_version: 4.1.0
-repository_type: pipeline
+  files_exist:
+    - assets/multiqc_config.yml
+    - conf/igenomes.config
+    - conf/igenomes_ignored.config
+    - .github/workflows/linting_comment.yml
+
 template:
   author: Aaryan Jaitly
   description: A bioinformatics pipeline for chromatin segmentation. It uses a hidden

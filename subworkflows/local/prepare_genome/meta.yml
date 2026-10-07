@@ -1,0 +1,46 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "prepare_genome"
+description: Prepares genomic reference files by downloading (if necessary) and filtering chromosome sizes, generating fixed-size genomic windows (bins), and sorting the reference files.
+keywords:
+  - genome
+  - reference
+  - chromsizes
+  - bins
+  - bedtools
+  - windows
+components:
+  - custom/downloadchromsizes
+  - custom/filterchromsizes
+  - bedtools/makewindows
+  - custom/filterbins
+  - custom/sortref
+input: []
+output:
+  - chrom_sizes:
+      type: file
+      description: |
+        Channel containing the filtered chromosome sizes file.
+        Structure: [ val(genome), path("filtered_*.chrom.sizes") ]
+      pattern: "filtered_*.chrom.sizes"
+  - chrom_sizes_sort:
+      type: file
+      description: |
+        Channel containing the sorted and reformatted chromosome sizes file with start coordinates.
+        Structure: [ val(genome), path("*.v2") ]
+      pattern: "*.v2"
+  - bins:
+      type: file
+      description: |
+        Channel containing the filtered genomic windows (bins) BED file.
+        Structure: [ val(meta), path("filtered_*.bed") ]
+      pattern: "filtered_*.bed"
+  - versions:
+      type: file
+      description: |
+        File containing software versions aggregated from the components.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

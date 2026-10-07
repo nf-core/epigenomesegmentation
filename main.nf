@@ -39,7 +39,7 @@ workflow NFCORE_EPIGENOMESEGMENTATION {
     //
     EPIGENOMESEGMENTATION (
         samplesheet,
-        params.outdir,
+        params.outdir
     )
 }
 /*

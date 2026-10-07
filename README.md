@@ -21,48 +21,92 @@
 
 ## Introduction
 
-**nf-core/epigenomesegmentation** is a bioinformatics pipeline that ...
+**nf-core/epigenomesegmentation** is a bioinformatics pipeline for chromatin segmentation. It uses a hidden Markov model (HMM) to annotate genomic regions with functional states (e.g., enhancers, promoters) based on combinations of epigenetic modifications, capturing spatial relations via transition probabilities.
 
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
+![nf-core/epigenomesegmentation metro map](docs/images/nf-core-epigenomesegmentation_dark.png)
 
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/community/brand/workflow-schematics#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
+<a href='https://www.denbi.de/about'> <img src="docs/images/denbi-logo.png" align="right" width="150"> </a>
+
+This is an approved de.NBI service. Please help us improve by taking our short user survey (<https://de.surveymonkey.com/r/denbi-service?sc=hd-hub&tool=esmm>).
+
+
+## Default Workflow: Topology Modelling
+By default, the pipeline runs the topology-modeling (LDM) segmentation workflow. Use `--duration` to select the duration-modeling (DM) workflow, `--dna` for methylation/coverage-only segmentation, or `--fitting` to evaluate candidate count distributions instead of running the usual segmentation workflow. `--jointrain` is an optional shared-training mode and is disabled by default.
+
+### Execution Steps
+
+1. **Genome Processing:** It includes 4 modules (`GET_CHROMSIZES`, `FILTER_CHROMSIZES`, `SORT_REFRENCE` & `MAKE_WINDOWS`) to generate a binned window size reference BED file based on parameter `--binsize and --genome` (200 and hg38 by default) along with a sorted reference chromosome sizes tab file.
+
+2. **BAM Processing:** It includes 4 modules (`SAMTOOLS_REHEADER`, `SAMTOOLS_INDEX`, `BAM_SHEET` & `BAM_COUNTS`) to generate a count matrix for histone marks using BAM files as input for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+3. **BED Processing:** It includes 2 modules (`BED_COUTNS` & `BEDTOOLS_MAP`) to generate a count matrix for coverage markers using BED files as input for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+4. **Merging:** It includes 4 modules (`STRIPHEADER`, `BEDTOOLS_INTERSECT`, `FILTER_BED` & `JOINBED`) to standardize the files to have the same number of rows and same genomic positions between histone and coverage counts is also responsible for merging the different coverage counts files together in one file.
+
+5. **EpiSegMix Prepare:** It includes 2 modules (`CONFIG` & `TRAINCOUNTS`) These generate a config file along with the training counts for the tool [EpiSegMix](https://doi.org/10.1101/2025.07.25.666820).
+
+6. **EpiSegMix Topology Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on topology modeling HMM.
+
+7. **EpiSegMix Standard Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on standard modeling HMM.
+
+8. **EpiSegMix Methylation Modelling:** It includes 3 modules (`TRAIN`, `DECODE` & `REPORT`) to give us segmentation results based on topology modeling HMM but <strong>only for coverage markers</strong>.
+
+9. **EpiSegMix Fitting:** It includes 2 modules (`TRAIN` & `BEST_DISTRIBUTION`) to give us a new samplesheet containing the best distribution that fits our data.
+
+---
+
+### **Subworkflow Reference**
+
+The pipeline logic is organized into the following modular components:
+
+| Category            | Subworkflows                                                    |
+| :------------------ | :-------------------------------------------------------------- |
+| **Setup**           | `GET_CHROMSIZES`, `FILTER_CHROMSIZES`, `SORT_REFRENCE`, `MAKE_WINDOWS`, `CONFIG` & `TRAINCOUNTS`                             |
+| **Data Processing** | `SAMTOOLS_REHEADER`, `SAMTOOLS_INDEX`, `BAM_SHEET`, `BAM_COUNTS`, `BED_COUTNS` & `BEDTOOLS_MAP`             |
+| **Modeling**  | `TRAIN`, `DECODE` & `REPORT` |
+| **Optimization**    | `BEST_DISTRIBUTION`                                          |
+
+---
+
+> **Note:** Use `--counts` to generate and publish count files without training a model or creating segmentations. See the [usage documentation](docs/usage.md#count-generation-only) for details.
+
+**Note:** Precomputed count matrices can be supplied with `--methcounts` and/or `--histonecounts`; see the [usage documentation](docs/usage.md#using-precomputed-counts) for their requirements.
 
 ## Usage
 
 > [!NOTE]
 > If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/get_started/environment_setup/overview) on how to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/get_started/run-your-first-pipeline) with `-profile test` before running the workflow on actual data.
 
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
 First, prepare a samplesheet with your input data that looks as follows:
 
-`samplesheet.csv`:
+_**samplesheet.csv**_:
 
 ```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
+sample_id,replicate,epigenetic_mark,file_name,modality,paired_end,distribution
+Kidney,1,H3K27ac,../data/kidney/histone/kidney_H3K27ac.bam,ChIP-seq,true,NBI
+Kidney,2,WGBS,../data/kidney/wgbs/kidney_WGBS.bed,WGBS,true,BI
 ```
 
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
+Each row represents a specific assay file associated with a sample. The pipeline automatically distinguishes between histone data and methylation data based on the file extension.
 
--->
+### Column Specifications
+
+- **`sample_id`**: A unique identifier for your sample (e.g., `Kidney`). Files sharing the same `sample_id` will be grouped and processed together.
+- **`replicate`**: The replicate number for the sample (e.g., `1`).
+- **`epigenetic_mark`**: The specific target or assay type (e.g., `H3K27ac` for histones, `WGBS` for methylation).
+- **`file_name`**: The file path. Histone data must be `.bam` or `.bam.gz`. Methylation data must be `.bed` or `.bed.gz`.
+- **`modality`**: The type of experiment performed (e.g., `ChIP-seq`, `WGBS`).
+- **`paired_end`**: A boolean value (`true` or `false`) indicating if the sequencing data is paired-end.
+- **`distribution`**: The statistical distribution to apply during model training for this mark (e.g., `NBI` for Negative Binomial, `BI` for Binomial). Leave empty to use global defaults.
 
 Now, you can run the pipeline using:
 
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
-
 ```bash
 nextflow run nf-core/epigenomesegmentation \
-   -profile <docker/singularity/.../institute> \
    --input samplesheet.csv \
-   --outdir <OUTDIR>
+   --outdir <OUTDIR> \
+   --genome hg38 \
+   -profile <docker/singularity/.../institute>
 ```
 
 > [!WARNING]
@@ -78,11 +122,17 @@ For more details about the output files and reports, please refer to the
 
 ## Credits
 
-nf-core/epigenomesegmentation was originally written by Aaryan Jaitly.
+The original framework EpiSegMix that was used in ESM (https://doi.org/10.1093/bioinformatics/btae178) and ESMM (https://doi.org/10.1101/2025.07.25.666820) was written by Johanna Elena Schmitz and [Nihit Aggarwal](mailto:nihit.aggarwal@uni-saarland.de) (Saarland University).
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+The pipeline was rewritten in Nextflow DSL2 by Aaryan Jaitly (Saarland University).
 
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+**EpiSegMix tool was developed and designed by:**
+
+- [Nihit Aggarwal](mailto:nihit.aggarwal@uni-saarland.de)
+- Johanna Elena Schmitz
+- Dr. AbdulRahman Salhab
+- Prof. Dr. Jörn Walter
+- Prof. Dr. Sven Rahmann
 
 ## Contributions and Support
 
@@ -91,11 +141,6 @@ If you would like to contribute to this pipeline, please see the [contributing g
 For further information or help, don't hesitate to get in touch on the [Slack `#epigenomesegmentation` channel](https://nfcore.slack.com/channels/epigenomesegmentation) (you can join with [this invite](https://nf-co.re/join/slack)).
 
 ## Citations
-
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use nf-core/epigenomesegmentation for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
-
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
 
 An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
 
