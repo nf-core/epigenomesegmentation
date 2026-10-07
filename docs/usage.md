@@ -42,6 +42,8 @@ File types are inferred automatically:
 - Histone -> `.bam`, `.bam.gz`
 - Methylation -> `.bed`, `.bed.gz`
 
+The input incase of Methylation (.bed | .bed.gz) must be a BED9+ file with chromosome (col 1), start position (col 2), strand (col 6), coverage (col 10), and percent methylation (col 11).
+
 A complete samplesheet file consisting of multiple samples, including replicates for specific histone marks and paired methylation data, may look like the one below. This example shows two samples (`CONTROL` and `TREATMENT`), where `CONTROL` has two replicates for the `H3K4me3` mark.
 
 ```csv title="samplesheet.csv"
