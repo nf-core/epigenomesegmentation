@@ -1,0 +1,90 @@
+// nf-core modules test episegmix/traincounts
+nextflow_process {
+
+    name "Test Process EPISEGMIX_TRAINCOUNTS"
+    script "../main.nf"
+    process "EPISEGMIX_TRAINCOUNTS"
+
+    tag "modules"
+    tag "modules_episegmix"
+    tag "episegmix"
+    tag "episegmix/traincounts"
+
+    test("GM12878 - EPISEGMIX_TRAINCOUNTS") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'GM12878_2',
+                    [
+                        [
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'H3K4me3',
+                            modality: 'ChIP-seq',
+                            paired_end: false,
+                            distribution: 'NBI'
+                        ]
+                    ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
+                    [ id: 'GM12878', epigenetic_mark: 'WGBS', distribution: 'BB' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Methylation/GM12878_meth.tab", checkIfExists: true),
+                    2,
+                    file("${projectDir}/assets/testdata/results_ldm/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("GM12878 - EPISEGMIX_TRAINCOUNTS - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'GM12878_2',
+                    [
+                        [
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'H3K4me3',
+                            modality: 'ChIP-seq',
+                            paired_end: false,
+                            distribution: 'NBI'
+                        ]
+                    ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Histone/GM12878.tab", checkIfExists: true),
+                    [ id: 'GM12878', epigenetic_mark: 'WGBS', distribution: 'BB' ],
+                    file("${projectDir}/assets/testdata/results_ldm/Counts/GM12878_Methylation/GM12878_meth.tab", checkIfExists: true),
+                    2,
+                    file("${projectDir}/assets/testdata/results_ldm/EpiSegMix/GM12878_2/Model/GM12878_2.yaml", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

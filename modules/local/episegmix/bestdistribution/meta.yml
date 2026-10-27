@@ -1,0 +1,69 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "episegmix_bestdistribution"
+description: Parses loglikelihoods from EpiSegMix training log files to determine the best distribution for each mark and updates the samplesheet.
+keywords:
+  - epigenomics
+  - segmentation
+  - hidden markov model
+  - distribution
+  - loglikelihood
+tools:
+  - "episegmix":
+      description: "EpiSegMix is a tool for the segmentation of epigenomic data."
+      homepage: "https://gitlab.com/rahmannlab/episegmix"
+      documentation: "https://gitlab.com/rahmannlab/episegmix/-/blob/main/README.md?ref_type=heads"
+      tool_dev_url: ""
+      doi: "https://doi.org/10.1093/nar/gkag591"
+      licence: null
+      identifier: biotools:episegmix
+
+input:
+  - log:
+      type: file
+      description: A collection or list of log files generated from previous training steps.
+      pattern: "*.log"
+  - ch_samplesheet:
+      type: file
+      description: The initial samplesheet (CSV) used for the pipeline run.
+      pattern: "*.{csv,tsv}"
+
+output:
+  samplesheet:
+    - "*.csv":
+        type: file
+        description: The updated samplesheet containing the calculated best distributions.
+        pattern: "*.csv"
+
+  results_all:
+    - "all_parsed_loglikelihoods.tsv":
+        type: file
+        description: A comprehensive table of all parsed loglikelihoods evaluated across the provided logs.
+        pattern: "all_parsed_loglikelihoods.tsv"
+
+  versions_episegmix:
+    - "${task.process}":
+        type: string
+        description: The name of the process
+    - "episegmix":
+        type: string
+        description: The name of the tool
+    - "episegmix --version":
+        type: eval
+        description: The expression to obtain the version of the tool
+
+topics:
+  versions:
+    - ${task.process}:
+        type: string
+        description: The name of the process
+    - episegmix:
+        type: string
+        description: The name of the tool
+    - episegmix --version:
+        type: eval
+        description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

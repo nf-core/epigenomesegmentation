@@ -1,0 +1,36 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "episegmix_prepare"
+description: Generates the configuration YAML for EpiSegMix and prepares the training counts and regions data based on that configuration.
+keywords:
+  - epigenomics
+  - segmentation
+  - hidden markov model
+  - configuration
+  - training
+components:
+  - episegmix/config
+  - episegmix/traincounts
+input:
+  - ch_in_episegmix_config:
+      type: file
+      description: |
+        The input channel containing sample metadata, histone counts, methylation matrices, and state settings.
+        Structure: `[ val(sample_id), val(meta), path(histone), val(meta2), path(meth), val(state) ]`
+      pattern: "*"
+output:
+  - ch_train_counts:
+      type: file
+      description: |
+        Channel containing the prepared training counts, regions, and methylation counts alongside the original configuration and metadata.
+        Structure: `[ val(sample_id), val(meta), path(histone), val(meta2), path(meth), val(state), path(yaml), path("*train-counts.txt"), path("*train-regions.txt"), path("*train-counts-meth.txt") ]`
+      pattern: "*.txt"
+  - ch_dna_regions:
+      type: file
+      description: |
+        Channel containing the DNA-specific regions file for training (if applicable).
+        Structure: `[ val(sample_id), path("*.regions.txt") ]`
+      pattern: "*.regions.txt"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

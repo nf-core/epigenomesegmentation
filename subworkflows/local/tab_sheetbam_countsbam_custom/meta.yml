@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "tab_sheetbam_countsbam_custom"
+description: Groups BAM and BAI files by sample, generates a configuration sheet for each group, and calculates read counts across genomic bins.
+keywords:
+  - bam
+  - counts
+  - bins
+  - epigenomics
+  - preprocessing
+components:
+  - custom/sheetbam
+  - custom/bamcounts
+input:
+  - ch_bam:
+      type: file
+      description: |
+        The input channel containing the BAM files.
+        Structure: `[ val(meta), path(bam) ]`
+      pattern: "*.bam"
+  - ch_bai:
+      type: file
+      description: |
+        The input channel containing the BAM index (BAI) files.
+        Structure: `[ val(meta), path(bai) ]`
+      pattern: "*.bai"
+  - ch_ref:
+      type: file
+      description: |
+        The input channel containing the reference genome identifier and chromosome sizes.
+        Structure: `[ val(genome), path(chrom_sizes) ]`
+      pattern: "*"
+output:
+  - sheetbam:
+      type: file
+      description: |
+        Channel containing the generated configuration text sheets along with the BAM files.
+        Structure: `[ val(sample_id), val(meta), path("*.txt"), path(bam) ]`
+      pattern: "*.txt"
+  - bamcounts:
+      type: file
+      description: |
+        Channel containing the calculated read counts across genomic bins.
+        Structure: `[ val(sample_id), val(meta), path("*.tab") ]`
+      pattern: "*.tab"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

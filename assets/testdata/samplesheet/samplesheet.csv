@@ -1,0 +1,4 @@
+sample_id,replicate,epigenetic_mark,file_name,modality,paired_end,distribution
+GM12878,1,WGBS,./assets/testdata/bed/ENCFF279HCL_chr12_chr13.bed.gz,WGBS,True,BB
+GM12878,1,H3K27me3,./assets/testdata/bam/ENCFF633BHN_chr12_chr13.bam,ChIP-seq,False,NBI
+GM12878,1,H3K4me3,./assets/testdata/bam/ENCFF911YNM_chr12_chr13.bam,ChIP-seq,False,NBI

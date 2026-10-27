@@ -1,0 +1,67 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_filterbins"
+description: Filters a BED file to retain only genomic regions (bins) that match a specifically defined bin size.
+keywords:
+  - genomics
+  - bed
+  - filter
+  - bins
+  - awk
+tools:
+  - "gawk":
+      description: "GNU Awk (gawk) is a pattern scanning and processing language used for text processing and data extraction."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information.
+          e.g. `[ id:'sample1' ]`
+    - bed:
+        type: file
+        description: The input BED file to be filtered.
+        pattern: "*.bed"
+
+output:
+  bed:
+    - - meta:
+          type: map
+          description: Groovy Map containing sample information.
+      - "filtered_*.bed":
+          type: file
+          description: The filtered BED file containing only the bins that match the specified size constraint.
+          pattern: "filtered_*.bed"
+
+  versions_awk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "awk":
+          type: string
+          description: The name of the tool
+      - 'awk --version | head -n1 | cut -d " " -f 3':
+          type: eval
+          description: The expression to obtain the version of awk
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - awk:
+          type: string
+          description: The name of the tool
+      - 'awk --version | head -n1 | cut -d " " -f 3':
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

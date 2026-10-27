@@ -1,0 +1,66 @@
+// nf-core modules test episegmix/bestdistribution
+nextflow_process {
+
+    name "Test Process EPISEGMIX_BESTDISTRIBUTION"
+    script "../main.nf"
+    process "EPISEGMIX_BESTDISTRIBUTION"
+
+    tag "modules"
+    tag "modules_episegmix"
+    tag "episegmix"
+    tag "episegmix/bestdistribution"
+
+    test("GM12878 - EPISEGMIX_BESTDISTRIBUTION") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_NBI_2_H3K4me3/Model/GM12878_NBI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_SI_2_H3K4me3/Model/GM12878_SI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_BNB_2_H3K4me3/Model/GM12878_BNB_2_H3K4me3.log", checkIfExists: true)
+                ]
+                input[1] = file("${projectDir}/assets/testdata/samplesheet/samplesheet.csv", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("GM12878 - EPISEGMIX_BESTDISTRIBUTION - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_NBI_2_H3K4me3/Model/GM12878_NBI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_SI_2_H3K4me3/Model/GM12878_SI_2_H3K4me3.log", checkIfExists: true),
+                    file("${projectDir}/assets/testdata/results_fitting/EpiSegMix/GM12878_BNB_2_H3K4me3/Model/GM12878_BNB_2_H3K4me3.log", checkIfExists: true)
+                ]
+                input[1] = file("${projectDir}/assets/testdata/samplesheet/samplesheet.csv", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

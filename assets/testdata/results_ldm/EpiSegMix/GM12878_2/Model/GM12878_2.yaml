@@ -1,0 +1,14 @@
+states: 2
+marker: 2
+marker_spec:
+  - name: H3K27me3
+    distribution: NBI
+  - name: H3K4me3
+    distribution: NBI
+data: [GM12878.tab]
+coverage_marker: 1
+coverage_marker_spec:
+  - name: WGBS
+    distribution: BB
+coverage_data: [GM12878_meth.tab]
+chr: [12]

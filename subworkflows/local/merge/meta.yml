@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "merge"
+description: Strips headers from histone counts, intersects them with binned methylation data, and filters the output into a unified format for downstream processing.
+keywords:
+  - merge
+  - bedtools
+  - intersect
+  - epigenetics
+  - methylation
+  - histone
+components:
+  - custom/stripheader
+  - bedtools/intersect
+  - custom/filterbed
+  - custom/joinbed
+input:
+  - ch_merge:
+      type: tuple
+      description: |
+        A joined channel containing both histone counts and binned methylation data for the same sample.
+        Structure: [ val(sample_id), val(meta1), path(histone), val(meta3), path(binned) ]
+output:
+  - ch_meth_tab:
+      type: tuple
+      description: |
+        Channel containing the extracted methylation/coverage tab file.
+        Structure: [ val(sample_id), val(meta), path(meth_tab) ]
+  - versions:
+      type: file
+      description: |
+        File containing software versions collated from all tools in the subworkflow.
+        Structure: [ path(versions.yml) ]
+      pattern: "versions.yml"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

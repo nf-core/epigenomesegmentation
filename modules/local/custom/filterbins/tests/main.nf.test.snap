@@ -1,0 +1,93 @@
+{
+    "mm10 - FILTERBINS": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "filtered_filtered_hg38_200bp.bed:md5,738b7df526af623af640c076574d4748"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_FILTERBINS",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "filtered_filtered_hg38_200bp.bed:md5,738b7df526af623af640c076574d4748"
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERBINS",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            },
+            {
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERBINS",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:39:36.394900128",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "mm10 - FILTERBINS - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "filtered_filtered_hg38_200bp.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_FILTERBINS",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ],
+                "bed": [
+                    [
+                        {
+                            "id": "hg38"
+                        },
+                        "filtered_filtered_hg38_200bp.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_FILTERBINS",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:39:50.542695774",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    }
+}

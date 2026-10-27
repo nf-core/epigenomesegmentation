@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "bam_reheader_index_samtools"
+description: Replaces the header of BAM files and generates corresponding index (BAI) files using SAMtools.
+keywords:
+  - bam
+  - reheader
+  - index
+  - samtools
+  - alignment
+components:
+  - samtools/reheader
+  - samtools/index
+input:
+  - ch_bam:
+      type: file
+      description: |
+        The input channel containing the BAM files and their associated metadata.
+        Structure: `[ val(meta), path(bam) ]`
+      pattern: "*.bam"
+output:
+  - bam:
+      type: file
+      description: |
+        Channel containing the reheadered BAM files.
+        Structure: `[ val(meta), path("*.bam") ]`
+      pattern: "*.bam"
+  - bai:
+      type: file
+      description: |
+        Channel containing the indexed BAM (BAI) files.
+        Structure: `[ val(meta), path("*.bai") ]`
+      pattern: "*.bai"
+  - versions:
+      type: file
+      description: |
+        File containing software versions aggregated from the components.
+        Structure: `[ path("versions.yml") ]`
+      pattern: "versions.yml"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"
