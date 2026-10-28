@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pandas as pd
-import yaml 
+import yaml
 import argparse
 import os
 import warnings

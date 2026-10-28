@@ -5,7 +5,7 @@ import warnings
 
 def main():
     warnings.simplefilter(action='ignore', category=FutureWarning)
-    
+
     parser = argparse.ArgumentParser(description = "Convert posterior scores to bedGraph format.")
     parser.add_argument("-d", metavar = "data", type = str, nargs = 1, help = "Data with chromosome positions and segmentation score.")
     parser.add_argument("-o", metavar = "output", type = str, nargs = 1, help = "Output file.")

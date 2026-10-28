@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import pandas as pd
-import yaml 
+import yaml
 import argparse
 import warnings
 
@@ -45,7 +45,7 @@ def train_counts(config, data, counts, regions):
             chr_data = data[data["chr"] == c]
             chr_data = chr_data.iloc[:, 3:]
             train.append(chr_data)
-            
+
     train = pd.concat(train, axis=0)
     train.to_csv(counts, sep='\t', header=False, index=False)
 

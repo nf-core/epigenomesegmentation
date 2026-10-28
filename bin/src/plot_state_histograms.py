@@ -12,7 +12,7 @@ from distribution import pmf
 
 def main():
     warnings.simplefilter(action='ignore', category=FutureWarning)
-    
+
     parser = argparse.ArgumentParser(description="Results of chromatin segmentation.")
     parser.add_argument("-c", metavar="data", type=str, nargs=1, help="Data with histone modifcations and segmentation.")
     parser.add_argument("-j", metavar="json", type=str, nargs=1, help="Json file with HMM parameters.")

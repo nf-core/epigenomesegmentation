@@ -13,7 +13,7 @@ import matplotlib.colors as mcolors
 
 
 def combine_data(model, input, index, columns, state_column):
-    prefix = os.path.basename(model['data'][index]) 
+    prefix = os.path.basename(model['data'][index])
 
     combined = []
     data = pd.read_csv(model['data'][index], sep='\t', converters={0:str})
@@ -107,10 +107,10 @@ if 'marker_spec' in model:
 
     for i in range(len(model['data'])):
         df, prefix = combine_data(model, args.i[0], i, columns, state_columns)
-        
+
         # CHANGED HERE: Removed the 'if i == 0:' restriction
         df.to_csv(args.o[0] + prefix, index=False, sep='\t')
-        
+
         to_bed(df, args.o[0], prefix, state_columns)
 else:
     to_bed_methylation(model, args.o[0], args.i[0], args.c[0])

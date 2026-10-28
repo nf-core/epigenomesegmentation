@@ -57,7 +57,6 @@ Processed alignment files that have been filtered (e.g., "nochr" suffix) and ind
 
 </details>
 
-
 ### EpiSegMix
 
 This is the core results directory, containing the output of the segmentation modeling. Files are organized by sample and state number (e.g., `_10`).

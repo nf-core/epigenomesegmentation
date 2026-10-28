@@ -41,7 +41,7 @@ plot_statistics.py \
 
 # 2. Loop over every sample's BED file
 for BED in "${SEG_DIR}"/viterbi_*.bed.gz; do
-    
+
     # Extract the pure sample ID (e.g., heart_E11.5_1)
     filename=$(basename "$BED")
     sample_id=${filename#viterbi_}
@@ -49,7 +49,7 @@ for BED in "${SEG_DIR}"/viterbi_*.bed.gz; do
 
     # Define the corresponding TAB file path
     TAB="${SEG_DIR}/${sample_id}.tab"
-    
+
     # Keep per-sample outputs named by the segmentation sample ID.
     PREFIX="${OUT_DIR}/${sample_id}"
 

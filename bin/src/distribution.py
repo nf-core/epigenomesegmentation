@@ -10,7 +10,7 @@ def sichel(max, mu, sigma, v):
     warnings.filterwarnings("ignore")
 
     pmf = np.empty(max)
-    alpha = math.sqrt(1 / math.pow(sigma, 2) + 2 * mu / sigma) 
+    alpha = math.sqrt(1 / math.pow(sigma, 2) + 2 * mu / sigma)
     w = math.sqrt(math.pow(mu, 2) + math.pow(alpha, 2)) - mu
     for x in range(max):
         if x == 0:
@@ -70,7 +70,7 @@ def pmf(max, HMM, state, marker):
         v = 0
         zeroP = math.exp((math.lgamma(v+r) + math.lgamma(alpha+r) + math.lgamma(beta+v) + math.lgamma(alpha+beta)) - (math.lgamma(v+1) + math.lgamma(r) + math.lgamma(alpha + r + beta + v) + math.lgamma(alpha) + math.lgamma(beta)))
         return [pi if v == 0 else (1-pi) * math.exp((math.lgamma(v+r) + math.lgamma(alpha+r) + math.lgamma(beta+v) + math.lgamma(alpha+beta)) - (math.lgamma(v+1) + math.lgamma(r) + math.lgamma(alpha + r + beta + v) + math.lgamma(alpha) + math.lgamma(beta))) / (1-zeroP) for v in np.arange(0, max)]
-    
+
     elif (HMM['emission'][state][marker]['distribution'] == 'GA'):
         mean = float(HMM['emission'][state][marker]['parameters']['mean'])
         std = float(HMM['emission'][state][marker]['parameters']['std'])
@@ -93,14 +93,14 @@ def pmf(max, HMM, state, marker):
         for i in range(1, len(pmf)):
             pmf[i] = (1.0-pi) * pmf[i] / (1-zeroP)
         return pmf
-    
+
     elif (HMM['emission'][state][marker]['distribution'] == 'AB'):
         alpha = float(HMM['emission'][state][marker]['parameters']['alpha'])
         beta = float(HMM['emission'][state][marker]['parameters']['beta'])
         pi = float(HMM['emission'][state][marker]['parameters']['pi'])
         x = np.linspace(0, 1, 200)
         return np.array([pi] + [(1 - pi) * (betadis.cdf(x[i], a=alpha, b=beta) - betadis.cdf(x[i-1], a=alpha, b=beta)) for i in range(1, 200)])
-    
+
     elif (HMM['emission'][state][marker]['distribution'] == 'B'):
         p = float(HMM['emission'][state][marker]['parameters']['p'])
         return np.array([bernoulli.pmf(v, p) for v in np.arange(0, max)])
@@ -108,7 +108,7 @@ def pmf(max, HMM, state, marker):
     else:
         print("Unknown distribution")
         exit(1)
-        
+
 def param(distribution, mean, std, zeroFreq, n, max):
     mean = np.max([mean, 0.00001])
     std = np.max([std, 0.00001])
@@ -122,7 +122,7 @@ def param(distribution, mean, std, zeroFreq, n, max):
 
     elif (distribution == 'PO'):
         return {"lambda": mean}
-    
+
     elif (distribution == 'BI'):
         return {"p": mean / n, "n": int(n)}
 
@@ -140,10 +140,10 @@ def param(distribution, mean, std, zeroFreq, n, max):
         alpha = np.max([1.01, p * (p * (1-p) / (0.05**2) - 1)])
         beta = np.max([0.01, (1-p) * (p * (1-p) / (0.05**2) - 1)])
         return {"alpha": alpha, "beta": beta, "r": r}
-    
+
     elif (distribution == 'ZAP'):
         return {"lambda": mean, "pi": zeroFreq}
-    
+
     elif (distribution == 'ZANBI'):
         var = std**2
         if mean >= var:
@@ -154,11 +154,11 @@ def param(distribution, mean, std, zeroFreq, n, max):
 
     elif (distribution == 'ZABNB'):
         r = np.max([1.0, mean**2 / (std**2-mean)])
-        p = mean / std**2 
+        p = mean / std**2
         alpha = np.max([1.01, p * (p * (1-p) / (0.05**2) - 1)])
         beta = np.max([0.01, (1-p) * (p * (1-p) / (0.05**2) - 1)])
         return {"alpha": alpha, "beta": beta, "r": r, "pi": zeroFreq}
-    
+
     elif (distribution == 'GA'):
         return {"mean": mean, "std": std}
 
@@ -173,10 +173,10 @@ def param(distribution, mean, std, zeroFreq, n, max):
         alpha2 = np.max([0.0001, (w + mean)**2 - mean**2])
         s = np.max([0.1, (math.sqrt(alpha2 + mean**2) + mean) / alpha2])
         return {"mu": mean, "sigma": s, 'v': -0.5, "pi": zeroFreq}
-    
+
     elif (distribution == 'B'):
         return {"p": mean}
-    
+
     else:
         print("Unknown distribution")
         exit(1)
@@ -200,4 +200,3 @@ def meth_param(distribution, mean, std, zeros):
         alpha = mean * x
         beta = (1.0 - mean) * x
         return {"alpha": alpha, "beta": beta, "pi": max(zeros, 0.0001)}
-

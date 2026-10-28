@@ -65,7 +65,7 @@ TREATMENT,1,WGBS,./data/treatment_methyl.bed.gz,WGBS,true,BI
 | `file_name`       | Full path to file. `.bam` / `.bam.gz` (histone), `.bed` / `.bed.gz` (methylation).     |
 | `modality`        | Supported: `ChIP-seq`, `WGBS`, `ATAC-seq`, `NOMe-seq`, `chip`, `wgbs`, `atac`, `nome`. |
 | `paired_end`      | Boolean (`true` or `false`).                                                           |
-| `distribution`    | Optional statistical distribution used for modeling. Leave empty to use the default. |
+| `distribution`    | Optional statistical distribution used for modeling. Leave empty to use the default.   |
 
 ### Supported Distributions
 
@@ -114,6 +114,7 @@ Pipeline settings can be provided in a `yaml` or `json` file via `-params-file <
 The pipeline routes inputs by file extension: BAM files are used for histone counts, while BED/BED.GZ files are used for methylation or coverage-marker counts. When both modalities are supplied, the default workflow combines them for segmentation; histone-only samples are segmented using histone data. For methylation/coverage-only segmentation, use `--dna`.
 
 ### Pipeline modes
+
 By default, the pipeline runs topology modeling (LDM). `--dna`, `--fitting`, `--jointrain`, and `--counts` change the workflow path; use only compatible options together. `--duration` selects the model type and can be combined with compatible workflow options such as `--jointrain`. `--methcounts` and `--histonecounts` are inputs for precomputed counts, not modes.
 
 #### Count generation only
@@ -154,7 +155,6 @@ Selects the duration-modeling (DM) HMM, which models segment duration. Without t
 ```
 
 This mode fits candidate distributions to the count data rather than running the usual segmentation workflow. Specify the comma-separated candidates with `--distributions`, for example `--distributions 'NBI,SI,BNB'`. The workflow uses the fitting results to produce an updated samplesheet with the best-fitting distribution.
-
 
 #### Jointrain Mode
 

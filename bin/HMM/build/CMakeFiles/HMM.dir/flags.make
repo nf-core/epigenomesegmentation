@@ -7,4 +7,3 @@ CXX_DEFINES = -DBOOST_ALL_NO_LIB -DBOOST_ATOMIC_DYN_LINK -DBOOST_FILESYSTEM_DYN_
 CXX_INCLUDES = -isystem /workspace/root/include
 
 CXX_FLAGS =  -std=c++17 -O3 -DNDEBUG -fPIC -fopenmp
-

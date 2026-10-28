@@ -119,7 +119,7 @@ cat << EOF > "${OUTPUT_FILE}"
 </html>
 EOF
 
-else 
+else
 
 cat << EOF > "${OUTPUT_FILE}"
 <!DOCTYPE html>
@@ -171,6 +171,6 @@ cat << EOF > "${OUTPUT_FILE}"
 </html>
 EOF
 
-fi 
+fi
 
 echo "HTML report generated at ${OUTPUT_FILE}"

@@ -56,7 +56,7 @@ FINAL_OUT="${prefix}.tab"
 # --- 1. DYNAMIC MERGE LOGIC ---
 
 if [[ -f "$SE_FILE" ]] && [[ -f "$PE_FILE" ]]; then
-    
+
     # 1. Extract and combine the headers directly into FINAL_OUT
     paste <(head -n 1 "$SE_FILE") <(head -n 1 "$PE_FILE" | cut -f4-) > "$FINAL_OUT"
 

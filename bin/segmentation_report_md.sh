@@ -12,13 +12,13 @@ STATISTICS_PREFIX=""
 # ==========================================
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        -n|--name) 
+        -n|--name)
             NAME="$2"
-            shift 2 
+            shift 2
             ;;
-        -o|--output-dir) 
+        -o|--output-dir)
             OUTPUT_DIR="$2"
-            shift 2 
+            shift 2
             ;;
         -p|--statistics-prefix)
             STATISTICS_PREFIX="$2"
@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
             echo "  -p, --statistics-prefix  Prefix for shared model-level plots"
             exit 0
             ;;
-        *) 
+        *)
             echo "Error: Unknown argument '$1'" >&2; exit 1 ;;
     esac
 done
@@ -49,7 +49,7 @@ MD_FILE="${OUTPUT_DIR}/${NAME}_report.md"
 
 cat << EOF > "${MD_FILE}"
 # EpiSegMix Segmentation Report
-**Sample / Prefix ID:** ${NAME}  
+**Sample / Prefix ID:** ${NAME}
 
 ---
 

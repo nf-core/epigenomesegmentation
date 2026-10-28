@@ -11,7 +11,7 @@ import matplotlib.colors as mcolors
 
 def main():
     warnings.simplefilter(action='ignore', category=FutureWarning)
-    
+
     parser = argparse.ArgumentParser(description = "Convert segmentation to bed format.")
     parser.add_argument("-d", metavar = "data", type = str, nargs = 1, help = "Data with chromosome position and segmentation information.")
     parser.add_argument("-o", metavar = "output", type = str, nargs = 1, help = "Output file.")
