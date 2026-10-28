@@ -1,0 +1,58 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_downloadchromsizes"
+description: Downloads the chromosome sizes file for a given genome assembly from the UCSC Genome Browser using wget.
+keywords:
+  - genomics
+  - ucsc
+  - reference
+  - download
+  - wget
+tools:
+  - "wget":
+      description: "GNU Wget is a free software package for retrieving files using HTTP, HTTPS, FTP and FTPS."
+      homepage: "https://www.gnu.org/software/wget/"
+      documentation: "https://www.gnu.org/software/wget/manual/wget.html"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/wget.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+
+input:
+  - genome:
+      type: string
+      description: The UCSC genome assembly name (e.g., `hg38`, `mm10`).
+
+output:
+  chromsizes:
+    - "*.chrom.sizes":
+        type: file
+        description: A two-column text file containing chromosome names and their respective sizes.
+        pattern: "*.chrom.sizes"
+
+  versions_wget:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "wget":
+          type: string
+          description: The name of the tool as defined in the emit channel (Note this evaluates wget but emits 'wget')
+      - 'wget -V | head -n1 | cut -f 3 -d " "':
+          type: eval
+          description: The expression to obtain the version of wget
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - wget:
+          type: string
+          description: The name of the tool as defined in the emit channel
+      - 'wget -V | head -n1 | cut -f 3 -d " "':
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

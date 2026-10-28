@@ -1,0 +1,81 @@
+// nf-core modules test custom/bedcounts
+nextflow_process {
+
+    name "Test Process CUSTOM_BEDCOUNTS"
+    script "../main.nf"
+    process "CUSTOM_BEDCOUNTS"
+
+    tag "modules"
+    tag "modules_"
+    tag "custom"
+    tag "custom/bedcounts"
+
+    test("Kidney - BEDCOUNTS") {
+
+        // (the module requires running more than one process to generate the required output)
+        // add the 'setup' method here.
+        // You can find more information about how to use a 'setup' method in the nf-test docs (https://www.nf-test.com/docs/testcases/setup/).
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [
+                        id: 'GM12878',
+                        replicate: 1,
+                        epigenetic_mark: 'WGBS',
+                        modality: 'WGBS',
+                        paired_end: true,
+                        distribution: 'BI'
+                    ],
+                    file("${projectDir}/assets/testdata/bed/ENCFF279HCL_chr12_chr13.bed.gz", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+                // See https://nf-co.re/docs/developing/testing/assertions for more information and examples.
+            )
+        }
+
+    }
+
+    test("Kidney - BEDCOUNTS - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    [
+                        id: 'GM12878',
+                        replicate: 1,
+                        epigenetic_mark: 'WGBS',
+                        modality: 'WGBS',
+                        paired_end: true,
+                        distribution: 'BI'
+                    ],
+                    file("${projectDir}/assets/testdata/bed/ENCFF279HCL_chr12_chr13.bed.gz", checkIfExists: true)
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

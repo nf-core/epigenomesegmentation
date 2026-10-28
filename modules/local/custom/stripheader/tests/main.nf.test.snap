@@ -1,0 +1,85 @@
+{
+    "Kidney - STRIPHEADER": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,f2cae1a2d82b9fc3fa39ba27c02f5a79"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_STRIPHEADER",
+                        "tail",
+                        "8.25"
+                    ]
+                ],
+                "noheader": [
+                    [
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,f2cae1a2d82b9fc3fa39ba27c02f5a79"
+                    ]
+                ],
+                "versions_tail": [
+                    [
+                        "CUSTOM_STRIPHEADER",
+                        "tail",
+                        "8.25"
+                    ]
+                ]
+            },
+            {
+                "versions_tail": [
+                    [
+                        "CUSTOM_STRIPHEADER",
+                        "tail",
+                        "8.25"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:41:44.594852835",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "Kidney - STRIPHEADER - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_STRIPHEADER",
+                        "tail",
+                        "8.25"
+                    ]
+                ],
+                "noheader": [
+                    [
+                        "GM12878",
+                        "no_header_GM12878.bed:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_tail": [
+                    [
+                        "CUSTOM_STRIPHEADER",
+                        "tail",
+                        "8.25"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:41:58.580347917",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    }
+}

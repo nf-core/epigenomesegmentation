@@ -1,0 +1,117 @@
+{
+    "Kidney - BAMCOUNTS - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "H3K4me3",
+                            "modality": "ChIP-seq",
+                            "paired_end": false,
+                            "distribution": "NBI"
+                        },
+                        "GM12878.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_BAMCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "bamcounts": [
+                    [
+                        "GM12878",
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "H3K4me3",
+                            "modality": "ChIP-seq",
+                            "paired_end": false,
+                            "distribution": "NBI"
+                        },
+                        "GM12878.tab:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "CUSTOM_BAMCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        },
+        "timestamp": "2026-10-02T13:37:26.775408235"
+    },
+    "Kidney - BAMCOUNTS": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "H3K27me3",
+                            "modality": "ChIP-seq",
+                            "paired_end": false,
+                            "distribution": "NBI"
+                        },
+                        "GM12878.tab:md5,f9defb300b2ec7c97656ffb535dbdf64"
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_BAMCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "bamcounts": [
+                    [
+                        "GM12878",
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "H3K27me3",
+                            "modality": "ChIP-seq",
+                            "paired_end": false,
+                            "distribution": "NBI"
+                        },
+                        "GM12878.tab:md5,f9defb300b2ec7c97656ffb535dbdf64"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "CUSTOM_BAMCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "CUSTOM_BAMCOUNTS",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-10-02T16:25:49.973989328"
+    }
+}

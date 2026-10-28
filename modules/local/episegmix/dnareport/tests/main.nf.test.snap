@@ -1,0 +1,400 @@
+{
+    "Forebrain - EPISEGMIX_DNAREPORT": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "Forebrain_16.5_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "Forebrain_16.5",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        2,
+                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
+                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
+                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        [
+                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,321b8b2f8263bb7ad43ef5e840c37c52",
+                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,c208a9121dba6a1af5e6e11445cc9a92"
+                        ],
+                        [
+                            "Forebrain_16.5_2-meanEmission.png:md5,500a1f05d6ec5810fca0efe679d8f9e2",
+                            "Forebrain_16.5_2-normEmission.png:md5,f8a76f23637102208799036c58f19a94",
+                            "Forebrain_16.5_2-stateColors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "Forebrain_16.5_2-stateLength.png:md5,1d3bad6d1a5c4a7b2b20636098a4d571",
+                            "Forebrain_16.5_2-stateMembership.png:md5,fc9b29bf38feb8e58d27e16543a0ef88",
+                            "Forebrain_16.5_2-transitionMatrix.png:md5,d3a1b6d9407fab1fe5559a953421ec12",
+                            "Forebrain_16.5_2.html:md5,68c2721b4a5f3be2ffebea1d7a4848cb"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "Forebrain_16.5_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "Forebrain_16.5",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        2,
+                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
+                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
+                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        [
+                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,321b8b2f8263bb7ad43ef5e840c37c52",
+                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,c208a9121dba6a1af5e6e11445cc9a92"
+                        ],
+                        [
+                            "Forebrain_16.5_2-meanEmission.png:md5,500a1f05d6ec5810fca0efe679d8f9e2",
+                            "Forebrain_16.5_2-normEmission.png:md5,f8a76f23637102208799036c58f19a94",
+                            "Forebrain_16.5_2-stateColors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "Forebrain_16.5_2-stateLength.png:md5,1d3bad6d1a5c4a7b2b20636098a4d571",
+                            "Forebrain_16.5_2-stateMembership.png:md5,fc9b29bf38feb8e58d27e16543a0ef88",
+                            "Forebrain_16.5_2-transitionMatrix.png:md5,d3a1b6d9407fab1fe5559a953421ec12",
+                            "Forebrain_16.5_2.html:md5,68c2721b4a5f3be2ffebea1d7a4848cb"
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T16:50:01.698474",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "Forebrain - EPISEGMIX_DNAREPORT - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "Forebrain_16.5_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "Forebrain_16.5",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        2,
+                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
+                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
+                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        [
+                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,321b8b2f8263bb7ad43ef5e840c37c52",
+                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,c208a9121dba6a1af5e6e11445cc9a92"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "Forebrain_16.5_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "Forebrain_16.5",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,e28a0ae617cff23a9d279e2d3ed0dc78",
+                        2,
+                        "Forebrain_16.5_2.yaml:md5,7c03fc9ea3cf3638d64b5cb12fbbe45b",
+                        "Forebrain_16.5_2-train-counts.txt:md5,2352c71acc26b86afc220baa2b071ec7",
+                        "Forebrain_16.5_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-Forebrain_16.5_2.json:md5,27db631b0d2a755ca71777392c26302e",
+                        [
+                            "Forebrain_16.5_WGBS_binnedbedcounts.bed:md5,321b8b2f8263bb7ad43ef5e840c37c52",
+                            "viterbi_Forebrain_16.5_WGBS_binnedbedcounts.bed.gz:md5,c208a9121dba6a1af5e6e11445cc9a92"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T16:50:05.60046",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "GM12878 - EPISEGMIX_DNAREPORT": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,01e603869b4fdb8850417eac860ae4a1",
+                        2,
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
+                        [
+                            "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
+                            "viterbi_GM12878_WGBS_binnedbedcounts.bed.gz:md5,776b80645e726b4438bb7ca30c8bd627"
+                        ],
+                        [
+                            "GM12878_2-meanEmission.png:md5,f5bacdf0ca2b5c6f7c493aa5837043e8",
+                            "GM12878_2-normEmission.png:md5,d2ed8d9f06c0e3a0df7a05f80f682b79",
+                            "GM12878_2-stateColors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "GM12878_2-stateLength.png:md5,0d758aa1c843623454609eb71433e094",
+                            "GM12878_2-stateMembership.png:md5,a4663a88577bb7e097c60b964b2c300e",
+                            "GM12878_2-transitionMatrix.png:md5,6d3c24f35a529308d10da34f25ac2797",
+                            "GM12878_2.html:md5,5fdb8c53e5bb07ca26fd9b066eef1a6d"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,01e603869b4fdb8850417eac860ae4a1",
+                        2,
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
+                        [
+                            "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
+                            "viterbi_GM12878_WGBS_binnedbedcounts.bed.gz:md5,776b80645e726b4438bb7ca30c8bd627"
+                        ],
+                        [
+                            "GM12878_2-meanEmission.png:md5,f5bacdf0ca2b5c6f7c493aa5837043e8",
+                            "GM12878_2-normEmission.png:md5,d2ed8d9f06c0e3a0df7a05f80f682b79",
+                            "GM12878_2-stateColors.png:md5,9e8d8ddd97ab92b299a0ea7588d5b293",
+                            "GM12878_2-stateLength.png:md5,0d758aa1c843623454609eb71433e094",
+                            "GM12878_2-stateMembership.png:md5,a4663a88577bb7e097c60b964b2c300e",
+                            "GM12878_2-transitionMatrix.png:md5,6d3c24f35a529308d10da34f25ac2797",
+                            "GM12878_2.html:md5,5fdb8c53e5bb07ca26fd9b066eef1a6d"
+                        ]
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:48:31.783334103",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "GM12878 - EPISEGMIX_DNAREPORT - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,01e603869b4fdb8850417eac860ae4a1",
+                        2,
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
+                        [
+                            "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
+                            "viterbi_GM12878_WGBS_binnedbedcounts.bed.gz:md5,776b80645e726b4438bb7ca30c8bd627"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "Segmentation": [
+                    [
+                        "GM12878_2",
+                        {
+                            "id": "no_bam_counts"
+                        },
+                        [
+                            
+                        ],
+                        {
+                            "id": "GM12878",
+                            "replicate": 1,
+                            "epigenetic_mark": "WGBS",
+                            "modality": "WGBS",
+                            "paired_end": true,
+                            "distribution": "BI"
+                        },
+                        "GM12878_WGBS_binnedbedcounts.bed:md5,01e603869b4fdb8850417eac860ae4a1",
+                        2,
+                        "GM12878_2.yaml:md5,a3b14a543c79aad0bf33ab38901a93ca",
+                        "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
+                        "GM12878_2-train-regions.txt:md5,cfcd208495d565ef66e7dff9f98764da",
+                        "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900",
+                        [
+                            "GM12878_WGBS_binnedbedcounts.bed:md5,3762986b4c6f9de7fbf0194d1cf71086",
+                            "viterbi_GM12878_WGBS_binnedbedcounts.bed.gz:md5,776b80645e726b4438bb7ca30c8bd627"
+                        ],
+                        "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DNAREPORT",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:48:46.326789518",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    }
+}

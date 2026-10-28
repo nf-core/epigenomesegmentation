@@ -1,0 +1,2 @@
+H3K27me3	ENCFF633BHN_chr12_chr13.nochr.bam	false
+H3K4me3	ENCFF911YNM_chr12_chr13.nochr.bam	false

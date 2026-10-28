@@ -1,0 +1,58 @@
+// nf-core modules test custom/filterchromsizes
+nextflow_process {
+
+    name "Test Process CUSTOM_FILTERCHROMSIZES"
+    script "../main.nf"
+    process "CUSTOM_FILTERCHROMSIZES"
+
+    tag "modules"
+    tag "modules_custom"
+    tag "custom"
+    tag "custom/filterchromsizes"
+
+    test("mm10 - FILTERCHROMSIZES") {
+
+        options "--genome hg38"
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/assets/testdata/ref/hg38_chr12_chr13.chrom.sizes", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("mm10 - FILTERCHROMSIZES - stub") {
+
+        options "-stub --genome hg38"
+
+        when {
+            process {
+                """
+                input[0] = file("${projectDir}/assets/testdata/ref/hg38_chr12_chr13.chrom.sizes", checkIfExists: true)
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}
