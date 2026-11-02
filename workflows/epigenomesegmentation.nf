@@ -18,6 +18,7 @@ include { EPISEGMIX_LDM                   } from '../subworkflows/local/episegmi
 include { EPISEGMIX_DM                    } from '../subworkflows/local/episegmix_dm/'
 include { EPISEGMIX_DNA                   } from '../subworkflows/local/episegmix_dna/'
 include { EPISEGMIX_FITTING               } from '../subworkflows/local/episegmix_fitting/'
+include { CUSTOM_MERGECOVERAGECOUNTS       } from '../modules/local/custom/mergecoveragecounts/'
 
 
 /*
@@ -125,21 +126,33 @@ workflow EPIGENOMESEGMENTATION {
     ch_states = Channel.of("${params.states}").splitCsv().flatten()
 
     if (params.dna == true) {
-        ch_in_episegmix_config = ch_mapped_bed
-        .map { it ->
-            def sample_id = it[0]
-            def meta2     = it[1]
-            def meth      = it[2]
+        ch_grouped_coverage = ch_mapped_bed
+            .groupTuple(by: 0)
+            .map { sample_id, sample_meta, meth_files ->
+                sample_meta = sample_meta.flatten()
+                tuple(
+                    sample_id,
+                    [
+                        id: sample_id,
+                        epigenetic_mark: sample_meta.collect { it.epigenetic_mark },
+                        distribution: sample_meta.collect { it.distribution ?: 'BI' }
+                    ],
+                    meth_files.flatten()
+                )
+            }
 
-            def meta1     = [id: 'no_bam_counts']
-            def histone   = []
+        if (params.methcounts) {
+            ch_merged_coverage = ch_grouped_coverage
+        } else {
+            CUSTOM_MERGECOVERAGECOUNTS(ch_grouped_coverage)
+            ch_merged_coverage = CUSTOM_MERGECOVERAGECOUNTS.out.merged
+        }
 
-            return tuple(sample_id, meta1, histone, meta2, meth)
-        }
-        .combine(ch_states)
-        .map { sample_id, meta1, histone, meta2, meth, state ->
-            ["${sample_id}_${state}", meta1, histone, meta2, meth, state]
-        }
+        ch_in_episegmix_config = ch_merged_coverage
+            .combine(ch_states)
+            .map { sample_id, meta2, meth, state ->
+                ["${sample_id}_${state}", [id: 'no_bam_counts'], [], meta2, meth, state]
+            }
     }
     else if (params.fitting == true) {
         ch_dist = Channel.of("${params.distributions}").splitCsv().flatten()

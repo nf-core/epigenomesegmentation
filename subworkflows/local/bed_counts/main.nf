@@ -17,16 +17,30 @@ workflow BED_COUNTS {
     ch_in_bedtools_map = ch_bins
         .combine(ch_bedcounts_out)
         .map { meta1, chrombin, meta2, tab ->
-            [ meta2, chrombin, tab ]
+            def map_meta = meta2
+            if (params.dna) {
+                map_meta = meta2 + [
+                    sample_id: meta2.id,
+                    id: "${meta2.id}_${meta2.epigenetic_mark}_${meta2.replicate ?: 1}"
+                ]
+            }
+            [ map_meta, chrombin, tab ]
         }
     ch_dummy_chrom_sizes = Channel.value([ [id: 'dummy'], [] ])
 
     BEDTOOLS_MAP(ch_in_bedtools_map, ch_dummy_chrom_sizes)
 
     new_mapped =  BEDTOOLS_MAP.out.mapped
-    .map{
-        meta, bed -> [meta.id, meta, bed]
-    }
+        .map { meta, bed ->
+            def sample_id = params.dna ? (meta.sample_id ?: meta.id) : meta.id
+            def restored_meta = meta
+            if (params.dna) {
+                restored_meta = new LinkedHashMap(meta)
+                restored_meta.remove('sample_id')
+                restored_meta.id = sample_id
+            }
+            [sample_id, restored_meta, bed]
+        }
     emit:
 
     ch_mapped_bed = new_mapped

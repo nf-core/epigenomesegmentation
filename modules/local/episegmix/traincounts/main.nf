@@ -25,8 +25,6 @@ process EPISEGMIX_TRAINCOUNTS {
     """
     if [[ "${histone}" == "" ]]; then
 
-    awk 'BEGIN {OFS="\t"} { \$4 = int(\$4 + 0.5); \$5 = int(\$5 + 0.5); print \$0 }' $meth > tmp.bed && mv tmp.bed $meth
-    sed -i '1 i\\chr\\tstart\\tend\\tCov\\tMeth' $meth
 
         get_meth_counts.py \\
             -d "${prefix}.yaml" \\

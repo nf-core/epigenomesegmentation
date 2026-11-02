@@ -67,7 +67,7 @@ done
 
 touch states.txt
 
-cut -f 4,5 ${COUNTS} > tmp_counts.txt
+cut -f 4- "${COUNTS}" > tmp_counts.txt
 sed -i '1d' tmp_counts.txt
 TopologyHMM \
     -m "${JSON}" \

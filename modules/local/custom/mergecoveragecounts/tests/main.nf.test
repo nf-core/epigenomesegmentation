@@ -1,0 +1,64 @@
+nextflow_process {
+
+    name "Test Process CUSTOM_MERGECOVERAGECOUNTS"
+    script "../main.nf"
+    process "CUSTOM_MERGECOVERAGECOUNTS"
+
+    tag "modules"
+    tag "modules_custom"
+    tag "custom"
+    tag "custom/mergecoveragecounts"
+
+    test("Merge multiple coverage files") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'sample1',
+                    [id: 'sample1', epigenetic_mark: ['WGBS_A', 'WGBS_B']],
+                    [
+                        file("\${projectDir}/assets/testdata/mergecoveragecounts/coverage_mark_a.bed", checkIfExists: true),
+                        file("\${projectDir}/assets/testdata/mergecoveragecounts/coverage_mark_b.bed", checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert file(process.out.merged[0][2]).text == """chr\tstart\tend\tCov1\tMeth1\tCov2\tMeth2
+chr1\t0\t10\t8\t3\t5\t1
+chr1\t10\t20\t6\t2\t9\t4
+"""
+        }
+
+    }
+
+    test("Merge a single coverage file") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'sample1',
+                    [id: 'sample1', epigenetic_mark: ['WGBS_A']],
+                    [
+                        file("\${projectDir}/assets/testdata/mergecoveragecounts/coverage_mark_a.bed", checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assert file(process.out.merged[0][2]).text == """chr\tstart\tend\tCov1\tMeth1
+chr1\t0\t10\t8\t3
+chr1\t10\t20\t6\t2
+"""
+        }
+
+    }
+}

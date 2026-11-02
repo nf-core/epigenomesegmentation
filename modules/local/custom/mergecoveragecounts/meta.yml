@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_mergecoveragecounts"
+description: Merge mapped coverage-count files for the same sample after verifying their genomic coordinates match.
+keywords:
+  - coverage
+  - methylation
+  - bed
+  - merge
+tools:
+  - "awk":
+      description: "A language for processing text files."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      licence: ["GPL-3.0-or-later"]
+input:
+  - - sample_id:
+        type: string
+        description: Sample identifier used to group coverage files.
+    - meta:
+        type: map
+        description: Coverage-marker metadata in the same order as the input files.
+    - meth_files:
+        type: file
+        description: Mapped BED coverage count files, each with coordinates and Cov/Meth columns.
+        pattern: "*.bed"
+output:
+  merged:
+    - - sample_id:
+          type: string
+          description: Sample identifier.
+      - meta:
+          type: map
+          description: Coverage-marker metadata passed through from the input.
+      - "*.coverage.tsv":
+          type: file
+          description: Single coordinate-aligned count matrix containing Cov/Meth columns for all markers.
+          pattern: "*.coverage.tsv"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"
