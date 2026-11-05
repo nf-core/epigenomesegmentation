@@ -154,7 +154,7 @@
                         "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
-                            "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
+                            "viterbi_GM12878.bed.gz:md5,19f2434d8a3de748a71750beebcadcf3"
                         ],
                         "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -194,7 +194,7 @@
                         "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
-                            "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
+                            "viterbi_GM12878.bed.gz:md5,19f2434d8a3de748a71750beebcadcf3"
                         ],
                         "dummy.txt:md5,d41d8cd98f00b204e9800998ecf8427e"
                     ]
@@ -245,7 +245,7 @@
                         "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
-                            "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
+                            "viterbi_GM12878.bed.gz:md5,19f2434d8a3de748a71750beebcadcf3"
                         ],
                         [
                             "GM12878-meanEmission.png:md5,238490d6882644ce58f072fa53d50ebf",
@@ -297,7 +297,7 @@
                         "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
-                            "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
+                            "viterbi_GM12878.bed.gz:md5,19f2434d8a3de748a71750beebcadcf3"
                         ],
                         [
                             "GM12878-meanEmission.png:md5,238490d6882644ce58f072fa53d50ebf",
