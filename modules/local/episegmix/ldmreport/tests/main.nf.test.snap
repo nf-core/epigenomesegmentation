@@ -151,7 +151,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,bf090d9309ace60b84441cfe78dbfb81",
+                        "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
                             "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
@@ -191,7 +191,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,bf090d9309ace60b84441cfe78dbfb81",
+                        "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
                             "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
@@ -242,7 +242,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,bf090d9309ace60b84441cfe78dbfb81",
+                        "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
                             "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"
@@ -294,7 +294,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,bf090d9309ace60b84441cfe78dbfb81",
+                        "final-model-GM12878_2.json:md5,4442d94c89ba473b51ddc092e163e4a5",
                         [
                             "GM12878.tab:md5,5f2c4b503c0924a13c87b245128248dc",
                             "viterbi_GM12878.bed.gz:md5,71af1723535840be27100b12050ff19a"

@@ -108,7 +108,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a"
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887"
                     ]
                 ],
                 "1": [
@@ -143,7 +143,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a"
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887"
                     ]
                 ],
                 "versions_episegmix": [

@@ -27,7 +27,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
                             "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
@@ -66,7 +66,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
                             "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
@@ -310,7 +310,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             
                         ]
@@ -348,7 +348,7 @@
                         "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
-                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a",
+                        "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             
                         ]
