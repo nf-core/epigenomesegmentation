@@ -1,0 +1,120 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "episegmix_dmtrain"
+description: Trains the EpiSegMix hidden Markov model (DM model) on the provided count and region data, outputting a trained model JSON file.
+keywords:
+  - epigenomics
+  - segmentation
+  - hidden markov model
+  - training
+  - model
+tools:
+  - "episegmix":
+      description: "EpiSegMix is a tool for the segmentation of epigenomic data."
+      homepage: "https://gitlab.com/rahmannlab/episegmix"
+      documentation: "https://gitlab.com/rahmannlab/episegmix/-/blob/main/README.md?ref_type=heads"
+      tool_dev_url: ""
+      doi: "https://doi.org/10.1093/nar/gkag591"
+      licence: null
+      identifier: biotools:episegmix
+
+input:
+  - - sample_id:
+        type: string
+        description: Identifier combining sample tissue, time point, and/or state (e.g., `kidney_P0_3`).
+    - meta:
+        type: map
+        description: Groovy Map containing sample information for histone marks.
+    - histone:
+        type: file
+        description: Counts file for histones derived from BAM files.
+        pattern: "*.{tab,txt,tsv,bed}"
+    - meta2:
+        type: map
+        description: Groovy Map containing metadata for methylation (WGBS) data.
+    - meth:
+        type: file
+        description: Methylation count matrix file.
+    - state:
+        type: integer
+        description: Integer value representing the number of segments/states to run.
+    - yaml:
+        type: file
+        description: The generated EpiSegMix configuration YAML file.
+        pattern: "*.yaml"
+    - traincounts:
+        type: file
+        description: Counts data filtered by the specified training chromosomes.
+        pattern: "*train-counts.txt"
+    - trainregions:
+        type: file
+        description: Genomic regions file specifying the length and locations of regions used for training.
+        pattern: "*train-regions.txt"
+    - traincountsmeth:
+        type: file
+        description: Methylation counts data used for training on the specified chromosomes.
+        pattern: "*train-counts-meth.txt"
+
+output:
+  json:
+    - - sample_id:
+          type: string
+          description: Identifier combining sample tissue, time point, and/or state.
+      - meta:
+          type: map
+          description: Groovy Map containing sample information for histone marks.
+      - histone:
+          type: file
+          description: Counts file for histones.
+      - meta2:
+          type: map
+          description: Groovy Map containing metadata for methylation (WGBS) data.
+      - meth:
+          type: file
+          description: Methylation count matrix file.
+      - state:
+          type: integer
+          description: Integer value representing the number of segments/states to run.
+      - yaml:
+          type: file
+          description: The generated EpiSegMix configuration YAML file.
+      - traincounts:
+          type: file
+          description: Counts data filtered by the specified training chromosomes.
+      - trainregions:
+          type: file
+          description: Genomic regions file specifying the length and locations of regions used for training.
+      - traincountsmeth:
+          type: file
+          description: Methylation counts data used for training on the specified chromosomes.
+      - "final*.json":
+          type: file
+          description: The final trained EpiSegMix model JSON file.
+          pattern: "final*.json"
+
+  versions_episegmix:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "episegmix":
+          type: string
+          description: The name of the tool
+      - "episegmix --version":
+          type: eval
+          description: The expression to obtain the version of the tool
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - episegmix:
+          type: string
+          description: The name of the tool
+      - episegmix --version:
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

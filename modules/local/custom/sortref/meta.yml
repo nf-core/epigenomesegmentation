@@ -1,0 +1,93 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_sortref"
+description: Sorts and reformats a filtered chromosome sizes file, inserting a start coordinate column to create a 3-column BED-like format.
+keywords:
+  - genomics
+  - reference
+  - sort
+  - awk
+  - chromsizes
+tools:
+  - "coreutils":
+      description: "GNU core utilities (includes sort, cat, etc.) for basic file manipulation."
+      homepage: "https://www.gnu.org/software/coreutils/"
+      documentation: "https://www.gnu.org/software/coreutils/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/coreutils.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+  - "awk":
+      description: "GNU Awk (gawk) is a pattern scanning and processing language."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+
+input:
+  - - meta_id:
+        type: string
+        description: The genome assembly name or identifier (e.g., `hg38`).
+    - filtered_chromsizes:
+        type: file
+        description: The filtered chromosome sizes file.
+        pattern: "filtered_*"
+
+output:
+  filtered_chromsizes:
+    - - meta_id:
+          type: string
+          description: The genome assembly name or identifier.
+      - "*.v2":
+          type: file
+          description: The sorted and reformatted chromosome sizes file with an added coordinate column.
+          pattern: "*.v2"
+
+  versions_awk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "awk":
+          type: string
+          description: The name of the tool
+      - 'awk --version | cut -f 3 -d " "':
+          type: eval
+          description: The expression to obtain the version of awk
+
+  versions_sort:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "sort":
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - awk:
+          type: string
+          description: The name of the tool
+      - 'awk --version | cut -f 3 -d " "':
+          type: eval
+          description: The expression to obtain the version of awk
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - sort:
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

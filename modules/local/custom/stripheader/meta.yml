@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_stripheader"
+description: Strips the first line (header) from a text or BED file using the GNU coreutils `tail` command.
+keywords:
+  - strip
+  - header
+  - tail
+  - bed
+  - coreutils
+tools:
+  - "coreutils":
+      description: "The GNU Core Utilities are the basic file, shell and text manipulation utilities of the GNU operating system."
+      homepage: "https://www.gnu.org/software/coreutils/"
+      documentation: "https://www.gnu.org/software/coreutils/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/coreutils.git"
+      doi: ""
+      licence: ["GPL-3.0-or-later"]
+      identifier: ""
+
+input:
+  - - meta:
+        type: map
+        description: |
+          Groovy Map containing sample information
+          e.g. `[ id:'sample1' ]`
+    - file:
+        type: file
+        description: Input text or BED file containing a header on the first line.
+        pattern: "*.{bed,txt,tsv,csv}"
+
+output:
+  noheader:
+    - - id:
+          type: string
+          description: |
+            The sample ID string extracted from the meta map.
+            e.g. `sample1`
+      - "no_header_*":
+          type: file
+          description: The processed file with the first line removed.
+          pattern: "no_header_*.bed"
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - tail:
+          type: string
+          description: The name of the tool
+      - 'tail --version | head -n1 | cut -d " " -f 4':
+          type: eval
+          description: The expression to obtain the version of the tool
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

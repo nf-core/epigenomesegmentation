@@ -1,0 +1,107 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_formatbed"
+description: Processes, merges strands, and filters a BED file containing genomic coordinates and metrics using standard Unix utilities.
+keywords:
+  - genomics
+  - bed
+  - awk
+  - sort
+  - data transformation
+tools:
+  - "coreutils":
+      description: "GNU core utilities (includes sort, join, cat, etc.) for basic file manipulation."
+      homepage: "https://www.gnu.org/software/coreutils/"
+      documentation: "https://www.gnu.org/software/coreutils/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/coreutils.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+  - "gawk":
+      description: "GNU Awk (gawk) is a pattern scanning and processing language."
+      homepage: "https://www.gnu.org/software/gawk/"
+      documentation: "https://www.gnu.org/software/gawk/manual/"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/gawk.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+  - "grep":
+      description: "GNU grep searches input files for lines containing a match to a given pattern list."
+      homepage: "https://www.gnu.org/software/grep/"
+      documentation: "https://www.gnu.org/software/grep/manual/grep.html"
+      tool_dev_url: "https://git.savannah.gnu.org/cgit/grep.git"
+      doi: ""
+      licence: "['GPL-3.0-or-later']"
+      identifier: ""
+
+input:
+  - - sample_id:
+        type: string
+        description: Identifier for the sample being processed.
+    - meta:
+        type: map
+        description: Groovy Map containing sample metadata, including the `modality` required by the script.
+    - file_path:
+        type: file
+        description: The input BED file to be processed. Can be uncompressed or gzipped (`.gz`).
+        pattern: "*.{bed,bed.gz,tsv,tsv.gz}"
+
+output:
+  countsbed:
+    - - sample_id:
+          type: string
+          description: Identifier for the sample.
+      - meta:
+          type: map
+          description: Groovy Map containing sample metadata.
+      - "*.bed":
+          type: file
+          description: The merged, filtered, and formatted output file.
+          pattern: "*.bed"
+
+  versions_awk:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "awk":
+          type: string
+          description: The name of the tool
+      - "awk --version | head -n 1 | awk '{print $3}'":
+          type: eval
+          description: The expression to obtain the version of awk
+
+  versions_sort:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "sort":
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - awk:
+          type: string
+          description: The name of the tool
+      - "awk --version | head -n 1 | awk '{print $3}'":
+          type: eval
+          description: The expression to obtain the version of awk
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - sort:
+          type: string
+          description: The name of the tool
+      - "sort --version | head -n 1 | awk '{print $NF}'":
+          type: eval
+          description: The expression to obtain the version of sort
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

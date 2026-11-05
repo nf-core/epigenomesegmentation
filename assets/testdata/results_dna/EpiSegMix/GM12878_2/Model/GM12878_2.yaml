@@ -1,0 +1,7 @@
+states: 2
+coverage_marker: 1
+coverage_marker_spec:
+  - name: WGBS
+    distribution: BB
+coverage_data: [GM12878_WGBS_binnedbedcounts.bed]
+chr: [12]

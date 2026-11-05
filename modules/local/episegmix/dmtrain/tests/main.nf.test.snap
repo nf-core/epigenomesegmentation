@@ -1,0 +1,344 @@
+{
+    "Kidney - EPISEGMIX_DMTRAIN - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-kidney_P0_2.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "json": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-kidney_P0_2.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T14:47:47.483799",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "GM12878 - EPISEGMIX_DMTRAIN": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "json": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-model-GM12878_2.json:md5,64fe37cc1556856c6557f6664a69ea7a"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:47:09.457232506",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    },
+    "Kidney - EPISEGMIX_DMTRAIN": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,76008326f2b9061a6f9e5f101d870a33"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "json": [
+                    [
+                        "kidney_P0_2",
+                        [
+                            {
+                                "id": "kidney_P0",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "kidney_P0.tab:md5,99561c64fc55eb98fe257187ac41a968",
+                        {
+                            "id": "no_bed_counts"
+                        },
+                        [
+                            
+                        ],
+                        2,
+                        "kidney_P0_2.yaml:md5,5844b6788c271f79f8dcfb699a1e65b3",
+                        "kidney_P0_2-train-counts.txt:md5,3e15c635e915fbb878a9d65384d08d89",
+                        "kidney_P0_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "kidney_P0_2-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        "final-model-kidney_P0_2.json:md5,76008326f2b9061a6f9e5f101d870a33"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            },
+            {
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-07-26T14:47:43.643989",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    },
+    "GM12878 - EPISEGMIX_DMTRAIN - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-GM12878_2.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "1": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ],
+                "json": [
+                    [
+                        "GM12878_2",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.tab:md5,faa2e2a55129297d7896b28ed60df915",
+                        {
+                            "id": "GM12878",
+                            "epigenetic_mark": "WGBS",
+                            "distribution": "BB"
+                        },
+                        "GM12878_meth.tab:md5,87cecc5e3b5912e8bdcbc137bf623ae5",
+                        2,
+                        "GM12878_2.yaml:md5,2e2a357f616d0dfd8e21a439a0aadbdf",
+                        "GM12878_2-train-counts.txt:md5,3d8f88e55c7317dd5d51d7d37cfb29e7",
+                        "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
+                        "GM12878_2-train-counts-meth.txt:md5,61ad859da25ab9f1fa3d19c612e978b4",
+                        "final-GM12878_2.json:md5,d41d8cd98f00b204e9800998ecf8427e"
+                    ]
+                ],
+                "versions_episegmix": [
+                    [
+                        "EPISEGMIX_DMTRAIN",
+                        "episegmix",
+                        "episegmix 1.0.0"
+                    ]
+                ]
+            }
+        ],
+        "timestamp": "2026-10-02T13:47:23.669307262",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "25.04.7"
+        }
+    }
+}

@@ -1,0 +1,86 @@
+// nf-core modules test custom/joinbed
+nextflow_process {
+
+    name "Test Process CUSTOM_JOINBED"
+    script "../main.nf"
+    process "CUSTOM_JOINBED"
+
+    tag "modules"
+    tag "modules_custom"
+    tag "custom"
+    tag "custom/joinbed"
+
+    test("Kidney - JOINBED") {
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'GM12878',
+                    [
+                        [
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'WGBS',
+                            modality: 'WGBS',
+                            paired_end: true,
+                            distribution: 'BI'
+                        ]
+                    ],
+                    [
+                        file("${projectDir}/assets/testdata/joinbed/GM12878_WGBS_1_meth.tab", checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(
+                    process.out,
+                    process.out.findAll { key, val -> key.startsWith('versions') }
+                ).match() }
+            )
+        }
+
+    }
+
+    test("Kidney - JOINBED - stub") {
+
+        options "-stub"
+
+        when {
+            process {
+                """
+                input[0] = [
+                    'GM12878',
+                    [
+                        [
+                            id: 'GM12878',
+                            replicate: 1,
+                            epigenetic_mark: 'WGBS',
+                            modality: 'WGBS',
+                            paired_end: true,
+                            distribution: 'BI'
+                        ]
+                    ],
+                    [
+                        file("${projectDir}/assets/testdata/joinbed/GM12878_WGBS_1_meth.tab", checkIfExists: true)
+                    ]
+                ]
+                """
+            }
+        }
+
+        then {
+            assert process.success
+            assertAll(
+                { assert snapshot(process.out).match() }
+            )
+        }
+
+    }
+
+}

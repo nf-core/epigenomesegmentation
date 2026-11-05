@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "episegmix_fitting"
+description: Executes LDM training and aggregates the resulting log files to determine the best-fitting distribution for each epigenetic mark, generating an updated samplesheet.
+keywords:
+  - epigenomics
+  - hidden markov model
+  - distribution fitting
+  - loglikelihood
+  - samplesheet
+components:
+  - episegmix/ldmtrain
+  - episegmix/bestdistribution
+input:
+  - ch_train_counts:
+      type: file
+      description: |
+        The input channel containing prepared training counts, regions, configuration YAML, and sample metadata.
+        Structure: `[ val(sample_id), val(meta), path(histone), val(meta2), path(meth), val(state), path(yaml), path(traincounts), path(trainregions), path(traincountsmeth) ]`
+      pattern: "*"
+output:
+  - samplesheet:
+      type: file
+      description: |
+        Channel containing the updated samplesheet (CSV) populated with the calculated best distributions.
+        Structure: `[ path("*.csv") ]`
+      pattern: "*.csv"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

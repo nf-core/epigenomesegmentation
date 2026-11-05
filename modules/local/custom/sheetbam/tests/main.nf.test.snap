@@ -1,0 +1,173 @@
+{
+    "Kidney - SHEETBAM": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K27me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            },
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.txt:md5,3e8ced8269f512e5973ba9e5484ecd20",
+                        [
+                            "ENCFF633BHN_chr12_chr13.nochr.bam:md5,6dfc6d32f104581f24d10ff347bf2a17",
+                            "ENCFF911YNM_chr12_chr13.nochr.bam:md5,e2ca85435fdb51ccca3b4ad1a2558dbc"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_SHEETBAM",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ],
+                "sheetbam": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K27me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            },
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.txt:md5,3e8ced8269f512e5973ba9e5484ecd20",
+                        [
+                            "ENCFF633BHN_chr12_chr13.nochr.bam:md5,6dfc6d32f104581f24d10ff347bf2a17",
+                            "ENCFF911YNM_chr12_chr13.nochr.bam:md5,e2ca85435fdb51ccca3b4ad1a2558dbc"
+                        ]
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_SHEETBAM",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            },
+            {
+                "versions_awk": [
+                    [
+                        "CUSTOM_SHEETBAM",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-10-02T16:26:18.512074606"
+    },
+    "Kidney - SHEETBAM - stub": {
+        "content": [
+            {
+                "0": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K27me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            },
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        [
+                            "ENCFF633BHN_chr12_chr13.nochr.bam:md5,6dfc6d32f104581f24d10ff347bf2a17",
+                            "ENCFF911YNM_chr12_chr13.nochr.bam:md5,e2ca85435fdb51ccca3b4ad1a2558dbc"
+                        ]
+                    ]
+                ],
+                "1": [
+                    [
+                        "CUSTOM_SHEETBAM",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ],
+                "sheetbam": [
+                    [
+                        "GM12878",
+                        [
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K27me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            },
+                            {
+                                "id": "GM12878",
+                                "replicate": 1,
+                                "epigenetic_mark": "H3K4me3",
+                                "modality": "ChIP-seq",
+                                "paired_end": false,
+                                "distribution": "NBI"
+                            }
+                        ],
+                        "GM12878.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
+                        [
+                            "ENCFF633BHN_chr12_chr13.nochr.bam:md5,6dfc6d32f104581f24d10ff347bf2a17",
+                            "ENCFF911YNM_chr12_chr13.nochr.bam:md5,e2ca85435fdb51ccca3b4ad1a2558dbc"
+                        ]
+                    ]
+                ],
+                "versions_awk": [
+                    [
+                        "CUSTOM_SHEETBAM",
+                        "awk",
+                        "4.1.3,"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "nf-test": "0.9.3",
+            "nextflow": "25.10.2"
+        },
+        "timestamp": "2026-10-02T16:26:32.68776131"
+    }
+}

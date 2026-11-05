@@ -1,0 +1,37 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/subworkflows/yaml-schema.json
+name: "bed_counts"
+description: Processes BED files to generate count metrics, maps them to predefined genomic bins using BEDTools, and filters the results for downstream methylation analysis.
+keywords:
+  - bed
+  - counts
+  - bins
+  - mapping
+  - methylation
+  - bedtools
+components:
+  - custom/bedcounts
+  - bedtools/map
+input:
+  - ch_in_bedcounts:
+      type: file
+      description: |
+        The input channel containing BED files (e.g., methylation data) and their associated metadata.
+        Structure: `[ val(meta), path(bed) ]`
+      pattern: "*.bed"
+  - ch_bins:
+      type: file
+      description: |
+        The input channel containing reference genomic bins (windows).
+        Structure: `[ val(meta), path(chrombin) ]`
+      pattern: "*.bed"
+output:
+  - ch_mapped_bed:
+      type: file
+      description: |
+        Channel containing the directly mapped BED files.
+        Structure: `[ val(sample_id), val(meta), path(bed) ]`
+      pattern: "*.bed"
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"

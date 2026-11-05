@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/nf-core/modules/master/modules/meta-schema.json
+name: "custom_bamcounts"
+description: Calculates read counts from BAM files across specified genomic bins, utilizing R and Bioconductor packages under the hood.
+keywords:
+  - genomics
+  - bam
+  - counts
+  - bins
+  - genomicranges
+tools:
+  - "episegmix":
+      description: "EpiSegMix is a tool for the segmentation of epigenomic data."
+      homepage: "https://gitlab.com/rahmannlab/episegmix"
+      documentation: "https://gitlab.com/rahmannlab/episegmix/-/blob/main/README.md?ref_type=heads"
+      tool_dev_url: ""
+      doi: "https://doi.org/10.1093/nar/gkag591"
+      licence: null
+      identifier: biotools:episegmix
+
+input:
+  - - sample_id:
+        type: string
+        description: Identifier combining sample tissue, time point, and/or state.
+    - meta:
+        type: map
+        description: Groovy Map containing sample metadata.
+    - sheetbam:
+        type: file
+        description: The structured text sheet configuration file for the BAM file (generated from the previous step).
+        pattern: "*.txt"
+    - bam:
+        type: file
+        description: The input BAM file to be counted.
+        pattern: "*.bam"
+  - - genome:
+        type: string
+        description: The genome assembly name or identifier (e.g., `hg38`).
+    - chrom_sizes:
+        type: file
+        description: The reference chromosome sizes file.
+        pattern: "*"
+
+output:
+  bamcounts:
+    - - sample_id:
+          type: string
+          description: Identifier combining sample tissue, time point, and/or state.
+      - meta:
+          type: map
+          description: Groovy Map containing sample metadata.
+      - "*.tab":
+          type: file
+          description: The generated tab-separated count file containing read counts across genomic bins.
+          pattern: "*.tab"
+
+  versions_episegmix:
+    - - "${task.process}":
+          type: string
+          description: The name of the process
+      - "episegmix":
+          type: string
+          description: The name of the tool
+      - "episegmix --version":
+          type: eval
+          description: The expression to obtain the version of episegmix
+
+topics:
+  versions:
+    - - ${task.process}:
+          type: string
+          description: The name of the process
+      - episegmix:
+          type: string
+          description: The name of the tool
+      - "episegmix --version":
+          type: eval
+          description: The expression to obtain the version of the tool
+
+authors:
+  - "@aaryanjaitly"
+maintainers:
+  - "@aaryanjaitly"
