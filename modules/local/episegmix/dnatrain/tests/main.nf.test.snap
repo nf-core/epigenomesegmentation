@@ -265,7 +265,7 @@
                         "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-GM12878_2.json:md5,8f3e43f8638b24173c6e8d42741eeabe"
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900"
                     ]
                 ],
                 "1": [
@@ -282,7 +282,7 @@
                             "id": "no_bam_counts"
                         },
                         [
-                            
+
                         ],
                         {
                             "id": "GM12878",
@@ -298,7 +298,7 @@
                         "GM12878_2-train-counts.txt:md5,a1ca2c95d121679d5d1e437874157eb2",
                         "GM12878_2-train-regions.txt:md5,897316929176464ebc9ad085f31e7284",
                         "dummy-train-counts-meth.txt:md5,d41d8cd98f00b204e9800998ecf8427e",
-                        "final-model-GM12878_2.json:md5,8f3e43f8638b24173c6e8d42741eeabe"
+                        "final-model-GM12878_2.json:md5,670aa8edb80b2ebc04144867cba44900"
                     ]
                 ],
                 "versions_episegmix": [
