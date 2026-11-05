@@ -30,7 +30,7 @@
                         "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
-                            "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
                         ]
                     ]
                 ],
@@ -69,7 +69,7 @@
                         "final-model-GM12878_2.json:md5,2d5de0193cbbc63d7caf235204bde887",
                         [
                             "GM12878.tab:md5,1342d58403181c0e0208696b55d78a39",
-                            "viterbi_GM12878.bed.gz:md5,401833d3f8ff4c6eb0286c7adcd34364"
+                            "viterbi_GM12878.bed.gz:md5,a4eb9cb065d6cae732204546521ae06d"
                         ]
                     ]
                 ],
